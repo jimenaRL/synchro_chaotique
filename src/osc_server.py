@@ -1,3 +1,4 @@
+import types
 import argparse
 from time import sleep
 
@@ -8,54 +9,62 @@ from microcontroller import MicroController
 parser = argparse.ArgumentParser()
 parser.add_argument("-ip", help="ip", type=str, default='0.0.0.0')
 parser.add_argument("-port", help="port", type=int, default=5213)
-parser.add_argument('--neighbors', nargs='+', type=int)
+parser.add_argument('-neighbors', nargs='+', type=int)
+parser.add_argument('-init', help="init value", type=float, default=0.0)
+parser.add_argument('-frequency', help="frequency", type=float, default=0.0)
+parser.add_argument('-couplings', nargs='+', type=float)
+parser.add_argument('-tau', help="frame time of server", type=float, default=0.01)
+parser.add_argument('-dt', help="time delta for updating microcontroller values", type=float, default=0.01)
+parser.add_argument('-verbose', help='verbose', type=int, default=1)
 pargs = parser.parse_args()
+
+
+neighbors = pargs.neighbors if pargs.neighbors else []
+micro = MicroController(address=pargs.port,
+                        neighbors=neighbors,
+                        init=pargs.init,
+                        frequency=pargs.frequency,
+                        couplings=pargs.couplings,
+                        dt=pargs.dt,
+                        verbose=pargs.verbose)
+
+tau = pargs.tau
 
 server = OSCServer((pargs.ip, pargs.port))
 server.timeout = 0
 run = True
-tau = 4
-dt = 0.01
-
-neighbors = pargs.neighbors if pargs.neighbors else []
-esp8266 = MicroController(address=pargs.port, neighbors=neighbors)
 
 
-# this method of reporting timeouts only works by convention
-# that before calling handle_request() field .timed_out is
-# set to False
 def handle_timeout(self):
+    """
+    this method of reporting timeouts only works by convention
+    that before calling handle_request() field .timed_out is set to False
+    """
     self.timed_out = True
 
 # add handle_timeout method to server class
-import types
 server.handle_timeout = types.MethodType(handle_timeout, server)
 
 
 def receive_callback(path, tags, args, source):
     """
-    from OSC import OSCClient, OSCMessage
-    client = OSCClient()
-    client.connect(("localhost", 666))
-    msg = OSCMessage("/receive")
-    msg.append(777)
-    msg.append(0.2)
-    client.send(msg)
+    callback for received osc message that update a neighbor's value of in micro
     """
     neighbor = args[0]
     value = args[1]
-    esp8266.update_neighbor(neighbor, value)
+    micro.update_neighbor(neighbor, value)
 
 
 def quit_callback(path, tags, args, source):
-    # don't do this at home (or it'll quit blender)
+    """ don't do this at home (or it'll quit blender)"""
     global run
     run = False
 
+server.addMsgHandler("/quit", quit_callback)
 server.addMsgHandler("/receive", receive_callback)
 
 
-# script that's called every frame
+# script called every frame
 def each_frame():
     # clear timed_out flag
     server.timed_out = False
@@ -63,18 +72,16 @@ def each_frame():
     while not server.timed_out:
         server.handle_request()
 
-
 while run:
     # call user script
     each_frame()
     # wait
     sleep(tau/2.)
-    # update value
-    esp8266.update_value(dt)
+    # send micro value to its neighbors
+    micro.send_value()
     # wait
     sleep(tau/2.)
-    # send value to others
-    esp8266.send_value()
-
+    # update value
+    micro.update_value()
 
 server.close()

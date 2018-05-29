@@ -16,7 +16,8 @@ parser.add_argument("-left", help="ip left", type=int, default=666)
 parser.add_argument("-right", help="ip  right", type=int, default=777)
 pargs = parser.parse_args()
 
-_esp8266 = MicroController(pargs.left, pargs.right)
+neighbors = pargs.neighbors if pargs.neighbors else []
+micro = MicroController(address=pargs.port, neighbors=neighbors)
 
 app = Flask(__name__)
 
@@ -31,10 +32,10 @@ def default():
     }
 
 
-@app.route('/gpio2/', methods=['GET'])
-def gpio2():
+@app.route('/receive/', methods=['GET'])
+def receive():
     try:
-        response = _esp8266.handle_request(request)
+        response = micro.handle_request(request)
         return json.dumps(response)
 
     except Exception as ex:
