@@ -15,6 +15,7 @@ parser.add_argument('-frequency', help="frequency", type=float, default=0.0)
 parser.add_argument('-couplings', nargs='+', type=float)
 parser.add_argument('-tau', help="frame time of server", type=float, default=0.01)
 parser.add_argument('-dt', help="time delta for updating microcontroller values", type=float, default=0.01)
+parser.add_argument('-method', help="integration method ('naive' or 'runge-kutta')", type=str, default='naive')
 parser.add_argument('-verbose', help='verbose', type=int, default=1)
 pargs = parser.parse_args()
 
@@ -26,6 +27,7 @@ micro = MicroController(address=pargs.port,
                         frequency=pargs.frequency,
                         couplings=pargs.couplings,
                         dt=pargs.dt,
+                        method=pargs.method,
                         verbose=pargs.verbose)
 
 tau = pargs.tau
