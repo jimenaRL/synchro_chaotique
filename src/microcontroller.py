@@ -146,10 +146,11 @@ class MicroController(object):
         kODE.integrate(new_t)
 
         self.data["phi"] = kODE.y
+        self.data["iter"] += 1
 
         self._t = new_t
 
-        if self._verbose:
+        if 1:  # self._verbose:
             print("new data: %s" % (self.data))
 
         return self.data["phi"]
