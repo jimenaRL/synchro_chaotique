@@ -5,7 +5,7 @@ from time import sleep
 
 from OSC import OSCServer
 
-from esp8266 import ESP8266
+from esp8266 import MicroController
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-ip", help="ip", type=str, default='0.0.0.0')
@@ -20,7 +20,7 @@ tau = 4
 dt = 0.01
 
 neighbors = pargs.neighbors if pargs.neighbors else []
-esp8266 = ESP8266(address=pargs.port, neighbors=neighbors)
+esp8266 = MicroController(address=pargs.port, neighbors=neighbors)
 
 
 # this method of reporting timeouts only works by convention

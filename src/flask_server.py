@@ -3,7 +3,7 @@ import sys
 import json
 import argparse
 
-from esp8266 import ESP8266
+from esp8266 import MicroController
 
 from flask import Flask, request
 
@@ -16,7 +16,7 @@ parser.add_argument("-left", help="ip left", type=int, default=666)
 parser.add_argument("-right", help="ip  right", type=int, default=777)
 pargs = parser.parse_args()
 
-_esp8266 = ESP8266(pargs.left, pargs.right)
+_esp8266 = MicroController(pargs.left, pargs.right)
 
 app = Flask(__name__)
 
