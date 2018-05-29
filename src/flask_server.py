@@ -3,7 +3,7 @@ import sys
 import json
 import argparse
 
-from esp8266 import MicroController
+from microcontroller import MicroController
 
 from flask import Flask, request
 

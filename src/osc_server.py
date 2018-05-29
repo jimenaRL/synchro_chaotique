@@ -1,11 +1,9 @@
-import sys
-import time
 import argparse
 from time import sleep
 
 from OSC import OSCServer
 
-from esp8266 import MicroController
+from microcontroller import MicroController
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-ip", help="ip", type=str, default='0.0.0.0')
