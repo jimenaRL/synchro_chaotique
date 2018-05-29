@@ -1,6 +1,0 @@
-python server.py -left 9 -ip=$(awk 'END{print $1}' /etc/hosts)
-
-http://127.0.0.1:777/gpio2/?arg1=value
-
-r = requests.get('http://0.0.0.0:777/gpio2', params={'value': 0.2}
-    ...: )
