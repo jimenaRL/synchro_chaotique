@@ -3,8 +3,6 @@ from __future__ import division
 from __future__ import absolute_import
 
 import numpy as np
-from scipy.integrate import ode
-from kuramoto import kuramoto_ODE_1
 
 from OSC import OSCClient, OSCMessage
 
@@ -17,47 +15,61 @@ class MicroController(object):
     def __init__(self,
                  address=0,
                  neighbors=[],
-                 init=0.0,
-                 frequency=0.1,
-                 couplings=[-0.5, 0.2],
+                 init_value=0.0,
+                 frequency=1,
+                 coupling=10,
                  dt=0.01,
-                 method='naive',
+                 method='euler',
                  verbose=1):
         """
             address:
                 [int] identifaction address (own port)
             neighbors:
-                list of neighbors identifaction (neighbors ports)
+                [list if ints] list of neighbors identifaction (neighbors ports)
+            init_value:
+                [float]
+            frequency:
+                [float]
+            coupling:
+                [float]
+            dt:
+                [float]
+            method:
+                [str]
+            verbose:
+                [int]
         """
 
-        if method in ['naive', 'runge-kutta']:
+        if method in ['euler', 'runge-kutta']:
             self._method = method
         else:
             raise ValueError("Wrong integration method '%s'. \
-                             Must be one in %s" % (method, ['naive', 'runge-kutta']))
+                             Must be one in %s" % (method, ['euler', 'runge-kutta']))
+        if method == 'runge-kutta':
+            from scipy.integrate import ode
+            from kuramoto import kuramoto_ODE_1
 
         self._verbose = verbose
         self._address = int(address)
         self._dt = np.float32(dt)
 
-        self.data = {"iter": 0, "phi": float(init)}
+        self.data = {"iter": 0, "value": init_value}
         self._t = 0.
+
+        self.neighbors = {int(n): {"iter": 0, "value": None} for n in neighbors}
+
+        self.set_str()
 
         # intrinsic frequency
         self._w = frequency
 
-        # coupling constants
-        self._k = couplings
-
-        self.neighbors = {int(n): {"idx": idx, "iter": 0, "phi": None}
-                          for idx, n in enumerate(neighbors)}
-
-        self.set_str()
+        # coupling constant
+        self._k = coupling / float(len(self.neighbors)+1)
 
         print(self)
 
     def _inited(self):
-        return all([d["phi"] is not None for d in self.neighbors.values()])
+        return all([d["value"] is not None for d in self.neighbors.values()])
 
     def set_str(self):
         self._str = "MicroController__{}".format(self._address)
@@ -67,58 +79,59 @@ class MicroController(object):
     def __str__(self):
         return self._str
 
-    def update_neighbor(self, neighbor, value):
+    def update_neighbor(self, neighbor, value, _iter):
         """
-        Update neighbors values
+        Update a neighbor's value.
         """
 
         if not neighbor in self.neighbors.keys():
-            raise ValueError("Wrong neighbor '%s'. Must be one in %s" % (neighbor, self.neighbors.keys()))
+            print("WARNING:Wrong neighbor '%s'. Must be one in %s" % (neighbor, self.neighbors.keys()))
+            return
+
+        self.neighbors[neighbor]["value"] = value
+        self.neighbors[neighbor]["iter"] = int(_iter)
 
         if self._verbose:
-            print('---------------------------')
-            print("old neighbor: %s" % (self.neighbors[neighbor]))
-        self.neighbors[neighbor]["phi"] = value
-        self.neighbors[neighbor]["iter"] += 1
-        if self._verbose:
-            print("new neighbor: %s" % (self.neighbors[neighbor]))
+            print("new neighbor %i: %s" % (neighbor, self.neighbors[neighbor]))
 
     def update_value(self):
-        if self._method == 'naive':
-            return self.update_value_naive()
+        if self._method == 'euler':
+            return self.update_value_euler()
         else:  # self._method == 'runge-kutta':
             return self.update_value_runge_kutta()
 
-    def update_value_naive(self):
+    def update_value_euler(self):
         """
-        Update own value with naive approx of order 1 to Kuramoto ODE.
+        Update own value with forward Euler method for integrating Kuramoto ODE.
         """
 
-        # don't start unless values set for all neighbors
+        # don't start unless values are set for all neighbors
         if not self._inited():
             return
 
-        if self._verbose:
-            print('---------------------------')
-            print("old data: %s" % (self.data))
-
-        old_y = self.data["phi"]
+        if not all([(self.data["iter"]) == v["iter"] for v in self.neighbors.values()]):
+            print("---- sychro problem ----")
+            print(self.data["iter"])
+            print([v["iter"] for v in self.neighbors.values()])
+            print("------------------------")
+        old_y = self.data["value"]
         tmp = 0.
         for d in self.neighbors.values():
-            tmp += (self._k[d['idx']] * np.sin(old_y-d["phi"]))
-        new_y = old_y + self._dt * (self._w+tmp)
+            tmp += (self._k * np.sin(d["value"]-old_y))
+        new_y = old_y + self._dt * (self._w + tmp)
 
-        self.data["phi"] = new_y
+        self.data["value"] = new_y
         self.data["iter"] += 1
 
+        print("%s %s" % (self.data["iter"], self.data["value"]))
         if self._verbose:
             print("new data: %s" % (self.data))
 
-        return self.data["phi"]
+        return self.data["value"]
 
     def update_value_runge_kutta(self):
         """
-        Update own value with Runge Kuta method for integrating to Kuramoto ODE.
+        Update own value with Runge Kuta method for integrating Kuramoto ODE.
         """
 
         # don't start unless values set for all neighbors
@@ -133,9 +146,9 @@ class MicroController(object):
         kODE = ode(kuramoto_ODE_1)
         kODE.set_integrator("dopri5")
 
-        old_y = self.data["phi"]
+        old_y = self.data["value"]
         old_t = self._t
-        y_others = np.array([d["phi"] for d in self.neighbors.values()])
+        y_others = np.array([d["value"] for d in self.neighbors.values()])
 
         new_t = old_t + self._dt
 
@@ -145,15 +158,15 @@ class MicroController(object):
 
         kODE.integrate(new_t)
 
-        self.data["phi"] = kODE.y
+        self.data["value"] = kODE.y
         self.data["iter"] += 1
 
         self._t = new_t
 
-        if 1:  # self._verbose:
+        if self._verbose:
             print("new data: %s" % (self.data))
 
-        return self.data["phi"]
+        return self.data["value"]
 
     def send_value(self):
         for add, d in self.neighbors.items():
@@ -161,6 +174,7 @@ class MicroController(object):
             c.connect(("localhost", add))
             msg = OSCMessage("/receive")
             msg.append(self._address)
-            msg.append(self.data["phi"])
+            msg.append(self.data["value"])
+            msg.append(self.data["iter"])
             c.send(msg)
             c.close()

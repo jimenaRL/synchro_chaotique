@@ -29,5 +29,5 @@ def kuramoto_ODE_1(t, y, arg):
     phase = w
     # add noise
     # phase += 0.0001*np.random.uniform(len(phase))
-    phase += np.array([k*np.sin(y - y_j) for y_j in y_others]).sum()
+    phase += np.array([k*np.sin(y_j - y) for y_j in y_others]).sum()
     return phase
