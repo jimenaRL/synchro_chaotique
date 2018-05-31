@@ -20,7 +20,8 @@ class MicroController(object):
                  coupling=10,
                  dt=0.01,
                  method='euler',
-                 verbose=1):
+                 verbose=0,
+                 monitoring=0):
         """
             address:
                 [int] identifaction address (own port)
@@ -38,6 +39,8 @@ class MicroController(object):
                 [str]
             verbose:
                 [int]
+            monitoring:
+                [int]
         """
 
         if method in ['euler', 'runge-kutta']:
@@ -50,6 +53,7 @@ class MicroController(object):
             from kuramoto import kuramoto_ODE_1
 
         self._verbose = verbose
+        self._monitoring = monitoring
         self._address = int(address)
         self._dt = np.float32(dt)
 
@@ -109,11 +113,11 @@ class MicroController(object):
         if not self._inited():
             return
 
-        if not all([(self.data["iter"]) == v["iter"] for v in self.neighbors.values()]):
-            print("---- sychro problem ----")
-            print(self.data["iter"])
-            print([v["iter"] for v in self.neighbors.values()])
-            print("------------------------")
+        # check sychronisation with neighbors
+        if self._verbose:
+            if not all([(self.data["iter"]) == v["iter"] for v in self.neighbors.values()]):
+                deca = [(n, self.data["iter"]-v["iter"]) for n, v in self.neighbors.items()]
+                print("[sychro problem] %s: %s" % (self.data["iter"], deca))
         old_y = self.data["value"]
         tmp = 0.
         for d in self.neighbors.values():
@@ -123,7 +127,10 @@ class MicroController(object):
         self.data["value"] = new_y
         self.data["iter"] += 1
 
-        print("%s %s" % (self.data["iter"], self.data["value"]))
+        # check sychronisation with neighbors
+        if self._monitoring:
+            print("%s %s" % (self.data["iter"], self.data["value"]))
+
         if self._verbose:
             print("new data: %s" % (self.data))
 

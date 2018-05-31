@@ -10,25 +10,27 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-ip", help="ip", type=str, default='0.0.0.0')
 parser.add_argument("-port", help="port", type=int, default=5213)
 parser.add_argument('-neighbors', nargs='+', type=int)
-parser.add_argument('-init', help="init value", type=float, default=0.0)
-parser.add_argument('-frequency', help="frequency", type=float, default=0.0)
-parser.add_argument('-couplings', nargs='+', type=float)
-parser.add_argument('-tau', help="frame time of server", type=float, default=0.01)
-parser.add_argument('-dt', help="time delta for updating microcontroller values", type=float, default=0.01)
-parser.add_argument('-method', help="integration method ('naive' or 'runge-kutta')", type=str, default='naive')
-parser.add_argument('-verbose', help='verbose', type=int, default=1)
+parser.add_argument('-init_value', help="init value", type=float, default=0.0)
+parser.add_argument('-frequency', help="frequency", type=float, default=1.0)
+parser.add_argument('-coupling', help="coupling", type=float, default=1.0)
+parser.add_argument('-tau', help="frame time of server", type=float, default=0.001)
+parser.add_argument('-dt', help="time delta for updating microcontroller values", type=float, default=0.001)
+parser.add_argument('-method', help="integration method ('euler' or 'runge-kutta')", type=str, default='euler')
+parser.add_argument('-verbose', help='verbose', type=int, default=0)
+parser.add_argument('-monitoring', help='monitoring', type=int, default=1)
 pargs = parser.parse_args()
 
 
 neighbors = pargs.neighbors if pargs.neighbors else []
 micro = MicroController(address=pargs.port,
                         neighbors=neighbors,
-                        init=pargs.init,
+                        init_value=pargs.init_value,
                         frequency=pargs.frequency,
-                        couplings=pargs.couplings,
+                        coupling=pargs.coupling,
                         dt=pargs.dt,
                         method=pargs.method,
-                        verbose=pargs.verbose)
+                        verbose=pargs.verbose,
+                        monitoring=pargs.monitoring)
 
 tau = pargs.tau
 
@@ -54,7 +56,8 @@ def receive_callback(path, tags, args, source):
     """
     neighbor = args[0]
     value = args[1]
-    micro.update_neighbor(neighbor, value)
+    _iter = args[2]
+    micro.update_neighbor(neighbor, value, _iter)
 
 
 def quit_callback(path, tags, args, source):
