@@ -1,0 +1,659 @@
+Handling lib "demo-bundle"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle" is updated recently enough, don't touch it
+Hash is updated: "" -> "8f9f654da756a18eeeb902c847a57114ef070ca3"
+Successfully fetched prebuilt binary for "demo-bundle" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/lib/esp8266/libdemo-bundle.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle"
+Handling lib "aws"...
+Handling lib "azure"...
+The --lib flag was not given for it, checking repository
+Handling lib "dht"...
+Handling lib "dns-sd"...
+Handling lib "rpc-service-config"...
+Handling lib "pwm"...
+Handling lib "gcp"...
+Handling lib "ca-bundle"...
+The --lib flag was not given for it, checking repository
+Handling lib "neopixel"...
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws" does not exist, cloning...
+
+Handling lib "rpc-azure"...
+Handling lib "ota-http-server"...
+Handling lib "rpc-service-gpio"...
+The --lib flag was not given for it, checking repository
+Handling lib "rpc-service-ota"...
+The --lib flag was not given for it, checking repository
+Handling lib "rpc-service-atca"...
+Handling lib "rpc-service-i2c"...
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c" does not exist, cloning...
+
+Handling lib "rpc-service-wifi"...
+Handling lib "i2c"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Handling lib "vfs-dev-spi-flash"...
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi" does not exist, cloning...
+
+Handling lib "rpc-loopback"...
+The --lib flag was not given for it, checking repository
+Handling lib "ota-http-client"...
+Handling lib "watson"...
+Handling lib "rpc-service-fs"...
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure" does not exist, cloning...
+
+Handling lib "rpc-mqtt"...
+Handling lib "rpc-uart"...
+Handling lib "shadow"...
+Handling lib "sntp"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config" does not exist, cloning...
+
+Handling lib "spi"...
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Handling lib "atca"...
+Handling lib "dash"...
+Handling lib "http-server"...
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+The --lib flag was not given for it, checking repository
+Handling lib "wifi"...
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Handling lib "adc"...
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c" does not exist, cloning...
+
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca" does not exist, cloning...
+
+Handling lib "ota-shadow"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure" is updated recently enough, don't touch it
+Hash is updated: "" -> "3dc81f9411b09c026a0e5caf97a297ec5921ab1c"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel" is updated recently enough, don't touch it
+Hash is updated: "" -> "ab09ada25256b4b2d0ba754fa081aded8f99ea78"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp" is updated recently enough, don't touch it
+Hash is updated: "" -> "a515a228be768a17010412f42e7a3866dcc53a98"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson" is updated recently enough, don't touch it
+Hash is updated: "" -> "4d9a5d7bb8ab51272b8a2618e28f4c219f9891ca"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure" is updated recently enough, don't touch it
+Hash is updated: "" -> "2814c37c524b4905bdab033f42e1f4f7c2fe8056"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi" is updated recently enough, don't touch it
+Hash is updated: "" -> "cce2d7be559256458a1f2ac39d756d6b2f6767ce"
+Hash is updated: "" -> "3326b76b453ecc10070d17f225256d08f52d778b"
+Hash is updated: "" -> "7e3e5e3244e5d56714624c6bcc264a5c650b05c3"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow" is updated recently enough, don't touch it
+Hash is updated: "" -> "1ebf0e670444f5238b0b6151bb4dc4079c15beca"
+Hash is updated: "" -> "1883e8f92e40c869eb5317dfd520227808cbffef"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server" is updated recently enough, don't touch it
+Hash is updated: "" -> "f489eabc4f7bc1c98f277ec8783eaec0491ba67b"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm" is updated recently enough, don't touch it
+Hash is updated: "" -> "13713bea3ced211e90fa6b1c438883ab5835cdef"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc" is updated recently enough, don't touch it
+Hash is updated: "" -> "4fcc6e143b3423380723434cfaf6153de18f0548"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca" is updated recently enough, don't touch it
+Hash is updated: "" -> "10146c32f97e94f7810e66841ed69a14790ac98d"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback" is updated recently enough, don't touch it
+Successfully fetched prebuilt binary for "rpc-azure" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/lib/esp8266/librpc-azure.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio" is updated recently enough, don't touch it
+Handling lib "rpc-common"...
+Lib "azure" is already handled, skipping
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common" does not exist, cloning...
+
+Hash is updated: "" -> "a9adcc32ab43c755243b25b9e3980a7d4be793df"
+Hash is updated: "" -> "025dd1daa575b8b21e2f61296e2c57bd3454960d"
+Hash is updated: "" -> "73ce8b61ab6fa26f0084a215e0fd9eb12ef1240f"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht" is updated recently enough, don't touch it
+Hash is updated: "" -> "3395d1b864c9f752190970f33fe8299537104d36"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash" is updated recently enough, don't touch it
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt" is updated recently enough, don't touch it
+Hash is updated: "" -> "ba27671827bca716d842e6d68f8cb914dc492669"
+Hash is updated: "" -> "fec1c77df6513717037bafefd3cc70e1969a8dd7"
+Hash is updated: "" -> "59e0658a69ed2b3e619eb8c65b72e6da96dc5fac"
+Hash is updated: "" -> "257799cc350bbfa209ba0d554a38a5d6b89e08c1"
+Hash is updated: "" -> "c5079863203c172fc5b6420c2c2557d4df9d2342"
+Hash is updated: "" -> "fd2fc406df1944d3f619d14f75cc4508a4e97a4f"
+Hash is updated: "" -> "8938ae6e3939f7991366a2e066e1b2a16d3842d6"
+Falling back to sources for "azure" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/azure/releases/download/latest/libazure-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure"
+Lib "shadow" is already handled, skipping
+Lib "sntp" is already handled, skipping
+Lib "ca-bundle" is already handled, skipping
+Handling lib "mqtt"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config" is updated recently enough, don't touch it
+Hash is updated: "" -> "354f394ea6142cf7958d1c03464326177cc90a4f"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp" is updated recently enough, don't touch it
+Hash is updated: "" -> "b7b964d60b6467b23cdf6a952630971608ef4420"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client" is updated recently enough, don't touch it
+Hash is updated: "" -> "544c8a7f130f4438c8d3b547df673c5ea5011263"
+Successfully fetched prebuilt binary for "neopixel" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/lib/esp8266/libneopixel.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel"
+Handling lib "mongoose"...
+The --lib flag was not given for it, checking repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose" does not exist, cloning...
+
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c" is updated recently enough, don't touch it
+Hash is updated: "" -> "585d0aecd23f24d627d96ba7cccd743b3383d12d"
+Falling back to sources for "dns-sd" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/dns-sd/releases/download/latest/libdns-sd-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd"
+Lib "http-server" is already handled, skipping
+Lib "ethernet" is optional, skipping
+Lib "wifi" is optional, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi" is updated recently enough, don't touch it
+Hash is updated: "" -> "42260104218eaf4277f890cf8dcf8d8174d8fd0f"
+Falling back to sources for "atca" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/atca/releases/download/latest/libatca-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca"
+Lib "i2c" is already handled, skipping
+Falling back to sources for "wifi" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/wifi/releases/download/latest/libwifi-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi"
+Lib "mongoose" is already handled, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi" is updated recently enough, don't touch it
+Falling back to sources for "http-server" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/http-server/releases/download/latest/libhttp-server-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server"
+Lib "ethernet" is optional, skipping
+Lib "atca" is optional, skipping
+Lib "mongoose" is already handled, skipping
+Lib "wifi" is optional, skipping
+Hash is updated: "" -> "d760573bd8482a7b43a58500b71dca20e71fc3a4"
+Successfully fetched prebuilt binary for "sntp" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/lib/esp8266/libsntp.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp"
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws" is updated recently enough, don't touch it
+Hash is updated: "" -> "5b1841914ea360fc1ebf5d8a1c965845e5885ddd"
+Successfully fetched prebuilt binary for "watson" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/lib/esp8266/libwatson.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson"
+Lib "ca-bundle" is already handled, skipping
+Lib "mqtt" is already handled, skipping
+Successfully fetched prebuilt binary for "ca-bundle" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/lib/esp8266/libca-bundle.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "shadow" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/lib/esp8266/libshadow.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "adc" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/lib/esp8266/libadc.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc"
+Successfully fetched prebuilt binary for "rpc-service-atca" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/lib/esp8266/librpc-service-atca.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca"
+Lib "atca" is already handled, skipping
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "pwm" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/lib/esp8266/libpwm.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-loopback" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/lib/esp8266/librpc-loopback.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback"
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "ota-http-server" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266/libota-http-server.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server"
+Lib "http-server" is already handled, skipping
+Lib "ota-http-client" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-uart" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/lib/esp8266/librpc-uart.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart"
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "dht" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/lib/esp8266/libdht.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht"
+Successfully fetched prebuilt binary for "vfs-dev-spi-flash" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/lib/esp8266/libvfs-dev-spi-flash.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash"
+Lib "spi" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-service-gpio" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/lib/esp8266/librpc-service-gpio.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio"
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-mqtt" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/lib/esp8266/librpc-mqtt.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt"
+Lib "mqtt" is already handled, skipping
+Lib "watson" is optional, skipping
+Lib "azure" is optional, skipping
+Lib "aws" is optional, skipping
+Lib "rpc-common" is already handled, skipping
+Lib "gcp" is optional, skipping
+Successfully fetched prebuilt binary for "rpc-service-i2c" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/lib/esp8266/librpc-service-i2c.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c"
+Lib "i2c" is already handled, skipping
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-service-ota" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266/librpc-service-ota.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota"
+Lib "ota-http-client" is already handled, skipping
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-service-wifi" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/lib/esp8266/librpc-service-wifi.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi"
+Lib "rpc-common" is already handled, skipping
+Lib "wifi" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-service-config" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/lib/esp8266/librpc-service-config.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config"
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "rpc-service-fs" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/lib/esp8266/librpc-service-fs.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs"
+Lib "rpc-common" is already handled, skipping
+Successfully fetched prebuilt binary for "ota-http-client" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266/libota-http-client.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "i2c" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/lib/esp8266/libi2c.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "gcp" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/lib/esp8266/libgcp.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp"
+Lib "ca-bundle" is already handled, skipping
+Lib "mqtt" is already handled, skipping
+Lib "sntp" is already handled, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common" is updated recently enough, don't touch it
+Successfully fetched prebuilt binary for "spi" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/lib/esp8266/libspi.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi"
+Lib "mongoose" is already handled, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose" is updated recently enough, don't touch it
+Hash is updated: "" -> "36f7fbccc5fde2a521e6828102ebfcefb24d856f"
+Hash is updated: "" -> "22166e042a608c6a79d44af36d65d2e71cbe0790"
+Successfully fetched prebuilt binary for "dash" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266/libdash.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash"
+Lib "ota-shadow" is already handled, skipping
+Lib "rpc-common" is already handled, skipping
+Lib "shadow" is already handled, skipping
+Falling back to sources for "rpc-common" (failed to fetch prebuilt binary: got 404 status code when accessed https://github.com/mongoose-os-libs/rpc-common/releases/download/latest/librpc-common-esp8266.a)
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common"
+Lib "http-server" is optional, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt" is updated recently enough, don't touch it
+Hash is updated: "" -> "b6698638dccafd3347212e0f161556f1776617d5"
+Successfully fetched prebuilt binary for "aws" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/lib/esp8266/libaws.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws"
+Lib "ca-bundle" is already handled, skipping
+Lib "shadow" is already handled, skipping
+Lib "mqtt" is already handled, skipping
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow" is updated recently enough, don't touch it
+Hash is updated: "" -> "5a463a39a3cad509bb8eca8200a1533b6c5bf103"
+Successfully fetched prebuilt binary for "mqtt" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/lib/esp8266/libmqtt.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt"
+Lib "mongoose" is already handled, skipping
+Successfully fetched prebuilt binary for "ota-shadow" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266/libota-shadow.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow"
+Lib "shadow" is already handled, skipping
+Successfully fetched prebuilt binary for "mongoose" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266/libmongoose.a"
+Prepared local dir: "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose"
+The flag --repo is not given, going to use mongoose-os repository
+Repository "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os" is updated recently enough, don't touch it
+Sources: [/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src/main.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_deps_init.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src/esp_adc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/mgos_i2c.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio/mgos_i2c_gpio.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src/mgos_atca.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src/mgos_ca_bundle.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src/mgos_mqtt.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src/mgos_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_greengrass.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src/mgos_sntp.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_cm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_dm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_sas.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mgos_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mjs_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src/esp_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src/mgos_http_server.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_http.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_ws.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mgos_rpc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src/mgos_dht.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_dns_sd.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_mdns.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip/lwip_mdns.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src/mgos_gcp.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src/mgos_neopixel.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/mgos_pwm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266/esp_pwm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src/mgos_rpc_channel_azure_dm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src/mg_rpc_channel_loopback.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src/mgos_watson.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src/mgos_rpc_channel_mqtt.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src/mgos_atca_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src/mgos_service_config.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src/mgos_service_filesystem.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src/mgos_gpio_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src/mgos_i2c_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src/mgos_rpc_service_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src/mgos_rpc_channel_uart.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi_mjs.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio/mgos_spi_gpio.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src/mgos_vfs_dev_spi_flash.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src/mgos_demo_bundle.c]
+Include dirs: [/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include]
+Binary libs: [/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266/libmongoose.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266/libota-shadow.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266/libdash.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266/libota-http-client.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266/libota-http-server.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266/librpc-service-ota.a]
+Building...
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956" to "/app"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os" to "/mongoose-os"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266"
+mount from "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen" to "/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen"
+Docker arguments: run --name mos_build_2018-06-03T18-58-23-00_5380686086124632181 --rm -i -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/modules/mongoose-os:/mongoose-os -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956:/app -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266 -v /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src:/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src --user 0:0 docker.cesanta.com/esp8266-build:2.2.1-1.5.0-r3 /bin/bash -c nice make '-j' '16' '-C' '/app' '-f' '/mongoose-os/fw/platforms/esp8266/Makefile.build' 'all' 'APP=dev' 'APP_BIN_LIBS=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/lib/esp8266/libmongoose.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-shadow/lib/esp8266/libota-shadow.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/lib/esp8266/libdash.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/lib/esp8266/libota-http-client.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-server/lib/esp8266/libota-http-server.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/lib/esp8266/librpc-service-ota.a' 'APP_CFLAGS=-DMGOS_DNS_SD_HIDE_ADDITIONAL_INFO=0 -DMGOS_ENABLE_FILE_UPLOAD=1 -DMGOS_ENABLE_RPC_CHANNEL_HTTP=1 -DMGOS_ENABLE_RPC_CHANNEL_WS=1 -DMGOS_ENABLE_SYS_SERVICE=1 -DMGOS_ENABLE_TUNNEL=0 -DMGOS_ENABLE_WEB_CONFIG=0 -DMGOS_HAVE_ADC=1 -DMGOS_HAVE_ATCA=1 -DMGOS_HAVE_AWS=1 -DMGOS_HAVE_AZURE=1 -DMGOS_HAVE_CA_BUNDLE=1 -DMGOS_HAVE_DASH=1 -DMGOS_HAVE_DEMO_BUNDLE=1 -DMGOS_HAVE_DHT=1 -DMGOS_HAVE_DNS_SD=1 -DMGOS_HAVE_GCP=1 -DMGOS_HAVE_HTTP_SERVER=1 -DMGOS_HAVE_I2C=1 -DMGOS_HAVE_MONGOOSE=1 -DMGOS_HAVE_MQTT=1 -DMGOS_HAVE_NEOPIXEL=1 -DMGOS_HAVE_OTA_HTTP_CLIENT=1 -DMGOS_HAVE_OTA_HTTP_SERVER=1 -DMGOS_HAVE_OTA_SHADOW=1 -DMGOS_HAVE_PWM=1 -DMGOS_HAVE_RPC_AZURE=1 -DMGOS_HAVE_RPC_COMMON=1 -DMGOS_HAVE_RPC_LOOPBACK=1 -DMGOS_HAVE_RPC_MQTT=1 -DMGOS_HAVE_RPC_SERVICE_ATCA=1 -DMGOS_HAVE_RPC_SERVICE_CONFIG=1 -DMGOS_HAVE_RPC_SERVICE_FS=1 -DMGOS_HAVE_RPC_SERVICE_GPIO=1 -DMGOS_HAVE_RPC_SERVICE_I2C=1 -DMGOS_HAVE_RPC_SERVICE_OTA=1 -DMGOS_HAVE_RPC_SERVICE_WIFI=1 -DMGOS_HAVE_RPC_UART=1 -DMGOS_HAVE_SHADOW=1 -DMGOS_HAVE_SNTP=1 -DMGOS_HAVE_SPI=1 -DMGOS_HAVE_VFS_DEV_SPI_FLASH=1 -DMGOS_HAVE_WATSON=1 -DMGOS_HAVE_WIFI=1 -DMGOS_WIFI_ENABLE_AP_STA=1 -DMG_ENABLE_DNS=1 -DMG_ENABLE_DNS_SERVER=1 -DMG_ENABLE_MQTT=1 -DMG_ENABLE_SNTP=1' 'APP_CONF_SCHEMA=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mos_conf_schema.yml' 'APP_CXXFLAGS=-DMGOS_DNS_SD_HIDE_ADDITIONAL_INFO=0 -DMGOS_ENABLE_FILE_UPLOAD=1 -DMGOS_ENABLE_RPC_CHANNEL_HTTP=1 -DMGOS_ENABLE_RPC_CHANNEL_WS=1 -DMGOS_ENABLE_SYS_SERVICE=1 -DMGOS_ENABLE_TUNNEL=0 -DMGOS_ENABLE_WEB_CONFIG=0 -DMGOS_HAVE_ADC=1 -DMGOS_HAVE_ATCA=1 -DMGOS_HAVE_AWS=1 -DMGOS_HAVE_AZURE=1 -DMGOS_HAVE_CA_BUNDLE=1 -DMGOS_HAVE_DASH=1 -DMGOS_HAVE_DEMO_BUNDLE=1 -DMGOS_HAVE_DHT=1 -DMGOS_HAVE_DNS_SD=1 -DMGOS_HAVE_GCP=1 -DMGOS_HAVE_HTTP_SERVER=1 -DMGOS_HAVE_I2C=1 -DMGOS_HAVE_MONGOOSE=1 -DMGOS_HAVE_MQTT=1 -DMGOS_HAVE_NEOPIXEL=1 -DMGOS_HAVE_OTA_HTTP_CLIENT=1 -DMGOS_HAVE_OTA_HTTP_SERVER=1 -DMGOS_HAVE_OTA_SHADOW=1 -DMGOS_HAVE_PWM=1 -DMGOS_HAVE_RPC_AZURE=1 -DMGOS_HAVE_RPC_COMMON=1 -DMGOS_HAVE_RPC_LOOPBACK=1 -DMGOS_HAVE_RPC_MQTT=1 -DMGOS_HAVE_RPC_SERVICE_ATCA=1 -DMGOS_HAVE_RPC_SERVICE_CONFIG=1 -DMGOS_HAVE_RPC_SERVICE_FS=1 -DMGOS_HAVE_RPC_SERVICE_GPIO=1 -DMGOS_HAVE_RPC_SERVICE_I2C=1 -DMGOS_HAVE_RPC_SERVICE_OTA=1 -DMGOS_HAVE_RPC_SERVICE_WIFI=1 -DMGOS_HAVE_RPC_UART=1 -DMGOS_HAVE_SHADOW=1 -DMGOS_HAVE_SNTP=1 -DMGOS_HAVE_SPI=1 -DMGOS_HAVE_VFS_DEV_SPI_FLASH=1 -DMGOS_HAVE_WATSON=1 -DMGOS_HAVE_WIFI=1 -DMGOS_WIFI_ENABLE_AP_STA=1 -DMG_ENABLE_DNS=1 -DMG_ENABLE_DNS_SERVER=1 -DMG_ENABLE_MQTT=1 -DMG_ENABLE_SNTP=1' 'APP_FS_FILES=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs/ca.pem /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs/index.html' 'APP_INCLUDES=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mongoose/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include/mg_rpc /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dash/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ota-http-client/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-ota/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/include /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/include' 'APP_SOURCES=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src/main.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_deps_init.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src/esp_adc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/mgos_i2c.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio/mgos_i2c_gpio.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src/mgos_atca.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src/mgos_ca_bundle.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src/mgos_mqtt.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src/mgos_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_greengrass.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src/mgos_sntp.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_cm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_dm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_sas.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_shadow.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mgos_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mjs_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src/esp_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src/mgos_http_server.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_http.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_ws.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mgos_rpc.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src/mgos_dht.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_dns_sd.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_mdns.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip/lwip_mdns.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src/mgos_gcp.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src/mgos_neopixel.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/mgos_pwm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266/esp_pwm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src/mgos_rpc_channel_azure_dm.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src/mg_rpc_channel_loopback.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src/mgos_watson.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src/mgos_rpc_channel_mqtt.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src/mgos_atca_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src/mgos_service_config.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src/mgos_service_filesystem.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src/mgos_gpio_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src/mgos_i2c_service.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src/mgos_rpc_service_wifi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src/mgos_rpc_channel_uart.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi_mjs.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio/mgos_spi_gpio.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src/mgos_vfs_dev_spi_flash.c /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src/mgos_demo_bundle.c' 'APP_VERSION=1.0' 'BUILD_DIR=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs' 'FFI_SYMBOLS=' 'FS_STAGING_DIR=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fs' 'FW_DIR=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fw' 'GEN_DIR=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen' 'MANIFEST_FINAL=/fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mos_final.yml' 'MGOS_ENABLE_I2C_GPIO=1' 'MGOS_ENABLE_SPI_GPIO=1' 'MGOS_ENABLE_UPDATER=1' 'MGOS_HAVE_ADC=1' 'MGOS_HAVE_ATCA=1' 'MGOS_HAVE_AWS=1' 'MGOS_HAVE_AZURE=1' 'MGOS_HAVE_CA_BUNDLE=1' 'MGOS_HAVE_DASH=1' 'MGOS_HAVE_DEMO_BUNDLE=1' 'MGOS_HAVE_DHT=1' 'MGOS_HAVE_DNS_SD=1' 'MGOS_HAVE_GCP=1' 'MGOS_HAVE_HTTP_SERVER=1' 'MGOS_HAVE_I2C=1' 'MGOS_HAVE_MONGOOSE=1' 'MGOS_HAVE_MQTT=1' 'MGOS_HAVE_NEOPIXEL=1' 'MGOS_HAVE_OTA_HTTP_CLIENT=1' 'MGOS_HAVE_OTA_HTTP_SERVER=1' 'MGOS_HAVE_OTA_SHADOW=1' 'MGOS_HAVE_PWM=1' 'MGOS_HAVE_RPC_AZURE=1' 'MGOS_HAVE_RPC_COMMON=1' 'MGOS_HAVE_RPC_LOOPBACK=1' 'MGOS_HAVE_RPC_MQTT=1' 'MGOS_HAVE_RPC_SERVICE_ATCA=1' 'MGOS_HAVE_RPC_SERVICE_CONFIG=1' 'MGOS_HAVE_RPC_SERVICE_FS=1' 'MGOS_HAVE_RPC_SERVICE_GPIO=1' 'MGOS_HAVE_RPC_SERVICE_I2C=1' 'MGOS_HAVE_RPC_SERVICE_OTA=1' 'MGOS_HAVE_RPC_SERVICE_WIFI=1' 'MGOS_HAVE_RPC_UART=1' 'MGOS_HAVE_SHADOW=1' 'MGOS_HAVE_SNTP=1' 'MGOS_HAVE_SPI=1' 'MGOS_HAVE_VFS_DEV_SPI_FLASH=1' 'MGOS_HAVE_WATSON=1' 'MGOS_HAVE_WIFI=1' 'MGOS_PATH=/mongoose-os' 'MGOS_WIFI_ENABLE_AP_STA=1' 'PLATFORM=esp8266'
+make: Entering directory '/app'
+  MKDIR /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fw
+  MKDIR /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs
+  MKDIR /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp
+CC esptool2.c
+  GEN   /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_ro_vars.c
+gcc -O2 -Wall -c esptool2.c -o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2.o
+CC esptool2_elf.c
+gcc -O2 -Wall -c esptool2_elf.c -o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2_elf.o
+  GEN   /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_config.c
+  GEN   /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/ffi_exports.c
+make[1]: Entering directory '/app'
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+make[1]: Entering directory '/app'
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+  GEN   /mongoose-os/fw/platforms/esp8266/ld/non_os.ld (0xffff0 @ 0x40200010) -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/0x100000.ld
+  CC    atca_command.c
+  CC    ./src/netif/etharp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/etharp.o
+  CC    ./src/core/dhcp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/dhcp.o
+  CC    ./src/core/mem.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/mem.o
+  CC    ./src/core/sys_arch.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/sys_arch.o
+  CC    ./src/core/mdns.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/mdns.o
+  CC    ./src/core/init.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/init.o
+LD /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2
+gcc -o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2 /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esptool2_elf.o
+  CC    atca_iface.c
+  CC    ./src/core/memp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/memp.o
+  CC    ./src/core/sys.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/sys.o
+  CC    atca_cfgs.c
+  CC    ./src/core/tcp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/tcp.o
+  CC    ./src/core/dns.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/dns.o
+  CC    atca_device.c
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_cache.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_cache.c.o
+CC rboot-stage2a.c
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/src/main.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/main.c.o
+  CC    basic/atca_basic.c
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_deps_init.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_deps_init.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/adc/esp8266/src/esp_adc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_adc.c.o
+  CC    ./src/core/raw.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/raw.o
+LD /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/rboot/rboot-stage2a.elf
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/mgos_i2c.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_i2c.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/i2c/src/common_gpio/mgos_i2c_gpio.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_i2c_gpio.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/atca/src/mgos_atca.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_atca.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/src/mgos_ca_bundle.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_ca_bundle.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/mqtt/src/mgos_mqtt.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_mqtt.c.o
+E2 /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/rboot-hex2a.h
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/shadow/src/mgos_shadow.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_shadow.c.o
+CC rboot.c
+  CC    ./src/core/tcp_in.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/tcp_in.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_aws.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_greengrass.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_aws_greengrass.c.o
+  CC    ./src/core/sntp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/sntp.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/aws/src/mgos_aws_shadow.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_aws_shadow.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/sntp/src/mgos_sntp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_sntp.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_azure.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_cm.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_azure_cm.c.o
+LD /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/rboot/rboot.elf
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_sas.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_azure_sas.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_dm.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_azure_dm.c.o
+E2 /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/rboot/rboot.bin
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/azure/src/mgos_azure_shadow.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_azure_shadow.c.o
+  CC    ./src/core/pbuf.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/pbuf.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mgos_wifi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_wifi.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/src/mjs_wifi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mjs_wifi.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/wifi/esp8266/src/esp_wifi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_wifi.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/http-server/src/mgos_http_server.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_http_server.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_rpc.c.o
+  CC    ./src/core/netif.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/netif.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_rpc_channel.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_http.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_rpc_channel_http.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mg_rpc/mg_rpc_channel_ws.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_rpc_channel_ws.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-common/src/mgos_rpc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_rpc.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dht/src/mgos_dht.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_dht.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_dns_sd.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_dns_sd.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/mgos_mdns.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_mdns.c.o
+  CC    ./src/core/stats.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/stats.o
+  CC    ./src/core/timers.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/timers.o
+  CC    ./src/core/def.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/def.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/gcp/src/mgos_gcp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_gcp.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/neopixel/src/mgos_neopixel.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_neopixel.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/dns-sd/src/lwip/lwip_mdns.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip_mdns.c.o
+  CC    ./src/core/udp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/udp.o
+  CC    ./src/core/tcp_out.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/tcp_out.o
+  CC    basic/atca_helpers.c
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/mgos_pwm.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_pwm.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/pwm/src/esp8266/esp_pwm.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_pwm.c.o
+  CC    ./src/core/ipv4/ip_frag.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/ip_frag.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-azure/src/mgos_rpc_channel_azure_dm.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_rpc_channel_azure_dm.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-loopback/src/mg_rpc_channel_loopback.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_rpc_channel_loopback.c.o
+  CC    ./src/core/ipv4/inet.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/inet.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/watson/src/mgos_watson.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_watson.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-mqtt/src/mgos_rpc_channel_mqtt.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_rpc_channel_mqtt.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-atca/src/mgos_atca_service.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_atca_service.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-config/src/mgos_service_config.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_service_config.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-fs/src/mgos_service_filesystem.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_service_filesystem.c.o
+  CC    ./src/core/ipv4/ip_addr.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/ip_addr.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-gpio/src/mgos_gpio_service.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_gpio_service.c.o
+  CC    ./src/core/ipv4/igmp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/igmp.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-i2c/src/mgos_i2c_service.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_i2c_service.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-uart/src/mgos_rpc_channel_uart.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_rpc_channel_uart.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/rpc-service-wifi/src/mgos_rpc_service_wifi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_rpc_service_wifi.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_spi.c.o
+  CC    host/atca_host.c
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/mgos_spi_mjs.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_spi_mjs.c.o
+  CC    ./src/core/ipv4/ip.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/ip.o
+  CC    ./src/core/ipv4/autoip.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/autoip.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/spi/src/common_gpio/mgos_spi_gpio.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_spi_gpio.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/vfs-dev-spi-flash/src/mgos_vfs_dev_spi_flash.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_vfs_dev_spi_flash.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/demo-bundle/src/mgos_demo_bundle.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_demo_bundle.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/ffi_exports.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/ffi_exports.c.o
+  CC    /mongoose-os/common/cs_file.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/cs_file.c.o
+  CC    ./src/core/ipv4/inet_chksum.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/inet_chksum.o
+  CC    /mongoose-os/common/cs_rbuf.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/cs_rbuf.c.o
+  CC    /mongoose-os/fw/src/mgos_config_util.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_config_util.c.o
+  CC    ./src/core/ipv4/icmp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/icmp.o
+  CC    /mongoose-os/fw/src/mgos_core_dump.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_core_dump.c.o
+  CC    /mongoose-os/fw/src/mgos_event.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_event.c.o
+  CC    /mongoose-os/fw/src/mgos_dlsym.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_dlsym.c.o
+  CC    /mongoose-os/fw/src/mgos_hw_timers.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_hw_timers.c.o
+  CC    /mongoose-os/fw/src/mgos_gpio.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_gpio.c.o
+  CC    ./src/api/netdb.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/netdb.o
+  CC    /mongoose-os/fw/src/mgos_time.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_time.c.o
+  CC    /mongoose-os/fw/src/mgos_init.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_init.c.o
+  CC    ./src/api/api_lib.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/api_lib.o
+  CC    /mongoose-os/fw/src/mgos_timers.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_timers.c.o
+  AR    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/libatca.a
+/opt/Espressif/crosstool-NG/builds/xtensa-lx106-elf/bin/xtensa-lx106-elf-ar -rc /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/libatca.a /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_command.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_iface.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_cfgs.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_device.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_basic.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_helpers.o /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/atca/atca_host.o
+make[1]: Leaving directory '/opt/cryptoauthlib/lib'
+  CC    ./src/api/netifapi.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/netifapi.o
+  CC    ./src/api/tcpip.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/tcpip.o
+  CC    /mongoose-os/fw/src/mgos_mmap_esp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_mmap_esp.c.o
+  CC    ./src/api/netbuf.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/netbuf.o
+  CC    /mongoose-os/fw/src/mgos_mongoose.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_mongoose.c.o
+  CC    /mongoose-os/fw/src/mgos_sys_config.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_sys_config.c.o
+  CC    ./src/api/err.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/err.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_config.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_config.c.o
+  CC    ./src/api/api_msg.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/api_msg.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mgos_ro_vars.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_ro_vars.c.o
+  CC    ./src/api/sockets.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/sockets.o
+  CC    /mongoose-os/fw/src/mgos_system.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_system.c.o
+  CC    /mongoose-os/fw/src/mgos_uart.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_uart.c.o
+  CC    /mongoose-os/fw/src/mgos_utils.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_utils.c.o
+  CC    ./espressif/app/espconn.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/espconn.o
+  CC    ./espressif/app/espconn_buf.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/espconn_buf.o
+  CC    /mongoose-os/fw/src/mgos_vfs.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_vfs.c.o
+  CC    ./espressif/app/netio.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/netio.o
+  CC    /mongoose-os/fw/src/mgos_vfs_dev.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_vfs_dev.c.o
+  CC    ./espressif/app/espconn_tcp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/espconn_tcp.o
+  CC    /mongoose-os/fw/src/mgos_vfs_dev_ram.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_vfs_dev_ram.c.o
+  CC    ./espressif/app/ping.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/ping.o
+  CC    /mongoose-os/fw/src/mgos_vfs_fs_spiffs.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_vfs_fs_spiffs.c.o
+  CC    /mongoose-os/common/cs_crc32.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/cs_crc32.c.o
+  CC    /mongoose-os/common/platforms/esp8266/rboot/rboot/appcode/rboot-bigflash.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/rboot-bigflash.c.o
+  CC    /mongoose-os/common/platforms/esp8266/rboot/rboot/appcode/rboot-api.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/rboot-api.c.o
+  CC    /mongoose-os/common/json_utils.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/json_utils.c.o
+  CC    /mongoose-os/common/umm_malloc/umm_malloc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/umm_malloc.c.o
+  CC    /mongoose-os/frozen/frozen.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/frozen.c.o
+  CC    ./espressif/app/dhcpserver.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/dhcpserver.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_config.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_config.c.o
+  CC    ./espressif/app/espconn_mdns.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/espconn_mdns.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_coredump.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_coredump.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_debug.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_debug.c.o
+  CC    ./espressif/app/espconn_udp.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/espconn_udp.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_exc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_exc.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_fs.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_fs.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_flash_writer.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_flash_writer.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_gpio.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_gpio.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_hal.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_hal.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_heap_trace.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_heap_trace.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_hw_timers.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_hw_timers.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_hw_wdt.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_hw_wdt.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_libc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_libc.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_main.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_main.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_periph.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_periph.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_uart.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_uart.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_updater.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_updater.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_vfs_dev_sysflash.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_vfs_dev_sysflash.c.o
+  CC    /mongoose-os/common/spiffs/spiffs_cache.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/spiffs_cache.c.o
+  CC    /mongoose-os/common/spiffs/spiffs_gc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/spiffs_gc.c.o
+  CC    /mongoose-os/common/spiffs/spiffs_nucleus.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/spiffs_nucleus.c.o
+  AR /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/lwip/liblwip_cs.a
+  CC    /mongoose-os/common/spiffs/spiffs_check.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/spiffs_check.c.o
+  CC    /mongoose-os/common/platforms/esp8266/esp_crypto.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_crypto.c.o
+make[1]: Leaving directory '/opt/Espressif/cs_lwip'
+  CC    /mongoose-os/common/platforms/esp8266/esp_umm_malloc.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_umm_malloc.c.o
+  CC    /mongoose-os/common/spiffs/spiffs_hydrogen.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/spiffs_hydrogen.c.o
+  CC    /mongoose-os/fw/src/mgos_debug.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_debug.c.o
+  CC    /mongoose-os/fw/src/mgos_net.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_net.c.o
+  CC    /mongoose-os/fw/src/mgos_bitbang.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_bitbang.c.o
+  CC    /mongoose-os/fw/src/mgos_updater_common.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mgos_updater_common.c.o
+  CC    /mongoose-os/fw/platforms/esp8266/src/esp_exc_non_os.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_exc_non_os.c.o
+  AS    /mongoose-os/fw/platforms/esp8266/src/esp_exc_vectors.S -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_exc_vectors.S.o
+  AS    /mongoose-os/fw/platforms/esp8266/src/esp_nsleep100.S -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/esp_nsleep100.S.o
+  CP    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/conf0.json -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fs
+  CP    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/libs/ca-bundle/fs/ca.pem -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fs
+  CP    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/fs/index.html -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fs
+  MKFS  /usr/local/bin/mkspiffs8 262144 4096 256 4096 /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fs -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/fs.bin
+     Adding ca.pem: 18826
+     Adding conf0.json: 5412
+     Adding index.html: 70
+     Image stats: size=262144, space: total=233681, used=25602, free=208079
+  GEN   /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/build_info.c
+  GEN   /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mg_build_info.c
+  AR    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mongoose-os.a
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/build_info.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/build_info.c.o
+  CC    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/gen/mg_build_info.c -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/mg_build_info.c.o
+  LD    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/dev.elf
+  FW    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/dev.elf -> /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/dev.bin
+  Generating breakdown
+  GEN    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/manifest.json
+  ZIP    /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/fw/dev-esp8266-last.zip
+     Adding /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/dev.bin
+     Adding /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/esp_init_data_default_v08.bin
+     Adding /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/fs.bin
+     Adding /fwbuild-volumes/latest/apps/dev/esp8266/build_contexts/build_ctx_172581956/build/objs/fw_temp/rboot.bin
+  Built dev/esp8266 version 1.0 (20180603-185826/???)
+make: Leaving directory '/app'
+Success, built dev/esp8266 version 1.0 (20180603-185826/???).
+Firmware saved to build/fw.zip
