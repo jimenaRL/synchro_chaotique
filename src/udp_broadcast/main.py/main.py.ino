@@ -13,30 +13,41 @@ char incomingPacket[255];         // buffer for incoming packets
 byte mac[6];                      // the MAC address of SAT
 
 /// neighbors /// 
-int nb_neighs = 3;
+int nb_neighs = 4;
 
 typedef struct {
     IPAddress ip;
     float val;
 } Node;
 
-Node Neighs[3] = {
+Node Neighs[4] = {
   {IPAddress(192, 168, 0, 17), 0.0},  // debug fake neighbor (my cel phone) 
+  {IPAddress(192, 168, 0, 36), 0.0},  // debug fake neighbor (my laptop) 
   {IPAddress(192, 168, 0, 13), 0.0},
   {IPAddress(192, 168, 0, 43), 0.0},
 };
 
 
 /// internal /// 
-float tau = 0.001;      // frame time of server
-float dt = 0.001;       // time delta for updating microcontroller values
-char value_buff[10];    // buffer to store strinf representation of internal value 
+const float tau = 0.001;   // frame time of server
+char val_buff[10];   // buffer to store strinf representation of internal value 
+const int width = 4; // width of for char to string conversion 
+const int prec = 6;  // precision of for char to string conversion 
 
 
-/// Kuramoto model parameter /// 
-float w = 1.0;    // frequency
-float k = 0.5;    // coupling constant
-float val = float(random(300));  // internal value
+/// Kuramoto model parameters /// 
+const float dt = 0.1;    // time delta for updating values
+const float w = 1.0;    // frequency
+const float k = 0.5;    // coupling constant
+float val = 10.0; // float(random(300));  // internal value
+
+/// debug /// 
+bool debug = true;
+
+//void typeof(String a){ Serial.println("it a String a");}
+//void typeof(int a)   { Serial.println("it a int a");}
+//void typeof(char* a) { Serial.println("it a char* a");}
+//void typeof(float a) { Serial.println("it a float a");}
 
 
 void print_mac(){
@@ -55,56 +66,67 @@ void print_mac(){
   Serial.println(mac[5],HEX);
 }
 
+void show_params(){
+    Serial.println("Kuramoto model parameters:"); 
+    Serial.printf("\t w: ");
+    Serial.println((float)(w),5); 
+    Serial.printf("\t k: ");
+    Serial.println((float)(k),5); 
+    Serial.printf("\t dt: ");
+    Serial.println((float)(dt),5); 
+
+}
+
 void show_neighs(){
-    Serial.printf("Neighbors:\n", WiFi.localIP().toString().c_str(), localUdpPort);
+    Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
     for (int i=0; i<nb_neighs; i++){
       Serial.printf("\t %d : ip %s | val ", i, Neighs[i].ip.toString().c_str());
       Serial.println((float)(Neighs[i].val),1); 
     }
 }
 
+void show_this(){
+      Serial.printf("\t x : ip %s | val ", WiFi.localIP().toString().c_str());
+      Serial.println((float)(val), 5); 
+}
+
+void show_all(){
+  show_neighs();
+  show_this();
+}
+
+
+// utils //
 void connect_wifi(){
   Serial.printf("Connecting to %s ", ssid);
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED){
     delay(500);
     Serial.print(".");
   }
   Serial.println(" connected!");
 }
 
-void setup(){
-  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
-  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
-  Serial.begin(115200);
-  Serial.println();
-  connect_wifi();
-  print_mac();
-  Udp.begin(localUdpPort);
-  Serial.printf("Now listening at IP %s, UDP port %d. \n", WiFi.localIP().toString().c_str(), localUdpPort);
-  show_neighs();
-}
-
-
+// send internal value to neighbors 
 void send_value(){
-    dtostrf(val, 4, 6, value_buff);  // 4 is mininum width, 6 is precision
-    for (int i=0; i < nb_neighs; i++){
-      Udp.beginPacket(Neighs[i].ip, remoteUdpPort);
-      Udp.write(value_buff);
-      Udp.endPacket();
-    }
+  // converts double val into an ASCII representationthat will be stored under value_buff
+  dtostrf(val, width, prec, val_buff);
+  for (int i=0; i < nb_neighs; i++){
+    Udp.beginPacket(Neighs[i].ip, remoteUdpPort);
+    Udp.write(val_buff);
+    Udp.endPacket();
+  }
 }
 
 // update internal value with Kuramoto model
 void update_value(){
-        float old_val = val;
-        float tmp = 0.0;
-        for (int i=0; i < nb_neighs; i++){
-              //  angle in Radians
-              tmp += (k * sin(PI*(Neighs[i].val - old_val)/180.0));
-        };
-        val = old_val + dt * (w + tmp);
+  Serial.printf("Updating internal value.\n");
+  float tmp = 0.0;
+  for (int i=0; i < nb_neighs; i++){
+    // /!\ /!\ /!\ sin argument angle mus be in Radians /!\ /!\ /!\ //
+    tmp += (k * sin(PI*(Neighs[i].val - val)/180.0));
+  };
+  val += dt * (w + tmp);
 }
 
 // update neighbor value from received packet 
@@ -117,37 +139,52 @@ void update_neigh(){
   };
 }
 
-// debug
-//void typeof(String a){ Serial.println("it a String a");}
-//void typeof(int a)   { Serial.println("it a int a");}
-//void typeof(char* a) { Serial.println("it a char* a");}
-//void typeof(float a) { Serial.println("it a float a");}
-
 // handle incoming packets
 void handle_packets(){
-      int packetSize = Udp.parsePacket();
-      if (packetSize){
-        // receive incoming UDP packets
-        Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
-        int len = Udp.read(incomingPacket, 255);
-        if (len > 0){
-          incomingPacket[len] = 0;
-        }
-        Serial.printf("UDP packet contents: %s\n", incomingPacket);
-        update_neigh();
-        show_neighs();
-        // for monitoring
-        digitalWrite(LED_BUILTIN, LOW);
-        delay(100);
-        digitalWrite(LED_BUILTIN, HIGH);
-      }
+  int packetSize = Udp.parsePacket();
+  if (packetSize){
+    // receive incoming UDP packets
+    if(debug){
+      Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
+    }
+    int len = Udp.read(incomingPacket, 255);
+    if (len > 0){
+      incomingPacket[len] = 0;
+    }
+    if(debug){
+      Serial.printf("UDP packet contents: %s\n", incomingPacket);
+    }
+    update_neigh();
+    update_value();
+    send_value();
+    show_all();
+    // for monitoring
+    if(debug){
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(100);
+      digitalWrite(LED_BUILTIN, HIGH);
+    }    
+  }
+}
+
+void setup(){
+  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
+  Serial.begin(115200);
+  Serial.println();
+  connect_wifi();
+  print_mac();
+  Udp.begin(localUdpPort);
+  Serial.printf("Now listening at IP %s, UDP port %d. \n", WiFi.localIP().toString().c_str(), localUdpPort);
+  show_all();
+  show_params();
 }
 
 void loop(){
     // handle incoming packets
     handle_packets();
     // wait
-    delay(tau/2.);
+    //delay(tau/2.);
     // send internal value to neighbors
     //send_value();
     // wait
