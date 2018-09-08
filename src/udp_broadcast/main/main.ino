@@ -23,8 +23,8 @@ typedef struct {
 Node Neighs[4] = {
   {IPAddress(192, 168, 0, 17), 0.0},  // debug fake neighbor (my cel phone) 
   {IPAddress(192, 168, 0, 36), 0.0},  // debug fake neighbor (my laptop) 
-  {IPAddress(192, 168, 0, 13), 0.0},
   {IPAddress(192, 168, 0, 43), 0.0},
+  {IPAddress(192, 168, 0, 30), 0.0},
 };
 
 
@@ -74,7 +74,6 @@ void show_params(){
     Serial.println((float)(k),5); 
     Serial.printf("\t dt: ");
     Serial.println((float)(dt),5); 
-
 }
 
 void show_neighs(){
@@ -111,8 +110,14 @@ void connect_wifi(){
 void send_value(){
   // converts double val into an ASCII representationthat will be stored under value_buff
   dtostrf(val, width, prec, val_buff);
+  if(debug){
+    Serial.printf("Sending value ");
+    Serial.print((float)(val), 5); 
+    Serial.println(" to  neighbors:");
+  }
   for (int i=0; i < nb_neighs; i++){
-    Udp.beginPacket(Neighs[i].ip, remoteUdpPort);
+    Serial.printf("%d : %s\n", i, Neighs[i].ip.toString().c_str());
+    Udp.beginPacket(Neighs[i].ip, 60795);
     Udp.write(val_buff);
     Udp.endPacket();
   }
@@ -120,7 +125,7 @@ void send_value(){
 
 // update internal value with Kuramoto model
 void update_value(){
-  Serial.printf("Updating internal value.\n");
+  Serial.printf("Updating internal value\n");
   float tmp = 0.0;
   for (int i=0; i < nb_neighs; i++){
     // /!\ /!\ /!\ sin argument angle mus be in Radians /!\ /!\ /!\ //
@@ -131,10 +136,10 @@ void update_value(){
 
 // update neighbor value from received packet 
 void update_neigh(){
-  Serial.printf("Updating neighbor %s with value %s ! \n", Udp.remoteIP().toString().c_str(), incomingPacket);
+  Serial.printf("Updating neighbor %s with value %s\n", Udp.remoteIP().toString().c_str(), incomingPacket);
   for (int i=0; i<nb_neighs; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
-      Neighs[i] = (Node){IPAddress(192, 168, 0, 17), String(incomingPacket).toFloat()};
+      Neighs[i] = (Node){Neighs[i].ip, String(incomingPacket).toFloat()};
     }
   };
 }
