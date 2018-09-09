@@ -7,48 +7,45 @@ const char* ssid = "jimena";
 const char* password = "ababababab";
 
 WiFiUDP Udp;
-unsigned int localUdpPort = 4210; // local port to listen on
-unsigned int remoteUdpPort = 4210; // local port to talk to
-char incomingPacket[255];         // buffer for incoming packets
-byte mac[6];                      // the MAC address of SAT
+unsigned int localUdpPort = 4210;  // local port to listen on
+const int inBufferSize = 255;      // size of buffer
+char incomingPacket[inBufferSize]; // buffer for incoming packets
+byte mac[6];                       // the MAC address of SAT
 
 /// neighbors /// 
-int nb_neighs = 4;
+int NB_NEIGHS = 4;
 
 typedef struct {
     IPAddress ip;
     float val;
+    int port;
 } Node;
 
 Node Neighs[4] = {
-  {IPAddress(192, 168, 0, 17), 0.0},  // debug fake neighbor (my cel phone) 
-  {IPAddress(192, 168, 0, 36), 0.0},  // debug fake neighbor (my laptop) 
-  {IPAddress(192, 168, 0, 43), 0.0},
-  {IPAddress(192, 168, 0, 30), 0.0},
+  {IPAddress(192, 168, 0, 17), 0.0, 40345},  // debug fake neighbor (UDP Sender app from cel phone) 
+  {IPAddress(192, 168, 0, 36), 0.0, 51519},  // debug fake neighbor (ParcketSender from my laptop) 
+  {IPAddress(192, 168, 0, 13), 0.0, 4210},
+  {IPAddress(192, 168, 0, 30), 0.0, 4210},
 };
 
 
 /// internal /// 
-const float tau = 0.001;   // frame time of server
-char val_buff[10];   // buffer to store strinf representation of internal value 
-const int width = 4; // width of for char to string conversion 
-const int prec = 6;  // precision of for char to string conversion 
+char val_buff[10];       // buffer to store strinf representation of internal value 
+const float TAU = 500; // time delta for updating values in milliseconds
+const int WIDTH = 4;     // WIDTH of for char to string conversion 
+const int PREC = 6;      // PRECision of for char to string conversion 
 
 
 /// Kuramoto model parameters /// 
-const float dt = 0.1;    // time delta for updating values
-const float w = 1.0;    // frequency
-const float k = 0.5;    // coupling constant
-float val = 10.0; // float(random(300));  // internal value
+const float dT = TAU/1000.0;    // model's time delta in seconds
+const float W = 1.0;     // frequency
+const float K = 0.5;    // coupling constant
+float val = float(random(10));  // internal value
 
-/// debug /// 
+/// debug ///
+
+const int ppFpre = 5; // Precision print float
 bool debug = true;
-
-//void typeof(String a){ Serial.println("it a String a");}
-//void typeof(int a)   { Serial.println("it a int a");}
-//void typeof(char* a) { Serial.println("it a char* a");}
-//void typeof(float a) { Serial.println("it a float a");}
-
 
 void print_mac(){
   WiFi.macAddress(mac);
@@ -69,31 +66,30 @@ void print_mac(){
 void show_params(){
     Serial.println("Kuramoto model parameters:"); 
     Serial.printf("\t w: ");
-    Serial.println((float)(w),5); 
+    Serial.println((float)(W),ppFpre); 
     Serial.printf("\t k: ");
-    Serial.println((float)(k),5); 
+    Serial.println((float)(K),ppFpre); 
     Serial.printf("\t dt: ");
-    Serial.println((float)(dt),5); 
+    Serial.println((float)(dT),ppFpre); 
 }
 
 void show_neighs(){
-    Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
-    for (int i=0; i<nb_neighs; i++){
-      Serial.printf("\t %d : ip %s | val ", i, Neighs[i].ip.toString().c_str());
-      Serial.println((float)(Neighs[i].val),1); 
-    }
+  Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  for (int i=0; i<NB_NEIGHS; i++){
+    Serial.printf("\t %d : ip %s | port %d | val ", i, Neighs[i].ip.toString().c_str(), Neighs[i].port);
+    Serial.println((float)(Neighs[i].val),ppFpre); 
+  }
 }
 
 void show_this(){
-      Serial.printf("\t x : ip %s | val ", WiFi.localIP().toString().c_str());
-      Serial.println((float)(val), 5); 
+  Serial.printf("\t x : ip %s | port %d | val ", WiFi.localIP().toString().c_str(), localUdpPort);
+  Serial.println((float)(val), ppFpre); 
 }
 
 void show_all(){
   show_neighs();
   show_this();
 }
-
 
 // utils //
 void connect_wifi(){
@@ -108,16 +104,15 @@ void connect_wifi(){
 
 // send internal value to neighbors 
 void send_value(){
-  // converts double val into an ASCII representationthat will be stored under value_buff
-  dtostrf(val, width, prec, val_buff);
+  // convert double val into an ASCII representation that will be stored under value_buff
+  dtostrf(val, WIDTH, PREC, val_buff);
   if(debug){
     Serial.printf("Sending value ");
-    Serial.print((float)(val), 5); 
-    Serial.println(" to  neighbors:");
+    Serial.print((float)(val), ppFpre); 
+    Serial.println(" to  neighbors.");
   }
-  for (int i=0; i < nb_neighs; i++){
-    Serial.printf("%d : %s\n", i, Neighs[i].ip.toString().c_str());
-    Udp.beginPacket(Neighs[i].ip, 60795);
+  for (int i=0; i<NB_NEIGHS; i++){
+    Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
     Udp.write(val_buff);
     Udp.endPacket();
   }
@@ -127,56 +122,50 @@ void send_value(){
 void update_value(){
   Serial.printf("Updating internal value\n");
   float tmp = 0.0;
-  for (int i=0; i < nb_neighs; i++){
+  for (int i=0; i<NB_NEIGHS; i++){
     // /!\ /!\ /!\ sin argument angle mus be in Radians /!\ /!\ /!\ //
-    tmp += (k * sin(PI*(Neighs[i].val - val)/180.0));
+    tmp += (K * sin(PI*(Neighs[i].val - val)/180.0));
   };
-  val += dt * (w + tmp);
+  val += dT * (W + tmp);
 }
 
 // update neighbor value from received packet 
 void update_neigh(){
-  Serial.printf("Updating neighbor %s with value %s\n", Udp.remoteIP().toString().c_str(), incomingPacket);
-  for (int i=0; i<nb_neighs; i++){
+  //float in_value = atof(incomingPacket);
+  long in_value = strtol(incomingPacket, NULL, 10);
+  Serial.printf("Updating neighbor %s with value %d\n", Udp.remoteIP().toString().c_str(), in_value);
+  for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
-      Neighs[i] = (Node){Neighs[i].ip, String(incomingPacket).toFloat()};
+      Neighs[i] = (Node){Neighs[i].ip, in_value, Neighs[i].port};
     }
   };
 }
 
-// handle incoming packets
-void handle_packets(){
+void update_state(){
+  update_neigh();
+  update_value();
+}
+
+// receive incoming UDP packets
+int read_buffer(){
   int packetSize = Udp.parsePacket();
   if (packetSize){
-    // receive incoming UDP packets
     if(debug){
       Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
-    }
-    int len = Udp.read(incomingPacket, 255);
-    if (len > 0){
-      incomingPacket[len] = 0;
-    }
-    if(debug){
       Serial.printf("UDP packet contents: %s\n", incomingPacket);
     }
-    update_neigh();
-    update_value();
-    send_value();
-    show_all();
-    // for monitoring
-    if(debug){
-      digitalWrite(LED_BUILTIN, LOW);
-      delay(100);
-      digitalWrite(LED_BUILTIN, HIGH);
-    }    
+    int len = Udp.read(incomingPacket, inBufferSize);
+    if (len > 0){
+      incomingPacket[len] = 0;   // I don't known what is this for but it  appears is in WiFiUdp's tutorial ... 
+    }
   }
+  return packetSize;
 }
 
 void setup(){
   pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
   digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
   Serial.begin(115200);
-  Serial.println();
   connect_wifi();
   print_mac();
   Udp.begin(localUdpPort);
@@ -186,16 +175,24 @@ void setup(){
 }
 
 void loop(){
-    // handle incoming packets
-    handle_packets();
+  // handle incoming packets
+  int packetSize = read_buffer();
+  // if package received
+  if(packetSize){
     // wait
-    //delay(tau/2.);
+    delay(TAU/2.);
+    // update internal state
+    update_state();
+    // wait
+    delay(TAU/2.);
     // send internal value to neighbors
-    //send_value();
-    // wait
-    //delay(tau/2.);
-    // update internal value
-    //update_value();
-
+    send_value();
+    if(debug){
+      show_all();
+      // for monitoring
+      //digitalWrite(LED_BUILTIN, LOW);
+      //delay(10);
+      //digitalWrite(LED_BUILTIN, HIGH);
+    }
+  }
 }
-
