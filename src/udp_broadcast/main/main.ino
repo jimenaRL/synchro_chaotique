@@ -12,7 +12,7 @@ const int inBufferSize = 255;      // size of buffer
 char incomingPacket[inBufferSize]; // buffer for incoming packets
 byte mac[6];                       // the MAC address of SAT
 
-/// neighbors /// 
+/// neighbors ///
 int NB_NEIGHS = 4;
 
 typedef struct {
@@ -24,19 +24,19 @@ typedef struct {
 Node Neighs[4] = {
   {IPAddress(192, 168, 0, 17), 0.0, 40345},  // debug fake neighbor (UDP Sender app from cel phone) 
   {IPAddress(192, 168, 0, 36), 0.0, 51519},  // debug fake neighbor (ParcketSender from my laptop) 
-  {IPAddress(192, 168, 0, 13), 0.0, 4210},
   {IPAddress(192, 168, 0, 30), 0.0, 4210},
+  {IPAddress(192, 168, 0, 13), 0.0, 4210},
 };
 
 
-/// internal /// 
+/// internal ///
 char val_buff[10];       // buffer to store strinf representation of internal value 
 const float TAU = 500; // time delta for updating values in milliseconds
 const int WIDTH = 4;     // WIDTH of for char to string conversion 
 const int PREC = 6;      // PRECision of for char to string conversion 
 
 
-/// Kuramoto model parameters /// 
+/// Kuramoto model parameters ///
 const float dT = TAU/1000.0;    // model's time delta in seconds
 const float W = 1.0;     // frequency
 const float K = 0.5;    // coupling constant
@@ -44,7 +44,7 @@ float val = float(random(10));  // internal value
 
 /// debug ///
 
-const int ppFpre = 5; // Precision print float
+const int ppFpre = 5; // precision print float
 bool debug = true;
 
 void print_mac(){
@@ -66,11 +66,11 @@ void print_mac(){
 void show_params(){
     Serial.println("Kuramoto model parameters:"); 
     Serial.printf("\t w: ");
-    Serial.println((float)(W),ppFpre); 
+    Serial.println((float)(W),ppFpre);
     Serial.printf("\t k: ");
-    Serial.println((float)(K),ppFpre); 
+    Serial.println((float)(K),ppFpre);
     Serial.printf("\t dt: ");
-    Serial.println((float)(dT),ppFpre); 
+    Serial.println((float)(dT),ppFpre);
 }
 
 void show_neighs(){
@@ -83,7 +83,7 @@ void show_neighs(){
 
 void show_this(){
   Serial.printf("\t x : ip %s | port %d | val ", WiFi.localIP().toString().c_str(), localUdpPort);
-  Serial.println((float)(val), ppFpre); 
+  Serial.println((float)(val), ppFpre);
 }
 
 void show_all(){
@@ -102,13 +102,15 @@ void connect_wifi(){
   Serial.println(" connected!");
 }
 
+// core methods //
+
 // send internal value to neighbors 
 void send_value(){
   // convert double val into an ASCII representation that will be stored under value_buff
   dtostrf(val, WIDTH, PREC, val_buff);
   if(debug){
     Serial.printf("Sending value ");
-    Serial.print((float)(val), ppFpre); 
+    Serial.print((float)(val), ppFpre);
     Serial.println(" to  neighbors.");
   }
   for (int i=0; i<NB_NEIGHS; i++){
@@ -120,10 +122,12 @@ void send_value(){
 
 // update internal value with Kuramoto model
 void update_value(){
-  Serial.printf("Updating internal value\n");
+  if(debug){
+    Serial.printf("Updating internal value\n");
+  }
   float tmp = 0.0;
   for (int i=0; i<NB_NEIGHS; i++){
-    // /!\ /!\ /!\ sin argument angle mus be in Radians /!\ /!\ /!\ //
+    // sin argument angle mus be in radians
     tmp += (K * sin(PI*(Neighs[i].val - val)/180.0));
   };
   val += dT * (W + tmp);
@@ -131,8 +135,13 @@ void update_value(){
 
 // update neighbor value from received packet 
 void update_neigh(){
-  //float in_value = atof(incomingPacket);
+  /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+  // atof(incomingPacket) always out a 0 value ...
+  // float in_value = atof(incomingPacket);
+  // strtol works better bbut only integer part of incoming value is recovered
+  // (e.g.: 10.2341 becomes the long 10)
   long in_value = strtol(incomingPacket, NULL, 10);
+  /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
   Serial.printf("Updating neighbor %s with value %d\n", Udp.remoteIP().toString().c_str(), in_value);
   for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
@@ -190,9 +199,9 @@ void loop(){
     if(debug){
       show_all();
       // for monitoring
-      //digitalWrite(LED_BUILTIN, LOW);
-      //delay(10);
-      //digitalWrite(LED_BUILTIN, HIGH);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(10);
+      digitalWrite(LED_BUILTIN, HIGH);
     }
   }
 }
