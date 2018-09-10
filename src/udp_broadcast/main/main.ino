@@ -157,11 +157,11 @@ void update_state(){
 int read_buffer(){
   int packetSize = Udp.parsePacket();
   if (packetSize){
+    int len = Udp.read(incomingPacket, inBufferSize);
     if(debug){
       Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
       Serial.printf("UDP packet contents: %s\n", incomingPacket);
     }
-    int len = Udp.read(incomingPacket, inBufferSize);
     if (len > 0){
       incomingPacket[len] = 0;   // I don't known what is this for but it  appears is in WiFiUdp's tutorial ... 
     }
