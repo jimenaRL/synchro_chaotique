@@ -8,12 +8,12 @@ const char* password = "ababababab";
 
 WiFiUDP Udp;
 unsigned int localUdpPort = 4210;  // local port to listen on
-const int bufferSize = 255;      // size of buffer
-char incomingPacket[bufferSize]; // buffer for incoming packets
+const int bufferSize = 255;        // size of buffer
+char incomingPacket[bufferSize];   // buffer for incoming packets
 byte mac[6];                       // the MAC address of SAT
 
 /// neighbors ///
-int NB_NEIGHS = 4;
+int NB_NEIGHS = 2;
 
 typedef struct {
     IPAddress ip;
@@ -22,31 +22,32 @@ typedef struct {
 } Node;
 
 Node Neighs[4] = {
-  {IPAddress(192, 168, 0, 17), 0.0, 40345},  // debug fake neighbor (UDP Sender app from cel phone) 
-  {IPAddress(192, 168, 0, 36), 0.0, 51519},  // debug fake neighbor (ParcketSender from my laptop) 
+  {IPAddress(192, 168, 0, 43), 0.0, 4210},
   {IPAddress(192, 168, 0, 30), 0.0, 4210},
-  {IPAddress(192, 168, 0, 13), 0.0, 4210},
+  {IPAddress(192, 168, 0, 17), 0.0, 40345},  // debug fake neighbor (UDP Sender app from cel phone)
+  {IPAddress(192, 168, 0, 36), 0.0, 51519},  // debug fake neighbor (ParcketSender from my laptop)
 };
 
 
 /// internal ///
-char val_buff[bufferSize];       // buffer to store strinf representation of internal value 
-const double TAU = 500; // time delta for updating values in milliseconds
-const int WIDTH = 10;     // WIDTH of for char to string conversion 
-const int PREC = 10;      // PRECision of for char to string conversion 
+char val_buff[bufferSize];  // buffer to store strinf representation of internal value
+const double TAU = 100;     // time delta for updating values in milliseconds
+const int WIDTH = 10;       // WIDTH of for char to string conversion
+const int PREC = 10;        // Precision of for char to string conversion
 
 
 /// Kuramoto model parameters ///
-const double dT = TAU/1000.0;    // model's time delta in seconds
-const double W = 1.0;     // frequency
-const double K = 0.5;    // coupling constant
-double val = double(random(10));  // internal value
+const double dT = TAU/1000.0;     // model's time delta in seconds
+const double W = 1.0;             // internal frequency
+const double K = 1.0;             // coupling constant
+double val = 0.0;  // internal value
 
 /// debug ///
 
 const int ppFpre = 10; // precision print
-bool debug = true;
-
+bool debug = false;
+bool monitoring = true;
+ 
 void print_mac(){
   WiFi.macAddress(mac);
   Serial.print("MAC adress: ");
@@ -64,7 +65,7 @@ void print_mac(){
 }
 
 void show_params(){
-    Serial.println("Kuramoto model parameters:"); 
+    Serial.println("Kuramoto model parameters:");
     Serial.printf("\t w: ");
     Serial.println((double)(W),ppFpre);
     Serial.printf("\t k: ");
@@ -77,7 +78,7 @@ void show_neighs(){
   Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
   for (int i=0; i<NB_NEIGHS; i++){
     Serial.printf("\t %d : ip %s | port %d | val ", i, Neighs[i].ip.toString().c_str(), Neighs[i].port);
-    Serial.println((double)(Neighs[i].val),ppFpre); 
+    Serial.println((double)(Neighs[i].val),ppFpre);
   }
 }
 
@@ -104,7 +105,7 @@ void connect_wifi(){
 
 // core methods //
 
-// send internal value to neighbors 
+// send internal value to neighbors
 void send_value(){
   // convert double val into an ASCII representation that will be stored under value_buff
   dtostrf(val, WIDTH, PREC, val_buff);
@@ -127,18 +128,19 @@ void update_value(){
   }
   double tmp = 0.0;
   for (int i=0; i<NB_NEIGHS; i++){
-    // sin argument angle mus be in radians
     tmp += (K * sin(Neighs[i].val - val));
   };
   val += dT * (W + tmp);
 }
 
-// update neighbor value from received packet 
+// update neighbor value from received packet
 void update_neigh(){
   double in_value = atof(incomingPacket);
-  Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str(), in_value);
-  Serial.print((double)(in_value), ppFpre);
+  if(debug){
+    Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str(), in_value);
+    Serial.print((double)(in_value), ppFpre);
     Serial.printf("\n");
+  }
   for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
       Neighs[i] = (Node){Neighs[i].ip, in_value, Neighs[i].port};
@@ -161,7 +163,7 @@ int read_buffer(){
       Serial.printf("UDP packet contents: %s\n", incomingPacket);
     }
     if (len > 0){
-      incomingPacket[len] = 0;   // I don't known what is this for but it  appears is in WiFiUdp's tutorial ... 
+      incomingPacket[len] = '\0';   // set null character to end  string representation
     }
   }
   return packetSize;
@@ -192,7 +194,7 @@ void loop(){
     delay(TAU/2.);
     // send internal value to neighbors
     send_value();
-    if(debug){
+    if(monitoring){
       show_all();
       // for monitoring
       digitalWrite(LED_BUILTIN, LOW);
