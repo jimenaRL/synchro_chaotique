@@ -135,11 +135,7 @@ void update_value(){
 
 // update neighbor value from received packet 
 void update_neigh(){
-  // atof(incomingPacket) always out a 0 value ...
   float in_value = atof(incomingPacket);
-  // strtol works better bbut only integer part of incoming value is recovered
-  // (e.g.: 10.2341 becomes the long 10)
-  // long in_value = strtol(incomingPacket, NULL, 10);
   Serial.printf("Updating neighbor %s with value %f\n", Udp.remoteIP().toString().c_str(), in_value);
   for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
