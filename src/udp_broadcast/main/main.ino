@@ -128,7 +128,7 @@ void update_value(){
   float tmp = 0.0;
   for (int i=0; i<NB_NEIGHS; i++){
     // sin argument angle mus be in radians
-    tmp += (K * sin(PI*(Neighs[i].val - val)/180.0));
+    tmp += (K * sin(Neighs[i].val - val));
   };
   val += dT * (W + tmp);
 }
