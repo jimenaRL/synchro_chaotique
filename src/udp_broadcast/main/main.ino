@@ -21,11 +21,9 @@ typedef struct {
     int port;
 } Node;
 
-Node Neighs[4] = {
-  {IPAddress(192, 168, 0, 43), 0.0, 4210},
+Node Neighs[2] = {
   {IPAddress(192, 168, 0, 30), 0.0, 4210},
-  {IPAddress(192, 168, 0, 17), 0.0, 40345},  // debug fake neighbor (UDP Sender app from cel phone)
-  {IPAddress(192, 168, 0, 36), 0.0, 51519},  // debug fake neighbor (ParcketSender from my laptop)
+  {IPAddress(192, 168, 0, 13), 0.0, 4210},
 };
 
 
@@ -47,7 +45,10 @@ double val = 0.0;  // internal value
 const int ppFpre = 10; // precision print
 bool debug = false;
 bool monitoring = true;
- 
+
+Node monitor_server = {IPAddress(192, 168, 0, 36), 0.0, 5005};
+
+
 void print_mac(){
   WiFi.macAddress(mac);
   Serial.print("MAC adress: ");
@@ -90,6 +91,15 @@ void show_this(){
 void show_all(){
   show_neighs();
   show_this();
+}
+
+void _monitor(){
+  //Serial.printf("Sending value ");
+  //Serial.print((double)(val), ppFpre);
+  //Serial.println(" to  monitor server.");
+  Udp.beginPacket(monitor_server.ip, monitor_server.port);
+  Udp.write(val_buff);
+  Udp.endPacket();
 }
 
 // utils //
@@ -195,7 +205,8 @@ void loop(){
     // send internal value to neighbors
     send_value();
     if(monitoring){
-      show_all();
+      _monitor();
+      // show_all();
       // for monitoring
       digitalWrite(LED_BUILTIN, LOW);
       delay(10);
