@@ -42,10 +42,12 @@ int16_t sine[256] = {
 };
 
 uint8_t phase;      
+//uint8_t double_phase;    
+uint8_t ratio_phase;    
+           
 
-const double dT = 0.001;     //  time delta in seconds
-const double W = 127;        //  frequency in Hz                 
-
+const double F = 880.;
+const double ratioF = F/172.;
 
 void setup() {
   WiFi.forceSleepBegin();
@@ -53,10 +55,15 @@ void setup() {
   system_update_cpu_freq(160);
   i2s_begin();
   i2s_set_rate(44100);
+//  Serial.begin(115200);
+//  Serial.printf("\nSetup done.\n");
 }
 
 void loop() {
-  //i2s_write_sample(0x8000 + sine[phase++]);
-  i2s_write_sample(0x8000 + (int16_t) 65536 * sin(2*PI*W*millis()));
+  phase++;
+  //double_phase = 2*phase;
+  //i2s_write_sample(0x8000 + sine[double_phase]);
+  ratio_phase = (int16_t) (ratioF * (float) phase);
+  i2s_write_sample(0x8000 + sine[ratio_phase]);
 }
 
