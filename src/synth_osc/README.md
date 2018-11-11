@@ -13,18 +13,18 @@ Materials & Connection
     * 2-3W 8Ohm haut-parleur
     * Option A
         * Connect directly Rx to speaker - and speaker + to 5V.
-    * Option B [from ESP8266Audio Arduino library] 
+        * Works but it audio volumen is a lot smaller than with option B.
+    * Option B from [ESP8266Audio](https://github.com/earlephilhower/ESP8266Audio/)
         * transistor NPN 2N3904
         * 220uF condensateur
-        * Works but it audio volumen is a lot smaller than with option B.
-        * You may also want to add a 220uF capacitor from USB5V to GND just to help filter out any voltage drop during high volume playback.
+        * Also possible to add a 220uF capacitor from USB5V to GND just to help filter out any voltage drop during high volume playback.
+        * Works quite nice.
 
-    * Option C
+    * Option C from [audio-hacking-on-the-esp8266](http://blog.dspsynth.eu/audio-hacking-on-the-esp8266/)
         * 1K résistance
         * 10uF condensateur
         * 10nF condensateur
-        * From audio hacking on the esp8266
-        * https://www.hackster.io/janost
+
 
 
 
