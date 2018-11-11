@@ -30,7 +30,6 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
 Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
 
 
-
 /// WiFi - UDP ///
 const char* ssid = "esthetopies";
 const char* password = "esthetopies";
@@ -65,18 +64,31 @@ void connect_udp(){
 // For store params received via OSC 
 int osc;
 int freq;
-int amplitude;
+int amp;
 
 // OSCMessage expected to be format as /callback int int int
+// with int's corresponding to osc amp freq 
 void callback(OSCMessage &msg) {
   osc = msg.getInt(0);
-  amplitude = msg.getInt(1);
+  amp = msg.getInt(1);
   freq = msg.getInt(2);
-  Serial.printf("\t Received : osc %d, amplitud %d, freq %d.\n", osc, amplitude, freq);
+  Serial.printf("\t Received : osc %d, amplitud %d, freq %d.\n", osc, amp, freq);
   if (osc == 0) {
-    a0 = (int8_t) amplitude;
+    a0 = (int8_t) amp;
     Serial.printf("\t\t Updated a0 to %d\n.", a0);
+    aCos0.setFreq(freq);
+    Serial.printf("\t\t Updated f0 to %d.\n", freq);
+    }
+  if (osc == 1) {
+    a1 = (int8_t) amp;
+    Serial.printf("\t\t Updated a0 to %d\n.", a1);
     aCos1.setFreq(freq);
+    Serial.printf("\t\t Updated f0 to %d.\n", freq);
+    }
+   if (osc == 2) {
+    a2 = (int8_t) amp;
+    Serial.printf("\t\t Updated a0 to %d\n.", a2);
+    aCos2.setFreq(freq);
     Serial.printf("\t\t Updated f0 to %d.\n", freq);
     }
 
@@ -118,7 +130,7 @@ void setup(){
   /*
       /!\ WARNING: is next line is not commented may no be audio output /!\
   */
-  Serial.begin(115200);
+  //Serial.begin(115200);
 
   connect_wifi();
   connect_udp();
