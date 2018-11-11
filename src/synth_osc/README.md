@@ -1,24 +1,21 @@
-Playing Audio from the EPS8266
+Play audio from the EPS8266 using Mozzi sound synthesis library and OSC control
 
 
-
-Mozzi sound synthesis library
+Requirements
 
     * ESP8266 port of the Mozzi sound synthesis library for Arduino
     * https://github.com/tfry-git/Mozzi
 
 
-Audio output materials
+Materials & Connection
 
-    * ESP8266  wemos d1 mini lite
+    * ESP8266 wemos d1 mini lite
     * 2-3W 8Ohm haut-parleur
     * Option A
-        * 
-    * Option B
-        * from ESP8266Audio Arduino library for playing audio on ESP8266 using a software-simulated delta-sigma DAC with dynamic 32x-128x oversampling. 
+        * Connect directly Rx to speaker - and speaker + to 5V.
+    * Option B [from ESP8266Audio Arduino library] 
         * transistor NPN 2N3904
         * 220uF condensateur
-        * Connect directly Rx to speaker - and speaker + to 5V.
         * Works but it audio volumen is a lot smaller than with option B.
         * You may also want to add a 220uF capacitor from USB5V to GND just to help filter out any voltage drop during high volume playback.
 

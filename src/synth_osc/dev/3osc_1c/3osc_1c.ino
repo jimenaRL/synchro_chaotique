@@ -129,7 +129,7 @@ void setup(){
   aCos2.setFreq(1000);
 
   // set initial amplitudes
-  a0=a1=a2=-128;
+  a0=a1=a2=127;
 
   // start synth engine
   startMozzi(CONTROL_RATE);
