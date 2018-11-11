@@ -3,8 +3,8 @@ Play audio from the EPS8266 using Mozzi sound synthesis library and OSC control
 
 Requirements
 
-    * ESP8266 port of the Mozzi sound synthesis library for Arduino
-    * https://github.com/tfry-git/Mozzi
+    * ESP8266 port of the Mozzi sound synthesis library for Arduino (https://github.com/tfry-git/Mozzi)
+    * OSC for ESP8266 (https://github.com/stahlnow/OSCLib-for-ESP8266)
 
 
 Materials & Connection
@@ -20,7 +20,31 @@ Materials & Connection
         * Also possible to add a 220uF capacitor from USB5V to GND just to help filter out any voltage drop during high volume playback.
         * Works quite nice.
 
+
+
+                                    2N3904 (NPN)
+                                    +---------+
+                                    |         |     +-|
+                                    | E  B  C |    / S|
+                                    +-|--|--|-+    | P|
+                                      |  |  +------+ E|
+                                      |  |         | A|
+        ESP8266-GND ------------------+  |  +------+ K| 
+                                         |  |      | E|
+        ESP8266-I2SOUT (Rx) -------------+  |      \ R|
+                                            |       +-|
+        USB 5V -----------------------------+
+
+        You may also want to add a 220uF cap from USB5V to GND just to help filter out any voltage droop during high volume playback.
+
+
+
+
     * Option C from [audio-hacking-on-the-esp8266](http://blog.dspsynth.eu/audio-hacking-on-the-esp8266/)
+
+
+        https://janostman.files.wordpress.com/2017/07/pdm-lpf.jpg
+
         * 1K résistance
         * 10uF condensateur
         * 10nF condensateur
