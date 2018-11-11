@@ -37,7 +37,7 @@ Materials & Connection
     * Option C from [audio-hacking-on-the-esp8266](http://blog.dspsynth.eu/audio-hacking-on-the-esp8266/)
 
 
-        https://janostman.files.wordpress.com/2017/07/pdm-lpf.jpg
+        ![alt text](https://janostman.files.wordpress.com/2017/07/pdm-lpf.jpg)
 
         * 1K résistance
         * 10uF condensateur
