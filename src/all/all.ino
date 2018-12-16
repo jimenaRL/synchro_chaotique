@@ -89,7 +89,7 @@ float val = 0.0;  // internal value
 /// debug ///
 const int PPFPRE = 10; // precision print
 int BAUD_RATE = 9600;
-bool DEBUG = true;
+bool DEBUG = false;
 
 void show_params(){
     Serial.println("Kuramoto model parameters:");
@@ -132,13 +132,12 @@ void oscillators(OSCMessage &msg) {
   aCos2.setFreq(msg.getInt(5));
 
   if(DEBUG){
-    Serial.println("oscillators !!!");
     Serial.print("Updating a0 with value ");
-    Serial.println((float)(a0), PPFPRE);
+    Serial.println(a0);
     Serial.print("Updating a1 with value ");
-    Serial.println((float)(a1), PPFPRE);
+    Serial.println(a1);
     Serial.print("Updating a2 with value ");
-    Serial.println((float)(a1), PPFPRE);
+    Serial.println(a2);
   }
 }
 
