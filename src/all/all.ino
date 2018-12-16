@@ -8,9 +8,13 @@
 */
 
 #include <MozziGuts.h>
+#include <Oscil.h> // oscillator template
+#include <tables/cos8192_int8.h> // waveform table
+
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
-#include <OSCMessage.h>neighbor
+
+#include <OSCMessage.h>
 #include <OSCBundle.h>
 #include <OSCData.h>
 
@@ -21,7 +25,7 @@ const char* password = "73385615";
 
 WiFiUDP Udp;
 const unsigned int localUdpPort = 8266;   // local port to listen for UDP packets
-const IPAddress ip(192, 168, 0, 15);     // IP para este dispositivo
+const IPAddress ip(192, 168, 0, 14);     // IP para este dispositivo
 const IPAddress gateway(192, 168, 0, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
@@ -49,10 +53,15 @@ void connect_udp(){
 /// Mozzi Synth /// 
 #define CONTROL_RATE 8 // 64 // in Hz, must be a power of 2 
 
+// oscillators amplitudes
+int8_t a0, a1, a2;
+
+// oscillators (tables with int8_t values between -128 and 127)
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
+
 /// Kuramoto model ///
-
-const float dT = 1.0/(float (CONTROL_RATE));     // model's time delta in seconds
-
 int NB_NEIGHS = 6;
 float in_value;
 char in_type;
@@ -67,11 +76,12 @@ Node Neighs[6] = {
   {IPAddress(192, 168, 0, 11), 0.0, 8266},
   {IPAddress(192, 168, 0, 12), 0.0, 8266},
   {IPAddress(192, 168, 0, 13), 0.0, 8266},
-  {IPAddress(192, 168, 0, 14), 0.0, 8266},
+  {IPAddress(192, 168, 0, 15), 0.0, 8266},
   {IPAddress(192, 168, 0, 113), 0.0, 5005},  // for monitoring 
   {IPAddress(192, 168, 0, 116), 0.0, 5005},  // for monitoring 
 };
 
+const float dT = 1.0/(float (CONTROL_RATE)); // model's time delta in seconds
 const float W = 1.0;  // internal frequency
 const float K = 1.0;  // coupling constant
 float val = 0.0;  // internal value
@@ -109,37 +119,56 @@ void show_all(){
 
 /// main ///
 
-// OSCMessage expected to be format as /callback int int int int int int
+// oscillators OSCMessage expected to be format as /callback int int int int int int
 // with int's corresponding to amp0 freq0 amp1 freq1 amp2 freq2
 void oscillators(OSCMessage &msg) {
+  a0 = (int8_t) msg.getInt(0);
+  aCos0.setFreq(msg.getInt(1));
+
+  a1 = (int8_t) msg.getInt(2);
+  aCos1.setFreq(msg.getInt(3));
+
+  a2 = (int8_t) msg.getInt(4);
+  aCos2.setFreq(msg.getInt(5));
+
+  if(DEBUG){
+    Serial.println("oscillators !!!");
+    Serial.print("Updating a0 with value ");
+    Serial.println((float)(a0), PPFPRE);
+    Serial.print("Updating a1 with value ");
+    Serial.println((float)(a1), PPFPRE);
+    Serial.print("Updating a2 with value ");
+    Serial.println((float)(a1), PPFPRE);
+  }
 }
 
 void neighbor(OSCMessage &msg) {
-  Serial.println("neighbor !!!!!!!!!!!!!!!!!!!");
-  in_type = msg.getType(0);
-  Serial.println(in_type);
-  if(in_type=='i'){
-    in_value = (float) msg.getInt(0);
-  }
-  else if(in_type=='f'){
-    in_value = (float) msg.getFloat(0);
-  }
-  else{
-    Serial.printf("Wrong type `%s` in received in neighbor callback. Must be `i` or `f`.", in_type);
-    return;
-  }
+  // update neighbors
   if(DEBUG){
+    in_type = msg.getType(0);
+    if(in_type=='f'){
+      in_value = msg.getFloat(0);
+    } else{
+      Serial.printf("Wrong type `%s` in received in neighbor callback. Must be `i` or `f`.", in_type);
+      return;
+    }
     Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str());
     Serial.println((float)(in_value), PPFPRE);
+  } else{
+    in_value = msg.getFloat(0);
   }
+
   for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
       Neighs[i] = (Node){Neighs[i].ip, in_value, Neighs[i].port};
     }
   };
+  // update internal value
+  update_value();
+  // send internal value to neighbors
+  send_message();
 }
 
- 
 // update internal value with Kuramoto model
 void update_value(){
   float tmp = 0.0;
@@ -166,55 +195,12 @@ void send_message(){
     digitalWrite(LED_BUILTIN, HIGH);
   }
   for (int i=0; i<NB_NEIGHS; i++){
-    Serial.println(Neighs[i].ip);
     Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
     msg.send(Udp);
     Udp.endPacket();
   }
   msg.empty();
 }
-
-
-void send_bundle(){
-  OSCBundle bndl;
-  bndl.add("/neighbor").add(val);
-  if(DEBUG){
-    Serial.printf("Sending value ");
-    Serial.print((float)(val), PPFPRE);
-    Serial.println(" to  neighbors:");
-  }
-  for (int i=0; i<NB_NEIGHS; i++){
-    Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
-    bndl.send(Udp);
-    Udp.endPacket();
-    Serial.println(Neighs[i].ip);
-  }
-  bndl.empty();
-}
-
-
-
-void read_bundle(){
-  OSCBundle bundle;
-  int size = Udp.parsePacket();
-  if (size > 0) {
-    while (size--) {
-      bundle.fill(Udp.read());
-    }
-    if (!bundle.hasError()){
-      bundle.dispatch("/oscillators", oscillators);
-      bundle.dispatch("/neighbor", neighbor);
-      update_value();
-      send_bundle();
-    } else {
-      error = bundle.getError();
-      Serial.print("OSCBundle error: ");
-      Serial.println(error);
-    }
-  }
-
-}
-
 
 void read_mesagge(){
   OSCMessage msg;
@@ -226,8 +212,6 @@ void read_mesagge(){
     if (!msg.hasError()){
       msg.dispatch("/oscillators", oscillators);
       msg.dispatch("/neighbor", neighbor);
-      update_value();
-      send_message();
     } else {
       error = msg.getError();
       Serial.print("Message error: ");
@@ -240,7 +224,6 @@ void read_mesagge(){
 // receive incoming UDP packets
 int read_buffer(){
   read_mesagge();
-  //read_bundle();
 }
 
 /// main ///
@@ -252,8 +235,14 @@ void updateControl(){
 
 // This runs on average 16384 times per second, so code here needs to be lean.
 int updateAudio(){
-  return 0;
+  long asig = (long)
+    aCos0.next()*a0 +
+    aCos1.next()*a1 +
+    aCos2.next()*a2;
+  asig >>= 9; // bitwise division to normalise total amplitude
+  return ((int) asig)<<8; // bitwise multiplication adapt to ESP8266 range
 }
+
 
 void setup(){
   /*
@@ -269,6 +258,14 @@ void setup(){
 
   show_all();
   show_params();
+
+  // set initial frequencies
+  aCos0.setFreq(200);
+  aCos1.setFreq(500);
+  aCos2.setFreq(1000);
+
+  // set initial amplitudes
+  a0=a1=a2=127;
 
   // start synth engine
   startMozzi(CONTROL_RATE);
