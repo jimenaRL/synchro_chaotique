@@ -4,13 +4,13 @@
          Only used for DEBUGging purposes.
     (2)  ESP8266 I2S audio interface expects int values encoded with 16 bit depth,
          so output of updateAudio() method must be between -32768 and 32768  (2**16 = 65536).
-    (3)  Oscil.setFreq() method doesn't look to like double values as argument
+    (3)  Oscil.setFreq() method doesn't look to like float values as argument
 */
 
 #include <MozziGuts.h>
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
-#include <OSCMessage.h>
+#include <OSCMessage.h>neighbor
 #include <OSCBundle.h>
 #include <OSCData.h>
 
@@ -21,7 +21,7 @@ const char* password = "73385615";
 
 WiFiUDP Udp;
 const unsigned int localUdpPort = 8266;   // local port to listen for UDP packets
-const IPAddress ip(192, 168, 0, 12);     // IP para este dispositivo
+const IPAddress ip(192, 168, 0, 15);     // IP para este dispositivo
 const IPAddress gateway(192, 168, 0, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
@@ -51,30 +51,30 @@ void connect_udp(){
 
 /// Kuramoto model ///
 
-const double dT = 1.0/(float (CONTROL_RATE));     // model's time delta in seconds
+const float dT = 1.0/(float (CONTROL_RATE));     // model's time delta in seconds
 
 int NB_NEIGHS = 6;
-double in_value;
+float in_value;
 char in_type;
 
 typedef struct {
     IPAddress ip;
-    double val;
+    float val;
     int port;
 } Node;
 
 Node Neighs[6] = {
   {IPAddress(192, 168, 0, 11), 0.0, 8266},
+  {IPAddress(192, 168, 0, 12), 0.0, 8266},
   {IPAddress(192, 168, 0, 13), 0.0, 8266},
   {IPAddress(192, 168, 0, 14), 0.0, 8266},
-  {IPAddress(192, 168, 0, 15), 0.0, 8266},
   {IPAddress(192, 168, 0, 113), 0.0, 5005},  // for monitoring 
   {IPAddress(192, 168, 0, 116), 0.0, 5005},  // for monitoring 
 };
 
-const double W = 1.0;  // internal frequency
-const double K = 1.0;  // coupling constant
-double val = 0.0;  // internal value
+const float W = 1.0;  // internal frequency
+const float K = 1.0;  // coupling constant
+float val = 0.0;  // internal value
 
 /// debug ///
 const int PPFPRE = 10; // precision print
@@ -84,22 +84,22 @@ bool DEBUG = true;
 void show_params(){
     Serial.println("Kuramoto model parameters:");
     Serial.printf("\t w: ");
-    Serial.println((double)(W),PPFPRE);
+    Serial.println((float)(W),PPFPRE);
     Serial.printf("\t k: ");
-    Serial.println((double)(K),PPFPRE);
+    Serial.println((float)(K),PPFPRE);
 }
 
 void show_neighs(){
   Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
   for (int i=0; i<NB_NEIGHS; i++){
     Serial.printf("\t %d : ip %s | port %d | val ", i, Neighs[i].ip.toString().c_str(), Neighs[i].port);
-    Serial.println((double)(Neighs[i].val),PPFPRE);
+    Serial.println((float)(Neighs[i].val),PPFPRE);
   }
 }
 
 void show_this(){
   Serial.printf("\t x : ip %s | port %d | val ", WiFi.localIP().toString().c_str(), localUdpPort);
-  Serial.println((double)(val), PPFPRE);
+  Serial.println((float)(val), PPFPRE);
 }
 
 void show_all(){
@@ -115,12 +115,14 @@ void oscillators(OSCMessage &msg) {
 }
 
 void neighbor(OSCMessage &msg) {
+  Serial.println("neighbor !!!!!!!!!!!!!!!!!!!");
   in_type = msg.getType(0);
+  Serial.println(in_type);
   if(in_type=='i'){
-    in_value = (double) msg.getInt(0);
+    in_value = (float) msg.getInt(0);
   }
   else if(in_type=='f'){
-    in_value = (double) msg.getFloat(0);
+    in_value = (float) msg.getFloat(0);
   }
   else{
     Serial.printf("Wrong type `%s` in received in neighbor callback. Must be `i` or `f`.", in_type);
@@ -128,7 +130,7 @@ void neighbor(OSCMessage &msg) {
   }
   if(DEBUG){
     Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str());
-    Serial.println((double)(in_value), PPFPRE);
+    Serial.println((float)(in_value), PPFPRE);
   }
   for (int i=0; i<NB_NEIGHS; i++){
     if(Udp.remoteIP() == Neighs[i].ip) {
@@ -140,32 +142,31 @@ void neighbor(OSCMessage &msg) {
  
 // update internal value with Kuramoto model
 void update_value(){
-  double tmp = 0.0;
+  float tmp = 0.0;
   for (int i=0; i<NB_NEIGHS; i++){
     tmp += (K * sin(Neighs[i].val - val));
   };
   val += dT * (W + tmp);
   if(DEBUG){
-    Serial.printf("New interna value ");
-    Serial.print((double)(val), PPFPRE);
+    Serial.printf("New internal value ");
+    Serial.print((float)(val), PPFPRE);
     Serial.println(".");
   }
 }
 
 // send internal value to neighbors
-void send_value(){
-
+void send_message(){
   OSCMessage msg("/neighbor");
   msg.add(val);
-
   if(DEBUG){
     Serial.printf("Sending value ");
-    Serial.print((double)(val), PPFPRE);
+    Serial.print((float)(val), PPFPRE);
     Serial.println(" to  neighbors.\n");
     digitalWrite(LED_BUILTIN, LOW);
     digitalWrite(LED_BUILTIN, HIGH);
   }
   for (int i=0; i<NB_NEIGHS; i++){
+    Serial.println(Neighs[i].ip);
     Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
     msg.send(Udp);
     Udp.endPacket();
@@ -173,8 +174,27 @@ void send_value(){
   msg.empty();
 }
 
-// receive incoming UDP packets
-int read_buffer(){
+
+void send_bundle(){
+  OSCBundle bndl;
+  bndl.add("/neighbor").add(val);
+  if(DEBUG){
+    Serial.printf("Sending value ");
+    Serial.print((float)(val), PPFPRE);
+    Serial.println(" to  neighbors:");
+  }
+  for (int i=0; i<NB_NEIGHS; i++){
+    Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
+    bndl.send(Udp);
+    Udp.endPacket();
+    Serial.println(Neighs[i].ip);
+  }
+  bndl.empty();
+}
+
+
+
+void read_bundle(){
   OSCBundle bundle;
   int size = Udp.parsePacket();
   if (size > 0) {
@@ -185,13 +205,42 @@ int read_buffer(){
       bundle.dispatch("/oscillators", oscillators);
       bundle.dispatch("/neighbor", neighbor);
       update_value();
-      send_value();
+      send_bundle();
     } else {
       error = bundle.getError();
       Serial.print("OSCBundle error: ");
       Serial.println(error);
     }
   }
+
+}
+
+
+void read_mesagge(){
+  OSCMessage msg;
+  int size = Udp.parsePacket();
+  if (size > 0) {
+    while (size--) {
+      msg.fill(Udp.read());
+    }
+    if (!msg.hasError()){
+      msg.dispatch("/oscillators", oscillators);
+      msg.dispatch("/neighbor", neighbor);
+      update_value();
+      send_message();
+    } else {
+      error = msg.getError();
+      Serial.print("Message error: ");
+      Serial.println(error);
+    }
+  }
+
+}
+
+// receive incoming UDP packets
+int read_buffer(){
+  read_mesagge();
+  //read_bundle();
 }
 
 /// main ///
