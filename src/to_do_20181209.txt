@@ -1,0 +1,6 @@
+TO DO
+
+(x) rewrite main.ino using OSC
+(2) add mozzi oscillators
+(3) test stability with more neighbords
+(4) test more complex structures
