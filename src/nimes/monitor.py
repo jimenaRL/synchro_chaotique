@@ -8,12 +8,15 @@ from osc import decodeOSC
 EXPECTED_DECODED_LENGTH = 3
 
 NODES = {
+    "192.168.0.10": {"iter": 0, "value": -1.0},
     "192.168.0.11": {"iter": 0, "value": -1.0},
     "192.168.0.12": {"iter": 0, "value": -1.0},
     "192.168.0.13": {"iter": 0, "value": -1.0},
     "192.168.0.14": {"iter": 0, "value": -1.0},
     "192.168.0.15": {"iter": 0, "value": -1.0},
 }
+
+MOD = 1000
 
 ENDPOINT = "/monitor"
 
@@ -44,7 +47,7 @@ sock.bind((UDP_IP, UDP_PORT))
 def print_nodes():
     s = "| "
     for n, d in NODES.iteritems():
-        s += "%s: %i %f | " % (n, d["iter"], d["value"])
+        s += "%s: %i %f | " % (n.split(".")[-1], d["iter"], d["value"])
     print (s)
 
 nb_errors = 0
@@ -64,7 +67,7 @@ while True:
         if endpoint==ENDPOINT:
             value = decoded[2]
             if remote_ip in NODES.keys():
-                NODES[remote_ip]["iter"] += 1
+                NODES[remote_ip]["iter"] = (NODES[remote_ip]["iter"]+1) % MOD
                 NODES[remote_ip]["value"] = value
             print_nodes()
         else:
