@@ -31,7 +31,6 @@ OSCErrorCode error;
 // Kuramoto model
 int NB_NEIGHS = 5;
 float in_value;
-char in_type;
 
 typedef struct{
     IPAddress ip;
