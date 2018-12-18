@@ -1,6 +1,7 @@
 TO DO
 
 (x) rewrite main.ino using OSC
-(2) add mozzi oscillators
-(3) test stability with more neighbords
-(4) test more complex structures
+(x) add mozzi oscillators
+(x) test stability with more neighbords (tested up to 4)
+(x) OTA for Kuramoto model parameters
+(5) test more complex structures

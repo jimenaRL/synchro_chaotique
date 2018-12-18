@@ -15,7 +15,7 @@ NODES = {
     "192.168.0.15": {"iter": 0, "value": -1.0},
 }
 
-ENDPOINT = "/neighbor"
+ENDPOINT = "/monitor"
 
 parser = argparse.ArgumentParser()
 
@@ -41,7 +41,6 @@ for k, v in parser.parse_args().__dict__.items():
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
-
 def print_nodes():
     s = "| "
     for n, d in NODES.iteritems():
@@ -49,9 +48,6 @@ def print_nodes():
     print (s)
 
 nb_errors = 0
-
-
-
 while True:
     try:
         data, address = sock.recvfrom(BUFSIZE)
@@ -70,22 +66,9 @@ while True:
             if remote_ip in NODES.keys():
                 NODES[remote_ip]["iter"] += 1
                 NODES[remote_ip]["value"] = value
-            else:
-                print("-------- error --------")
-                print("Remote IP not in predefined nodes")
-                print(address)
-                print(data)
-                print(remote_ip)
-                print(remote_port)
-                print(decoded)
-                print(NODES)
-                print("--------------------")
-
             print_nodes()
-
         else:
             print("Wrong endpoint `%s`. Must be `%s`." % (endpoint, ENDPOINT))
             continue
-
     except Exception as e:
         print(e)

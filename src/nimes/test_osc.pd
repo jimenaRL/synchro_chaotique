@@ -1,0 +1,93 @@
+#N canvas 353 155 833 544 10;
+#X msg 285 342 disconnect;
+#X floatatom 132 145 5 0 0 0 - - -;
+#X obj 50 -7 hsl 128 15 -1 1 0 0 empty empty empty -2 -8 0 10 -261682
+-1 -1 0 1;
+#X obj 45 124 mrpeach/packOSC;
+#X obj 43 454 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 43 423 mrpeach/udpsend 0;
+#X obj -17 125 print;
+#X obj 46 12 float;
+#X obj 69 37 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 45 75 sendtyped /neighbor f \$1;
+#X obj 249 36 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 236 -7 hsl 128 15 0 10 0 0 empty empty empty -2 -8 0 10 -261682
+-1 -1 12200 1;
+#X obj 232 12 float;
+#X obj 249 54 float 10;
+#X obj 69 55 float 0;
+#X text 306 406 comment;
+#X obj 247 454 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 247 423 mrpeach/udpsend 0;
+#X obj 454 459 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 454 428 mrpeach/udpsend 0;
+#X obj 266 319 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 473 323 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 56 357 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 54 394 connect 192.168.0.11 8266;
+#X msg 264 372 connect 192.168.0.12 8266;
+#X msg 471 377 connect 192.168.0.13 8266;
+#X text 311 54 Set K;
+#X obj 352 151 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 339 108 hsl 128 15 0 10 0 0 empty empty empty -2 -8 0 10 -261682
+-1 -1 7700 1;
+#X obj 335 127 float;
+#X text 438 167 Set W;
+#X obj 533 34 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 520 -9 hsl 128 15 0.001 0.1 0 0 empty empty empty -2 -8 0 10
+-261682 -1 -1 9800 1;
+#X obj 516 10 float;
+#X text 625 52 Set DT;
+#X obj 533 52 float 0.01;
+#X obj 352 169 float 2;
+#X msg 225 74 sendtyped /set_param/K f \$1;
+#X msg 509 72 sendtyped /set_param/DT f \$1;
+#X msg 328 189 sendtyped sendtyped /set_param/W f \$1W if 1 \$1;
+#X connect 0 0 5 0;
+#X connect 0 0 17 0;
+#X connect 0 0 19 0;
+#X connect 2 0 7 0;
+#X connect 3 0 5 0;
+#X connect 3 0 17 0;
+#X connect 3 0 19 0;
+#X connect 3 1 1 0;
+#X connect 5 0 4 0;
+#X connect 7 0 9 0;
+#X connect 8 0 14 0;
+#X connect 9 0 3 0;
+#X connect 9 0 6 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 37 0;
+#X connect 13 0 37 0;
+#X connect 14 0 9 0;
+#X connect 17 0 16 0;
+#X connect 19 0 18 0;
+#X connect 20 0 24 0;
+#X connect 21 0 25 0;
+#X connect 22 0 23 0;
+#X connect 23 0 5 0;
+#X connect 24 0 17 0;
+#X connect 25 0 19 0;
+#X connect 27 0 36 0;
+#X connect 28 0 29 0;
+#X connect 29 0 39 0;
+#X connect 31 0 35 0;
+#X connect 32 0 33 0;
+#X connect 33 0 38 0;
+#X connect 35 0 38 0;
+#X connect 36 0 39 0;
+#X connect 37 0 3 0;
+#X connect 37 0 6 0;
+#X connect 38 0 3 0;
+#X connect 39 0 3 0;
