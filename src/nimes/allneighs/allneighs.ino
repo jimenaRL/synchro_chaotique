@@ -23,7 +23,7 @@ const char* password = "73385615";
 
 WiFiUDP Udp;
 const unsigned int localUdpPort = 8266;   // local port to listen for UDP packets
-const IPAddress ip(192, 168, 0, 10);     // IP para este dispositivo
+const IPAddress ip(192, 168, 0, 15);     // IP para este dispositivo
 const IPAddress gateway(192, 168, 0, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
@@ -41,11 +41,11 @@ typedef struct{
 } Node;
 
 Node Neighs[5] ={
+ {IPAddress(192, 168, 0, 10), 0.0, 8266, 1.0},
  {IPAddress(192, 168, 0, 11), 0.0, 8266, 1.0},
  {IPAddress(192, 168, 0, 12), 0.0, 8266, 1.0},
  {IPAddress(192, 168, 0, 13), 0.0, 8266, 1.0},
  {IPAddress(192, 168, 0, 14), 0.0, 8266, 1.0},
- {IPAddress(192, 168, 0, 15), 0.0, 8266, 1.0},
 };
 
 int NB_MONITORS = 1;
