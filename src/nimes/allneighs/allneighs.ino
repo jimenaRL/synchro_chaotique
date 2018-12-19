@@ -18,41 +18,40 @@ bool DEBUG = false;
 bool MONITOR = true;
 
 // WiFi - UDP
-const char* ssid = "TP-Link_BED2";
-const char* password = "73385615";
+const char* SSID = "esthetopies";
+const char* PWD = "esthetopies";
 
 WiFiUDP Udp;
-const unsigned int localUdpPort = 8266;   // local port to listen for UDP packets
-const IPAddress ip(192, 168, 0, 15);     // IP para este dispositivo
+const unsigned int commPort = 8266;   // local port to listen for UDP packets
+const int intIp = 11; // IP para este dispositivo sera ip(192, 168, 0, intIp);
 const IPAddress gateway(192, 168, 0, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
 
-// Kuramoto model
-int NB_NEIGHS = 5;
+// model
+const int NB_NEIGHS = 5;
 float in_value;
 
 typedef struct{
-    IPAddress ip;
+    int intIp;
     float val;
-    int port;
     float weight;
 } Node;
 
 Node Neighs[5] ={
- {IPAddress(192, 168, 0, 10), 0.0, 8266, 1.0},
- {IPAddress(192, 168, 0, 11), 0.0, 8266, 1.0},
- {IPAddress(192, 168, 0, 12), 0.0, 8266, 1.0},
- {IPAddress(192, 168, 0, 13), 0.0, 8266, 1.0},
- {IPAddress(192, 168, 0, 14), 0.0, 8266, 1.0},
+ {10, 0.0, 1.0},
+ {12, 0.0, 1.0},
+ {13, 0.0, 1.0},
+ {14, 0.0, 1.0},
+ {15, 0.0, 1.0},
 };
 
-int NB_MONITORS = 1;
-Node Monitors[1] ={
- {IPAddress(192, 168, 0, 113), 0.0, 5005},
-};
+const int MONITOR_PORT = 5005;
+int NB_MONITORS = 3;
+int Monitors[3] = {111, 112, 113};
 
-float DT = 1.0/(float (CONTROL_RATE)); // model's time delta in seconds
+
+float DT = 1.0/(float (CONTROL_RATE)); // time delta
 float W = 1.0;  // internal frequency
 float K = 1.0;  // coupling constant
 float current_val = 0.0;  // internal value
@@ -69,9 +68,9 @@ Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
 /// helpers ///
 
 void connect_wifi(){
-  Serial.printf("\nConnecting to %s ", ssid);
-  WiFi.config(ip, gateway, subnet);
-  WiFi.begin(ssid, password);
+  Serial.printf("\nConnecting to %s ", SSID);
+  WiFi.config(IPAddress(192, 168, 0, intIp), gateway, subnet);
+  WiFi.begin(SSID, PWD);
   while (WiFi.status() != WL_CONNECTED){
     delay(500);
     Serial.print(".");
@@ -83,7 +82,7 @@ void connect_wifi(){
 
 void connect_udp(){
   Serial.println("Starting UDP");
-  Udp.begin(localUdpPort);
+  Udp.begin(commPort);
   Serial.print("Local port: ");
   Serial.println(Udp.localPort());
 }
@@ -103,42 +102,37 @@ void show_params(){
 }
 
 void show_neighs(){
-  Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  Serial.print("Nodes:\n");
   for (int i=0; i<NB_NEIGHS; i++){
-    if(Neighs[i].weight > 0){
-      Serial.printf("\t %d : ip %s | port %d | weight ", i, Neighs[i].ip.toString().c_str(), Neighs[i].port);
-      Serial.print(Neighs[i].weight, PPFPRE);
-      Serial.print(" | current_val "),
-      Serial.println(Neighs[i].val, PPFPRE);
-    }
+   if(Neighs[i].weight > 0){
+     Serial.printf("\tintIp %d | weight ", Neighs[i].intIp);
+     Serial.print(Neighs[i].weight, PPFPRE);
+     Serial.print(" | current_val "),
+     Serial.println(Neighs[i].val, PPFPRE);
+   }
   }
 }
 
 void show_this(){
-  Serial.printf("\t x : ip %s | port %d | weight x | current_val ", WiFi.localIP().toString().c_str(), localUdpPort);
-  Serial.println(current_val, PPFPRE);
-}
-
-void show_all(){
-  show_neighs();
-  show_this();
+  Serial.printf("\tintIp %d | ---------- | current_val ", intIp);
+  Serial.print(current_val, PPFPRE);
 }
 
 void monitor(){
   OSCMessage msg("/monitor");
   msg.add(current_val);
   if(DEBUG){
-    Serial.printf("Sending value ");
+    Serial.print("Sending value ");
     Serial.print((float)(current_val), PPFPRE);
-    Serial.println(" to  monitors:");
+    Serial.print(" to monitors:");
   }
   for (int i=0; i<NB_MONITORS; i++){
-    Udp.beginPacket(Monitors[i].ip, Monitors[i].port);
+    Udp.beginPacket(IPAddress(192, 168, 0, Monitors[i]), MONITOR_PORT);
     msg.send(Udp);
     Udp.endPacket();
     if(DEBUG){
-      Serial.print("\t");
-      Serial.println(Monitors[i].ip);
+      Serial.print(" ");
+      Serial.print(Monitors[i]);
     }
   }
   msg.empty();
@@ -215,21 +209,19 @@ void set_freq(OSCMessage &msg){
   }
 }
 
-void neighbors_weights(OSCMessage &msg){
+void neighbor_weight(OSCMessage &msg){
+  int idx = msg.getInt(0);
   for (int i=0; i<NB_NEIGHS; i++){
-    Neighs[i].weight = msg.getFloat(i);
+    if(Neighs[i].intIp == idx){
+      Neighs[i].weight = msg.getFloat(1);
+      if(DEBUG){
+        Serial.printf("Updated neighbor %d with weight ", idx);
+        Serial.println(Neighs[idx].weight);
+      }
+    }
   }
 }
 
-void neighbor_weight_idx(OSCMessage &msg){
-  int idx = msg.getInt(0);
-  Neighs[idx].weight = msg.getFloat(1);
-  if(DEBUG){
-    Serial.printf("Updated %d-th neighbor with weight ", idx);
-    Serial.println(Neighs[idx].weight);
-    show_neighs();
-  }
-}
 // main 
 
 // update internal value
@@ -255,20 +247,23 @@ void send_message(){
   OSCMessage msg("/neighbor");
   msg.add(current_val);
   if(DEBUG){
-    Serial.printf("Sending value ");
+    Serial.print("Sending value ");
     Serial.print(current_val, PPFPRE);
-    Serial.println(" to  neighbors:");
+    Serial.print(" to neighbors:");
   }
   for (int i=0; i<NB_NEIGHS; i++){
     if(Neighs[i].weight > 0){
-      Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
+      Udp.beginPacket(IPAddress(192, 168, 0, Neighs[i].intIp), commPort);
       msg.send(Udp);
       Udp.endPacket();
       if(DEBUG){
-        Serial.print("\t");
-        Serial.println(Neighs[i].ip);
+        Serial.print(" ");
+        Serial.print(Neighs[i].intIp);
       }
     }
+  }
+  if(DEBUG){
+    Serial.println("");
   }
   msg.empty();
 }
@@ -278,10 +273,10 @@ void neighbor(OSCMessage &msg){
   in_value = msg.getFloat(0);
   // update neighbors
   for (int i=0; i<NB_NEIGHS; i++){
-    if(Udp.remoteIP() == Neighs[i].ip && Neighs[i].weight > 0){
-      Neighs[i] = (Node){Neighs[i].ip, in_value, Neighs[i].port, Neighs[i].weight};
+    if(Udp.remoteIP()[3] == Neighs[i].intIp && Neighs[i].weight > 0){
+      Neighs[i] = (Node){Neighs[i].intIp, in_value, Neighs[i].weight};
       if(DEBUG){
-        Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str());
+        Serial.printf("Updating neighbor %d with value ", Neighs[i].intIp);
         Serial.println(in_value, PPFPRE);
       }
     }
@@ -304,18 +299,17 @@ void parse_message(){
       msg.fill(Udp.read());
     }
     if (!msg.hasError()){
-      msg.dispatch("/show_neighs", show_neighs_ckb);  // nok
+      msg.dispatch("/show_neighs", show_neighs_ckb);
       msg.dispatch("/current_val", set_current_val);
       msg.dispatch("/param/K", set_K);
       msg.dispatch("/param/W", set_W);
       msg.dispatch("/param/DT", set_DT);
-      msg.dispatch("/DEBUG", set_DEBUG);  // nok
-      msg.dispatch("/MONITOR", set_MONITOR);  // nok
+      msg.dispatch("/DEBUG", set_DEBUG);
+      msg.dispatch("/MONITOR", set_MONITOR);
       msg.dispatch("/oscillator/freq", set_freq);
-      msg.dispatch("/oscillator/amp", set_amp);  // nok
+      msg.dispatch("/oscillator/amp", set_amp);
       msg.dispatch("/neighbor", neighbor);
-      msg.dispatch("/neighbors_weights", neighbors_weights);  // nok
-      msg.dispatch("/neighbor_weight_idx", neighbor_weight_idx);  // nok
+      msg.dispatch("/neighbor_weight", neighbor_weight);
     } else{
       error = msg.getError();
       Serial.print("Message error: ");
@@ -344,7 +338,7 @@ void setup(){
   connect_wifi();
   connect_udp();
 
-  show_all();
+  show_neighs();
   show_params();
 
   // set initial frequencies
