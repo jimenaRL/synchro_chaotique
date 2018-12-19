@@ -67,7 +67,7 @@
 #X obj 372 536 r osc;
 #X msg 501 519 disconnect;
 #X obj 369 269 mrpeach/packOSC;
-#X obj 369 325 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 369 325 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 369 294 mrpeach/udpsend 0;
 #X obj 325 269 print;
@@ -132,7 +132,7 @@
 #X text 402 130 comment;
 #X msg 244 -45 sendtyped /param/C f \$1;
 #X msg 244 40 sendtyped /param/MU f \$1;
-#X text 228 30;
+#X text 228 30 comment;
 #X obj 245 165 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X floatatom 245 187 5 0 0 0 - - -;
