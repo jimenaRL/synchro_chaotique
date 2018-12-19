@@ -1,12 +1,3 @@
-  /*  NOTES
-    (1)  Do not use Serial.begin() when sending output audio,
-         it seems that in that case Rx serial output may not available.
-         Only used for DEBUGging purposes.
-    (2)  ESP8266 I2S audio interface expects int values encoded with 16 bit depth,
-         so output of updateAudio() method must be between -32768 and 32768  (2**16 = 65536).
-    (3)  Oscil.setFreq() method doesn't look to like float values as argument
-*/
-
 #include <MozziGuts.h>
 #include <Oscil.h> // oscillator template
 #include <tables/cos8192_int8.h> // waveform table
@@ -18,26 +9,71 @@
 #include <OSCBundle.h>
 #include <OSCData.h>
 
-#define CONTROL_RATE 8 // in Hz, must be a power of 2 
+#define CONTROL_RATE 32 // in Hz, must be a power of 2 
 
+/// debug ///
+const int PPFPRE = 10; // print precision 
+int BAUD_RATE = 9600;
 bool DEBUG = false;
 bool MONITOR = true;
 
-/// WiFi - UDP ///
-const char* ssid = "TP-Link_BED2";
-const char* password = "73385615";
+// WiFi - UDP
+const char* SSID = "esthetopies";
+const char* PWD = "esthetopies";
 
 WiFiUDP Udp;
-const unsigned int localUdpPort = 8266;   // local port to listen for UDP packets
-const IPAddress ip(192, 168, 0, 12);     // IP para este dispositivo
+const unsigned int commPort = 8266;   // local port to listen for UDP packets
+const int intIp = 11; // IP para este dispositivo sera ip(192, 168, 0, intIp);
 const IPAddress gateway(192, 168, 0, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
 
+// model
+const int NB_NEIGHS = 5;
+float in_value;
+
+typedef struct{
+    int intIp;
+    float current_val;
+    float previous_val;
+    float weight;
+} Node;
+
+
+// ring geometry
+Node Neighs[5]={
+ {10, 0.0, 0.0, 1.0},
+ {12, 0.0, 0.0, 1.0},
+ {13, 0.0, 0.0, 0.0},
+ {14, 0.0, 0.0, 0.0},
+ {15, 0.0, 0.0, 0.0},
+};
+
+const int MONITOR_PORT = 5005;
+int NB_MONITORS = 3;
+int Monitors[3] = {111, 112, 113};
+
+float DT = 1.0/(float (CONTROL_RATE)); // time delta
+float DX = 1./(NB_NEIGHS+1);  // space delta
+float C  = 0.051;  // sound speed
+float MU = 0.1;  // viscosity
+float current_val = 0.0;  // internal value
+float previous_val = 0.0;  // internal previous value
+
+// Mozzi Synth
+
+// oscillator amplitude
+int8_t a0;
+
+// oscillator (table with int8_t values between -128 and 127)
+Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
+
+/// helpers ///
+
 void connect_wifi(){
-  Serial.printf("\nConnecting to %s ", ssid);
-  WiFi.config(ip, gateway, subnet);
-  WiFi.begin(ssid, password);
+  Serial.printf("\nConnecting to %s ", SSID);
+  WiFi.config(IPAddress(192, 168, 0, intIp), gateway, subnet);
+  WiFi.begin(SSID, PWD);
   while (WiFi.status() != WL_CONNECTED){
     delay(500);
     Serial.print(".");
@@ -49,198 +85,235 @@ void connect_wifi(){
 
 void connect_udp(){
   Serial.println("Starting UDP");
-  Udp.begin(localUdpPort);
+  Udp.begin(commPort);
   Serial.print("Local port: ");
   Serial.println(Udp.localPort());
 }
 
-/// Mozzi Synth /// 
-
-// oscillators amplitudes
-int8_t a0, a1, a2;
-
-// oscillators (tables with int8_t values between -128 and 127)
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos0(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos1(COS8192_DATA);
-Oscil<COS8192_NUM_CELLS, AUDIO_RATE> aCos2(COS8192_DATA);
-
-/// Kuramoto model ///
-int NB_NEIGHS = 4;
-float in_value;
-
-typedef struct {
-    IPAddress ip;
-    float current_val;
-    float previous_val;
-    int port;
-} Node;
-
-Node Neighs[4] = {
-  {IPAddress(192, 168, 0, 11), 0.0, 0.0, 8266},
-  {IPAddress(192, 168, 0, 13), 0.0, 0.0, 8266},
-  {IPAddress(192, 168, 0, 14), 0.0, 0.0, 8266},
-  {IPAddress(192, 168, 0, 15), 0.0, 0.0, 8266},
-};
-
-int NB_MONITORS = 1;
-Node Monitors[1] = {
-  {IPAddress(192, 168, 0, 113), 0.0, 5005},
-};
-
-float DT = 1.0/(float (CONTROL_RATE)); // model's time delta in seconds
-float W = 1.0;  // internal frequency
-float K = 1.0;  // coupling constant
-float current_val = 0.0;  // internal current value
-float previous_val = 0.0;  // internal previous value
-
-/// debug ///
-const int PPFPRE = 10; // precision print
-int BAUD_RATE = 9600;
-
 void show_params(){
     Serial.println("Kuramoto model parameters:");
-    Serial.printf("\t w: ");
-    Serial.println((float)(W),PPFPRE);
-    Serial.printf("\t k: ");
-    Serial.println((float)(K),PPFPRE);
+    Serial.printf("\t C: ");
+    Serial.println(C, PPFPRE);
+    Serial.printf("\t MU: ");
+    Serial.println(MU, PPFPRE);
+    Serial.printf("\t DT: ");
+    Serial.println(DT, PPFPRE);
+    Serial.printf("\t DX: ");
+    Serial.println(DX, PPFPRE);
+    Serial.printf("\t DEBUG: ");
+    Serial.println(DEBUG);
+    Serial.printf("\t MONITOR: ");
+    Serial.println(MONITOR);
 }
 
 void show_neighs(){
-  Serial.printf("Nodes:\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  Serial.print("Nodes:\n");
   for (int i=0; i<NB_NEIGHS; i++){
-    Serial.printf("\t %d : ip %s | port %d | current_val ", i, Neighs[i].ip.toString().c_str(), Neighs[i].port);
-    Serial.println((float)(Neighs[i].current_val),PPFPRE);
-    Serial.print(" | previous_val ");
-    Serial.print((float)(Neighs[i].previous_val), PPFPRE);
+   if(Neighs[i].weight > 0){
+     Serial.printf("\tintIp %d | weight ", Neighs[i].intIp);
+     Serial.print(Neighs[i].weight, PPFPRE);
+     Serial.print(" | current_val "),
+     Serial.println(Neighs[i].current_val, PPFPRE);
+   }
   }
 }
 
 void show_this(){
-  Serial.printf("\t x : ip %s | port %d | current_val ", WiFi.localIP().toString().c_str(), localUdpPort);
-    Serial.println((float)(current_val),PPFPRE);
-    Serial.print(" | previous_val ");
-    Serial.print((float)(previous_val), PPFPRE);
-}
-
-void show_all(){
-  show_neighs();
-  show_this();
-}
-
-/// main ///
-void set_values(OSCMessage &msg) {
-  current_val = msg.getFloat(0);
-  previous_val = msg.getFloat(1);
-  Serial.print("Parameter `current_val` and `previous_val` updated with values ");
-  Serial.println(current_val);
-  Serial.print(" and ");
-  Serial.println(previous_val);
-}
-
-void set_K(OSCMessage &msg) {
-  K = msg.getFloat(0);
-  Serial.print("Parameter `K` updated with value ");
-  Serial.println(K);
-}
-
-void set_W(OSCMessage &msg) {
-  W = msg.getFloat(0);
-  Serial.print("Parameter `W` updated with value ");
-  Serial.println(W);
-}
-
-void set_DT(OSCMessage &msg) {
-  DT = msg.getFloat(0);
-  Serial.print("Parameter `DT` updated with value ");
-  Serial.println(DT);
-}
-
-void set_DEBUG(OSCMessage &msg) {
-  DEBUG = msg.getBoolean(0);
-  Serial.print("Parameter `DEBUG` updated with value ");
-  Serial.println(DEBUG);
-}
-
-void set_MONITOR(OSCMessage &msg) {
-  MONITOR = msg.getBoolean(0);
-  Serial.print("Parameter `MONITOR` updated with value ");
-  Serial.println(MONITOR);
-}
-
-
-// oscillators OSCMessage expected to be format as /callback int int int int int int
-// with int's corresponding to amp0 freq0 amp1 freq1 amp2 freq2
-void oscillators(OSCMessage &msg) {
-  a0 = (int8_t) msg.getFloat(0);
-  aCos0.setFreq(msg.getFloat(1));
-
-  a1 = (int8_t) msg.getFloat(2);
-  aCos1.setFreq(msg.getFloat(3));
-
-  a2 = (int8_t) msg.getFloat(4);
-  aCos2.setFreq(msg.getFloat(5));
-
-  if(DEBUG){
-    Serial.print("Updating a0 with value ");
-    Serial.println(a0);
-    Serial.print("Updating a1 with value ");
-    Serial.println(a1);
-    Serial.print("Updating a2 with value ");
-    Serial.println(a2);
-  }
+  Serial.printf("\tintIp %d | ---------- | current_val ", intIp);
+  Serial.print(current_val, PPFPRE);
 }
 
 void monitor(){
   OSCMessage msg("/monitor");
-  msg.add(val);
+  msg.add(current_val);
   if(DEBUG){
-    Serial.printf("Sending value ");
-    Serial.print((float)(val), PPFPRE);
-    Serial.println(" to  monitors.\n");
+    Serial.print("Sending value ");
+    Serial.print((float)(current_val), PPFPRE);
+    Serial.print(" to monitors:");
   }
   for (int i=0; i<NB_MONITORS; i++){
-    Udp.beginPacket(Monitors[i].ip, Monitors[i].port);
+    Udp.beginPacket(IPAddress(192, 168, 0, Monitors[i]), MONITOR_PORT);
     msg.send(Udp);
     Udp.endPacket();
+    if(DEBUG){
+      Serial.print(" ");
+      Serial.print(Monitors[i]);
+    }
   }
   msg.empty();
+    if(DEBUG){
+      Serial.println("");
+    }
 }
 
 
-// update internal value with Kuramoto model
-void update_value(){
-  float tmp = 0.0;
+/// callbacks ///
+
+void show_neighs_ckb(OSCMessage &msg){
+  show_neighs();
+}
+
+
+void set_DEBUG(OSCMessage &msg){
+  DEBUG = (bool) msg.getInt(0);
+  Serial.print("DEBUG ");
+  Serial.println(DEBUG);
+}
+
+void set_MONITOR(OSCMessage &msg){
+  MONITOR = (bool) msg.getInt(0);
+  if(DEBUG){
+    Serial.print("MONITOR ");
+    Serial.println(MONITOR);
+  }
+}
+
+void current_val_ckb(OSCMessage &msg){
+  current_val = msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Current value updated with value ");
+    Serial.println(current_val);
+  }
+}
+
+void set_values(OSCMessage &msg) {
+  current_val = msg.getFloat(0);
+  previous_val = msg.getFloat(1);
+  if(DEBUG){
+    Serial.print("Current and previous values updated with value ");
+    Serial.println(current_val);
+    Serial.print(" and ");
+    Serial.println(previous_val);
+  }
+}
+
+void set_C(OSCMessage &msg){
+  C = msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Parameter `C` updated with value ");
+    Serial.println(C);
+  }
+}
+
+void set_MU(OSCMessage &msg){
+  MU = msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Parameter `MU` updated with value ");
+    Serial.println(MU);
+  }
+}
+
+void set_DX(OSCMessage &msg){
+  DX = msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Parameter `DX` updated with value ");
+    Serial.println(DX);
+  }
+}
+
+void set_DT(OSCMessage &msg){
+  DT = msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Parameter `DT` updated with value ");
+    Serial.println(DT);
+  }
+}
+
+void set_amp(OSCMessage &msg){
+  a0 = (int8_t) msg.getFloat(0);
+  if(DEBUG){
+    Serial.print("Updated a0 with value ");
+    Serial.println(a0);
+  }
+}
+
+void set_freq(OSCMessage &msg){
+  float f0 = msg.getFloat(0);
+  aCos0.setFreq(f0);
+  if(DEBUG){
+    Serial.print("Updated f0 with value ");
+    Serial.println(f0);
+  }
+}
+
+void neighbor_weight(OSCMessage &msg){
+  int idx = msg.getInt(0);
   for (int i=0; i<NB_NEIGHS; i++){
-    tmp += (K * sin(Neighs[i].val - val));
-  };
-  val += DT * (W + tmp);
+    if(Neighs[i].intIp == idx){
+      Neighs[i].weight = msg.getFloat(1);
+      if(DEBUG){
+        Serial.printf("Updated neighbor %d with weight ", idx);
+        Serial.println(Neighs[idx].weight);
+      }
+    }
+  }
+}
+
+// main 
+
+// update internal value using discrete wave equation
+void update_value(){
+
+  float D2TP = 2.0 * current_val - previous_val;
+  float D2XP_current = 0.0;
+  float D2XP_previous = 0.0;
+  int NB_ACT_NEIGHS = 0;
+  for(int j=0; j<NB_NEIGHS; j++){
+    if(Neighs[j].weight > 0){
+      D2XP_previous += Neighs[j].previous_val;
+      D2XP_current += Neighs[j].current_val;
+      NB_ACT_NEIGHS += 1;
+    }
+  }
+  D2XP_current -= NB_ACT_NEIGHS * current_val;
+  D2XP_previous -= NB_ACT_NEIGHS * previous_val;
+  previous_val = current_val;
+  // DTD2XP_current = (D2XP_current - D2XP_previous)
+  current_val = D2TP + C * D2XP_current + MU * (D2XP_current - D2XP_previous);
   if(DEBUG){
     Serial.printf("New internal value ");
-    Serial.print((float)(val), PPFPRE);
+    Serial.print(current_val, PPFPRE);
     Serial.println(".");
   }
 }
 
-void neighbor(OSCMessage &msg) {
-  // update neighbors
+// send internal value to neighbors
+void send_message(){
+  OSCMessage msg("/neighbor");
+  msg.add(current_val);
   if(DEBUG){
-    in_type = msg.getType(0);
-    if(in_type=='f'){
-      in_value = msg.getFloat(0);
-    } else{
-      Serial.printf("Wrong type `%s` in received in neighbor callback. Must be `i` or `f`.", in_type);
-      return;
-    }
-    Serial.printf("Updating neighbor %s with value ", Udp.remoteIP().toString().c_str());
-    Serial.println((float)(in_value), PPFPRE);
-  } else {
-    in_value = msg.getFloat(0);
+    Serial.print("Sending value ");
+    Serial.print(current_val, PPFPRE);
+    Serial.print(" to neighbors:");
   }
   for (int i=0; i<NB_NEIGHS; i++){
-    if(Udp.remoteIP() == Neighs[i].ip) {
-      // prev_val < curr_val 
-      // curr_val < in_value
-      Neighs[i] = (Node){Neighs[i].ip, in_value, curr_val, Neighs[i].port};
+    if(Neighs[i].weight > 0){
+      Udp.beginPacket(IPAddress(192, 168, 0, Neighs[i].intIp), commPort);
+      msg.send(Udp);
+      Udp.endPacket();
+      if(DEBUG){
+        Serial.print(" ");
+        Serial.print(Neighs[i].intIp);
+      }
+    }
+  }
+  if(DEBUG){
+    Serial.println("");
+  }
+  msg.empty();
+}
+
+// receive value from neighbor
+void neighbor(OSCMessage &msg){
+  in_value = msg.getFloat(0);
+  // update neighbors
+  for (int i=0; i<NB_NEIGHS; i++){
+    if(Udp.remoteIP()[3] == Neighs[i].intIp && Neighs[i].weight > 0){
+      Neighs[i] = (Node){Neighs[i].intIp, in_value, current_val, Neighs[i].weight};
+      if(DEBUG){
+        Serial.printf("Updating neighbor %d with value ", Neighs[i].intIp);
+        Serial.println(in_value, PPFPRE);
+      }
     }
   };
   // update internal value
@@ -253,103 +326,69 @@ void neighbor(OSCMessage &msg) {
   }
 }
 
-// send internal value to neighbors
-void send_message(){
-  OSCMessage msg("/neighbor");
-  msg.add(val);
-  if(DEBUG){
-    Serial.printf("Sending value ");
-    Serial.print((float)(val), PPFPRE);
-    Serial.println(" to  neighbors.\n");
-    digitalWrite(LED_BUILTIN, LOW);
-    digitalWrite(LED_BUILTIN, HIGH);
-  }
-  for (int i=0; i<NB_NEIGHS; i++){
-    Udp.beginPacket(Neighs[i].ip, Neighs[i].port);
-    msg.send(Udp);
-    Udp.endPacket();
-  }
-  msg.empty();
-}
 
-// receive incoming UDP packets
-void read_mesagge(){
+void parse_message(){
   OSCMessage msg;
   int size = Udp.parsePacket();
-  if (size > 0) {
-    while (size--) {
+  if (size > 0){
+    while (size--){
       msg.fill(Udp.read());
     }
     if (!msg.hasError()){
+      msg.dispatch("/show_neighs", show_neighs_ckb);
+      msg.dispatch("/current_val", current_val_ckb);
       msg.dispatch("/set_values", set_values);
-      msg.dispatch("/set_param/K", set_K);
-      msg.dispatch("/set_param/W", set_W);
-      msg.dispatch("/set_param/DT", set_DT);
-      msg.dispatch("/set_param/DEBUG", set_DEBUG);
-      msg.dispatch("/set_param/MONITOR", set_MONITOR);
-      msg.dispatch("/oscillators", oscillators);
+      msg.dispatch("/param/C", set_C);
+      msg.dispatch("/param/MU", set_MU);
+      msg.dispatch("/param/DT", set_DT);
+      msg.dispatch("/param/DX", set_DX);
+      msg.dispatch("/DEBUG", set_DEBUG);
+      msg.dispatch("/MONITOR", set_MONITOR);
+      msg.dispatch("/oscillator/freq", set_freq);
+      msg.dispatch("/oscillator/amp", set_amp);
       msg.dispatch("/neighbor", neighbor);
-    } else {
+      msg.dispatch("/neighbor_weight", neighbor_weight);
+    } else{
       error = msg.getError();
       Serial.print("Message error: ");
       Serial.println(error);
     }
   }
-
 }
-
-/// main ///
 
 // This runs CONTROL_RATE times per second.
 void updateControl(){
-  read_mesagge();
-  aCos0.setFreq((int) 100*val);
-  aCos1.setFreq((int) 100*val);
-  aCos2.setFreq((int) 100*val);
+  parse_message();
+  aCos0.setFreq((int) 100*current_val);
 }
 
 // This runs on average 16384 times per second, so code here needs to be lean.
 int updateAudio(){
-  long asig = (long)
-    aCos0.next()*a0+
-    aCos1.next()*a1 +
-    aCos2.next()*a2;
-  asig >>= 9; // bitwise division to normalise total amplitude
-  return ((int) asig)<<8; // bitwise multiplication adapt to ESP8266 range
+  return  a0*aCos0.next();
 }
 
-
 void setup(){
-  /*
-      /!\ WARNING: is next line is not commented may no be audio output /!\
-  */
   Serial.begin(BAUD_RATE);
 
-  pinMode(LED_BUILTIN, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
-  digitalWrite(LED_BUILTIN, LOW);  // Turn the LED off by making the voltage HIGH
+  pinMode(LED_BUILTIN, OUTPUT); // Initialize the LED_BUILTIN pin as an output
+  digitalWrite(LED_BUILTIN, LOW);
 
   connect_wifi();
   connect_udp();
 
-  show_all();
+  show_neighs();
   show_params();
 
   // set initial frequencies
-  aCos0.setFreq(200);
-  aCos1.setFreq(500);
-  aCos2.setFreq(1000);
+  aCos0.setFreq(500);
 
-  // set initial amplitudes
-  a0=a1=a2=32;
+  // set initial amplitude
+  a0=32;
 
   // start synth engine
   startMozzi(CONTROL_RATE);
 }
 
-
 void loop(){
   audioHook(); // required here, it fills output buffer (256 cells > maximum latency of about 15 ms)
 }
-
-
-

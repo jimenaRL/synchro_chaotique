@@ -31,8 +31,8 @@ def f(y,z):
 
 y = np.empty((nb_oscilators, duree))
 z = np.empty((nb_oscilators, duree))
-y[:,0] = 0.9*np.random.rand(nb_oscilators)
-y[:,0] += -y[:,0].mean()
+#y[:,0] = 0.9*np.random.rand(nb_oscilators)
+#y[:,0] += -y[:,0].mean()
 y[:,0]=-1
 #y[14,0]=-1
 #y[16,0]=-1
@@ -42,7 +42,7 @@ y[15,0]=29
 z[:,0] = y[:,0]
 #print(z[:,0])
 for idx in range(1, duree):
-    (y[:, idx],z[:, idx]) = f(y[:,idx-1],z[:, idx-1])
+    (y[:, idx], z[:, idx]) = f(y[:,idx-1], z[:, idx-1])
    # z[15, idx]+=5.9*np.cos(0.005*idx)+5.9*np.cos(0.0045*idx)
 #    print(z[:,idx-1])
 
