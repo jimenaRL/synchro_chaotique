@@ -1,6 +1,6 @@
 #N canvas 200 23 1098 754 10;
 #X obj 522 371 mrpeach/packOSC;
-#X obj 522 417 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 522 417 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 522 396 mrpeach/udpsend 0;
 #X obj 478 371 print;
@@ -45,30 +45,15 @@
 #X obj 446 -11 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 446 -39 s osc;
-#X obj 446 -88 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 446 -88 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X msg 446 -62 sendtyped /DEBUG i \$1;
 #X msg 446 10 sendtyped /MONITOR i \$1;
-#X obj 8 363 s osc;
-#X obj 8 301 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+#X obj 8 334 s osc;
+#X obj 8 271 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
-#X obj 9 318 float;
+#X obj 9 289 float;
 #X floatatom 10 111 5 0 0 0 - - -;
-#X obj 50 430 s osc;
-#X obj 50 368 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 51 385 float;
-#X msg 51 409 sendtyped /neighbor_weight_idx if 1 \$1;
-#X obj 100 494 s osc;
-#X obj 100 432 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 101 449 float;
-#X obj 153 556 s osc;
-#X obj 153 494 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 154 511 float;
-#X msg 10 341 sendtyped /neighbor_weight_idx if 0 \$1;
-#X msg 101 471 sendtyped /neighbor_weight_idx if 2 \$1;
 #X msg 447 89 sendtyped /show_neighs i 0;
 #X obj 446 63 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -115,12 +100,6 @@
 #X msg 916 188 disconnect;
 #X msg 826 207 connect 192.168.0.10 8266;
 #X msg 828 352 connect 192.168.0.13 8266;
-#X msg 154 535 sendtyped /neighbor_weight_idx if 3 \$1;
-#X obj 242 623 s osc;
-#X obj 242 561 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 243 578 float;
-#X msg 243 602 sendtyped /neighbor_weight_idx if 4 \$1;
 #X obj 651 161 r d;
 #X obj 741 -10 s d;
 #X obj 916 166 r d;
@@ -139,6 +118,32 @@
 #X obj 828 331 r c;
 #X obj 826 482 r c;
 #X obj 564 474 r c;
+#X msg 10 312 sendtyped /neighbor_weight if 10 \$1;
+#X obj 50 398 s osc;
+#X obj 50 336 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 51 353 float;
+#X obj 100 463 s osc;
+#X obj 100 401 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 101 418 float;
+#X obj 15 506 s osc;
+#X obj 15 444 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 16 461 float;
+#X obj 62 569 s osc;
+#X obj 62 507 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 63 524 float;
+#X msg 51 377 sendtyped /neighbor_weight if 11 \$1;
+#X msg 101 440 sendtyped /neighbor_weight if 12 \$1;
+#X msg 16 485 sendtyped /neighbor_weight if 13 \$1;
+#X msg 63 548 sendtyped /neighbor_weight_idx if 14 \$1;
+#X obj 105 631 s osc;
+#X obj 104 569 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 105 586 float;
+#X msg 105 610 sendtyped /neighbor_weight_idx if 14 \$1;
 #X connect 0 0 2 0;
 #X connect 2 0 1 0;
 #X connect 4 0 5 0;
@@ -169,65 +174,68 @@
 #X connect 38 0 36 0;
 #X connect 39 0 19 0;
 #X connect 41 0 42 0;
-#X connect 42 0 54 0;
+#X connect 42 0 100 0;
 #X connect 43 0 30 0;
-#X connect 45 0 46 0;
-#X connect 46 0 47 0;
-#X connect 47 0 44 0;
-#X connect 49 0 50 0;
-#X connect 50 0 55 0;
-#X connect 52 0 53 0;
-#X connect 53 0 96 0;
-#X connect 54 0 40 0;
-#X connect 55 0 48 0;
-#X connect 56 0 18 0;
-#X connect 57 0 56 0;
-#X connect 58 0 60 0;
-#X connect 60 0 59 0;
+#X connect 44 0 18 0;
+#X connect 45 0 44 0;
+#X connect 46 0 48 0;
+#X connect 48 0 47 0;
+#X connect 50 0 49 0;
+#X connect 50 0 46 0;
+#X connect 51 0 48 0;
+#X connect 52 0 54 0;
+#X connect 54 0 53 0;
+#X connect 56 0 55 0;
+#X connect 56 0 52 0;
+#X connect 57 0 54 0;
+#X connect 60 0 62 0;
 #X connect 62 0 61 0;
-#X connect 62 0 58 0;
-#X connect 63 0 60 0;
-#X connect 64 0 66 0;
-#X connect 66 0 65 0;
-#X connect 68 0 67 0;
-#X connect 68 0 64 0;
-#X connect 69 0 66 0;
-#X connect 72 0 74 0;
-#X connect 74 0 73 0;
-#X connect 76 0 74 0;
-#X connect 77 0 75 0;
-#X connect 77 0 72 0;
-#X connect 78 0 74 0;
-#X connect 79 0 2 0;
-#X connect 80 0 66 0;
-#X connect 81 0 83 0;
-#X connect 83 0 82 0;
-#X connect 85 0 84 0;
-#X connect 85 0 81 0;
-#X connect 86 0 83 0;
-#X connect 87 0 83 0;
-#X connect 88 0 90 0;
-#X connect 90 0 89 0;
-#X connect 92 0 91 0;
-#X connect 92 0 88 0;
-#X connect 93 0 90 0;
-#X connect 94 0 90 0;
-#X connect 95 0 60 0;
-#X connect 96 0 51 0;
-#X connect 98 0 99 0;
-#X connect 99 0 100 0;
-#X connect 100 0 97 0;
-#X connect 101 0 78 0;
-#X connect 103 0 93 0;
-#X connect 104 0 11 0;
-#X connect 105 0 63 0;
-#X connect 106 0 69 0;
-#X connect 107 0 86 0;
-#X connect 108 0 102 0;
-#X connect 109 0 110 0;
-#X connect 111 0 94 0;
-#X connect 112 0 76 0;
-#X connect 113 0 79 0;
-#X connect 114 0 95 0;
-#X connect 115 0 87 0;
-#X connect 116 0 80 0;
+#X connect 64 0 62 0;
+#X connect 65 0 63 0;
+#X connect 65 0 60 0;
+#X connect 66 0 62 0;
+#X connect 67 0 2 0;
+#X connect 68 0 54 0;
+#X connect 69 0 71 0;
+#X connect 71 0 70 0;
+#X connect 73 0 72 0;
+#X connect 73 0 69 0;
+#X connect 74 0 71 0;
+#X connect 75 0 71 0;
+#X connect 76 0 78 0;
+#X connect 78 0 77 0;
+#X connect 80 0 79 0;
+#X connect 80 0 76 0;
+#X connect 81 0 78 0;
+#X connect 82 0 78 0;
+#X connect 83 0 48 0;
+#X connect 84 0 66 0;
+#X connect 86 0 81 0;
+#X connect 87 0 11 0;
+#X connect 88 0 51 0;
+#X connect 89 0 57 0;
+#X connect 90 0 74 0;
+#X connect 91 0 85 0;
+#X connect 92 0 93 0;
+#X connect 94 0 82 0;
+#X connect 95 0 64 0;
+#X connect 96 0 67 0;
+#X connect 97 0 83 0;
+#X connect 98 0 75 0;
+#X connect 99 0 68 0;
+#X connect 100 0 40 0;
+#X connect 102 0 103 0;
+#X connect 103 0 113 0;
+#X connect 105 0 106 0;
+#X connect 106 0 114 0;
+#X connect 108 0 109 0;
+#X connect 109 0 115 0;
+#X connect 111 0 112 0;
+#X connect 112 0 116 0;
+#X connect 113 0 101 0;
+#X connect 114 0 104 0;
+#X connect 115 0 107 0;
+#X connect 116 0 110 0;
+#X connect 118 0 119 0;
+#X connect 119 0 120 0;
+#X connect 120 0 117 0;
