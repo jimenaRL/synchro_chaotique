@@ -1,3 +1,4 @@
+import csv
 import time
 import socket
 import random
@@ -16,8 +17,6 @@ NODES = {
     "192.168.0.15": {"iter": 0, "value": -1.0},
 }
 
-MOD = 1000
-
 ENDPOINT = "/monitor"
 
 parser = argparse.ArgumentParser()
@@ -34,7 +33,13 @@ parser.add_argument('-bufsize',
                     dest="BUFSIZE",
                     type=int,
                     default=256)
-
+parser.add_argument('-name',
+                    dest="NAME",
+                    type=str,
+                    default="")
+parser.add_argument('-show',
+                    dest="SHOW",
+                    action="store_true")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -51,27 +56,32 @@ def print_nodes():
     print (s)
 
 nb_errors = 0
-while True:
-    try:
-        data, address = sock.recvfrom(BUFSIZE)
-        remote_ip, remote_port = address
-        decoded = decodeOSC(data)
-        if not len(decoded) == EXPECTED_DECODED_LENGTH:
-            nb_errors += 1
-            print("Error number %i: len(decoded) is %i, expected %i." % (
-                nb_errors,
-                len(decoded),
-                EXPECTED_DECODED_LENGTH))
-            continue
-        endpoint, _types = decoded[:2]
-        if endpoint==ENDPOINT:
-            value = decoded[2]
-            if remote_ip in NODES.keys():
-                NODES[remote_ip]["iter"] = (NODES[remote_ip]["iter"]+1) % MOD
-                NODES[remote_ip]["value"] = value
-            print_nodes()
-        else:
-            print("Wrong endpoint `%s`. Must be `%s`." % (endpoint, ENDPOINT))
-            continue
-    except Exception as e:
-        print(e)
+with open("%s.csv" % NAME, mode='w') as f:
+    writer = csv.writer(f, delimiter=',')
+    while True:
+        try:
+            data, address = sock.recvfrom(BUFSIZE)
+            remote_ip, remote_port = address
+            decoded = decodeOSC(data)
+            if not len(decoded) == EXPECTED_DECODED_LENGTH:
+                nb_errors += 1
+                print("Error number %i: len(decoded) is %i, expected %i." % (
+                    nb_errors,
+                    len(decoded),
+                    EXPECTED_DECODED_LENGTH))
+                continue
+            endpoint, _types = decoded[:2]
+            if endpoint==ENDPOINT:
+                value = decoded[2]
+                iter_ = NODES[remote_ip]["iter"]+1
+                if remote_ip in NODES.keys():
+                    NODES[remote_ip]["iter"] = iter_
+                    NODES[remote_ip]["value"] = value
+                if SHOW:
+                    print_nodes()
+                writer.writerow([remote_ip.split(".")[-1], iter_, value])
+            else:
+                print("Wrong endpoint `%s`. Must be `%s`." % (endpoint, ENDPOINT))
+                continue
+        except Exception as e:
+            print(e)
