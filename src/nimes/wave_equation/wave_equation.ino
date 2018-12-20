@@ -9,10 +9,10 @@
 #include <OSCBundle.h>
 #include <OSCData.h>
 
-#define CONTROL_RATE 32 // in Hz, must be a power of 2 
+#define CONTROL_RATE 4 // in Hz, must be a power of 2 
 
 /// debug ///
-const int PPFPRE = 10; // print precision 
+const int PPFPRE = 7; // print precision 
 int BAUD_RATE = 9600;
 bool DEBUG = false;
 bool MONITOR = true;
@@ -29,7 +29,7 @@ const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
 
 // model
-const int NB_NEIGHS = 5;
+const int NB_NEIGHS = 6; // includes self
 float in_value;
 
 typedef struct{
@@ -39,11 +39,11 @@ typedef struct{
     float weight;
 } Node;
 
-
+const float self_weight = 0.0;
 // ring geometry
-Node Neighs[5]={
+Node Neighs[6]={
  {10, 0.0, 0.0, 1.0},
- {12, 0.0, 0.0, 1.0},
+ {12, 0.0, 0.0, 0.0},
  {13, 0.0, 0.0, 0.0},
  {14, 0.0, 0.0, 0.0},
  {15, 0.0, 0.0, 0.0},
@@ -53,12 +53,10 @@ const int MONITOR_PORT = 5005;
 int NB_MONITORS = 3;
 int Monitors[3] = {111, 112, 113};
 
-float DT = 1.0/(float (CONTROL_RATE)); // time delta
-float DX = 1./(NB_NEIGHS+1);  // space delta
-float C  = 0.051;  // sound speed
-float MU = 0.1;  // viscosity
-float current_val = 0.0;  // internal value
-float previous_val = 0.0;  // internal previous value
+float C = 0.051;  // sound speed
+float MU = 0.0;  // viscosity
+float current_val = 10.0;  // internal value
+float previous_val = 10.0;  // internal previous value
 
 // Mozzi Synth
 
@@ -96,10 +94,6 @@ void show_params(){
     Serial.println(C, PPFPRE);
     Serial.printf("\t MU: ");
     Serial.println(MU, PPFPRE);
-    Serial.printf("\t DT: ");
-    Serial.println(DT, PPFPRE);
-    Serial.printf("\t DX: ");
-    Serial.println(DX, PPFPRE);
     Serial.printf("\t DEBUG: ");
     Serial.println(DEBUG);
     Serial.printf("\t MONITOR: ");
@@ -121,6 +115,9 @@ void show_neighs(){
 void show_this(){
   Serial.printf("\tintIp %d | ---------- | current_val ", intIp);
   Serial.print(current_val, PPFPRE);
+  Serial.printf("| previous_val ", intIp);
+  Serial.print(previous_val, PPFPRE);
+  Serial.println("");
 }
 
 void monitor(){
@@ -149,10 +146,13 @@ void monitor(){
 
 /// callbacks ///
 
+void show_this_ckb(OSCMessage &msg){
+  show_this();
+}
+
 void show_neighs_ckb(OSCMessage &msg){
   show_neighs();
 }
-
 
 void set_DEBUG(OSCMessage &msg){
   DEBUG = (bool) msg.getInt(0);
@@ -172,7 +172,26 @@ void current_val_ckb(OSCMessage &msg){
   current_val = msg.getFloat(0);
   if(DEBUG){
     Serial.print("Current value updated with value ");
-    Serial.println(current_val);
+    Serial.print(current_val, PPFPRE);
+    Serial.println("");
+  }
+}
+
+void set_neighbors(OSCMessage &msg) {
+  int intIp_ = msg.getInt(0);
+  for (int i=0; i<NB_NEIGHS; i++){
+    if(Neighs[i].intIp == intIp_){
+      Neighs[i].current_val = msg.getFloat(1);
+      Neighs[i].previous_val = msg.getFloat(2);
+      if(DEBUG){
+        Serial.print("Neighbor ");
+        Serial.print(Neighs[i].intIp);
+        Serial.print(" current and previous values updated with values: ");
+        Serial.print(Neighs[i].current_val, PPFPRE);
+        Serial.print(" and ");
+        Serial.println(Neighs[i].previous_val, PPFPRE);
+      }
+    }
   }
 }
 
@@ -180,10 +199,10 @@ void set_values(OSCMessage &msg) {
   current_val = msg.getFloat(0);
   previous_val = msg.getFloat(1);
   if(DEBUG){
-    Serial.print("Current and previous values updated with value ");
-    Serial.println(current_val);
+    Serial.print("Current and previous values updated with values: ");
+    Serial.print(current_val, PPFPRE);
     Serial.print(" and ");
-    Serial.println(previous_val);
+    Serial.println(previous_val, PPFPRE);
   }
 }
 
@@ -191,7 +210,7 @@ void set_C(OSCMessage &msg){
   C = msg.getFloat(0);
   if(DEBUG){
     Serial.print("Parameter `C` updated with value ");
-    Serial.println(C);
+    Serial.println(C, PPFPRE);
   }
 }
 
@@ -199,23 +218,7 @@ void set_MU(OSCMessage &msg){
   MU = msg.getFloat(0);
   if(DEBUG){
     Serial.print("Parameter `MU` updated with value ");
-    Serial.println(MU);
-  }
-}
-
-void set_DX(OSCMessage &msg){
-  DX = msg.getFloat(0);
-  if(DEBUG){
-    Serial.print("Parameter `DX` updated with value ");
-    Serial.println(DX);
-  }
-}
-
-void set_DT(OSCMessage &msg){
-  DT = msg.getFloat(0);
-  if(DEBUG){
-    Serial.print("Parameter `DT` updated with value ");
-    Serial.println(DT);
+    Serial.println(MU, PPFPRE);
   }
 }
 
@@ -223,7 +226,7 @@ void set_amp(OSCMessage &msg){
   a0 = (int8_t) msg.getFloat(0);
   if(DEBUG){
     Serial.print("Updated a0 with value ");
-    Serial.println(a0);
+    Serial.println(a0, PPFPRE);
   }
 }
 
@@ -232,7 +235,7 @@ void set_freq(OSCMessage &msg){
   aCos0.setFreq(f0);
   if(DEBUG){
     Serial.print("Updated f0 with value ");
-    Serial.println(f0);
+    Serial.println(f0, PPFPRE);
   }
 }
 
@@ -260,16 +263,20 @@ void update_value(){
   int NB_ACT_NEIGHS = 0;
   for(int j=0; j<NB_NEIGHS; j++){
     if(Neighs[j].weight > 0){
-      D2XP_previous += Neighs[j].previous_val;
-      D2XP_current += Neighs[j].current_val;
-      NB_ACT_NEIGHS += 1;
+      D2XP_previous += (Neighs[j].previous_val - previous_val);
+      D2XP_current += (Neighs[j].current_val - current_val);
+      Serial.print(j);
+      Serial.print(" : D2XP_current ");
+      Serial.print(D2XP_current, PPFPRE);
+      Serial.println("");
     }
   }
-  D2XP_current -= NB_ACT_NEIGHS * current_val;
-  D2XP_previous -= NB_ACT_NEIGHS * previous_val;
   previous_val = current_val;
   // DTD2XP_current = (D2XP_current - D2XP_previous)
   current_val = D2TP + C * D2XP_current + MU * (D2XP_current - D2XP_previous);
+  Serial.print("D2TP ");
+  Serial.print(D2TP, PPFPRE);
+  Serial.println("");
   if(DEBUG){
     Serial.printf("New internal value ");
     Serial.print(current_val, PPFPRE);
@@ -335,13 +342,13 @@ void parse_message(){
       msg.fill(Udp.read());
     }
     if (!msg.hasError()){
+      msg.dispatch("/show_this", show_this_ckb);
       msg.dispatch("/show_neighs", show_neighs_ckb);
       msg.dispatch("/current_val", current_val_ckb);
+      msg.dispatch("/set_neighbors", set_neighbors);
       msg.dispatch("/set_values", set_values);
       msg.dispatch("/param/C", set_C);
       msg.dispatch("/param/MU", set_MU);
-      msg.dispatch("/param/DT", set_DT);
-      msg.dispatch("/param/DX", set_DX);
       msg.dispatch("/DEBUG", set_DEBUG);
       msg.dispatch("/MONITOR", set_MONITOR);
       msg.dispatch("/oscillator/freq", set_freq);
@@ -376,6 +383,7 @@ void setup(){
   connect_wifi();
   connect_udp();
 
+  show_this();
   show_neighs();
   show_params();
 
