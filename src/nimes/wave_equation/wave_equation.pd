@@ -156,16 +156,8 @@
 #X floatatom 18 100 5 0 0 0 - - -;
 #X floatatom 58 101 5 0 0 0 - - -;
 #X obj -3 163 s osc;
-#X obj -3 14 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X floatatom 18 14 5 0 0 0 - - -;
-#X floatatom 58 15 5 0 0 0 - - -;
-#X obj -3 77 s osc;
-#X obj -3 35 pack i f f;
-#X floatatom 99 15 5 0 0 0 - - -;
-#X msg -3 56 sendtyped /set/values iff \$1 \$2 \$3;
 #X obj -3 121 pack i f;
-#X msg -3 142 sendtyped /set/weights if \$1 \$2;
+#X msg -3 142 sendtyped /set/weight if \$1 \$2;
 #X connect 0 0 2 0;
 #X connect 2 0 1 0;
 #X connect 4 0 5 0;
@@ -267,14 +259,8 @@
 #X connect 121 0 124 0;
 #X connect 123 0 119 0;
 #X connect 124 0 122 0;
-#X connect 125 0 136 0;
-#X connect 126 0 136 0;
-#X connect 127 0 136 1;
-#X connect 129 0 133 0;
-#X connect 130 0 133 0;
-#X connect 131 0 133 1;
-#X connect 133 0 135 0;
-#X connect 134 0 133 2;
-#X connect 135 0 132 0;
-#X connect 136 0 137 0;
-#X connect 137 0 128 0;
+#X connect 125 0 129 0;
+#X connect 126 0 129 0;
+#X connect 127 0 129 1;
+#X connect 129 0 130 0;
+#X connect 130 0 128 0;

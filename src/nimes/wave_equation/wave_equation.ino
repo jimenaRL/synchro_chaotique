@@ -26,7 +26,7 @@ const unsigned int COMMPORT = 8266;  // local port to listen for UDP packets
 const int IP0 = 192;
 const int IP1 = 168;
 const int IP2 = 0;
-const int selfIdIp = 10; // IP para este dispositivo sera ip(192, 168, 0, idIp);
+const int selfIdIp = 15; // IP para este dispositivo sera ip(192, 168, 0, idIp);
 const IPAddress gateway(IP0, IP1, IP2, 1);  // IP gateway, normalmente es la del router
 const IPAddress subnet(255, 255, 255, 0); // Mascara de subred
 OSCErrorCode error;
@@ -45,11 +45,11 @@ const float self_weight = 0.0;
 Node Self = {selfIdIp, 0.0, 0.0, self_weight};
 
 Node Neighs[5]={
- {11, 0.0, 0.0, 2.0},
+ {10, 0.0, 0.0, 0.0},
+ {11, 0.0, 0.0, 0.0},
  {12, 0.0, 0.0, 0.0},
  {13, 0.0, 0.0, 0.0},
- {14, 0.0, 0.0, 0.0},
- {15, 0.0, 0.0, 0.0},
+ {14, 0.0, 0.0, 2.0},
 };
 
 const int MONITOR_PORT = 5005;
