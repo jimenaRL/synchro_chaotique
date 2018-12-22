@@ -118,6 +118,30 @@ IP_VERTEX = [
     (99, [5, -1, 2]),
 ]
 
+def bump(x, smin, Mmin, Mmax, smax):
+    if(x<smin or x>smax):
+        return 0
+    if(x<Mmin):
+        return (x-smin)/(Mmin-smin)
+    if(x>Mmax):
+        return 1-(x-Mmax)/(smax-Mmax)
+    return 1
+
+
+def triplebump(x, smin, Mmin1, Mmax1, Mmin2, Mmax2, Mmin3, Mmax3, smax):
+    a0 = bump(x, smin, Mmin1, Mmax1, Mmin2)
+    a1 = bump(x, Mmax1, Mmin2, Mmax2, Mmin3)
+    a2 = bump(x, Mmax2, Mmin3, Mmax3, smax)
+    return a0, a1, a2
+
+def triplebumpA(x):
+    return triplebump(x, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8)
+
+def triplebumpB(x):
+    return triplebump(x, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4)
+
+def triplebumpC(x):
+    return triplebump(x, 0.0, 0.15, 0.12, 0.21, 0.25, 0.28, 0.35, 0.37)
 
 def get_ip(vertex):
     for ip, v in IP_VERTEX:
@@ -198,7 +222,7 @@ def mean(nodes):
 
 def send(nodes):
     for node in nodes:
-        if node.ip == 43:
+        if node.ip > 0:
             msg = OSCMessage("/%i" % node.ip)
             tmp = node.current
             xA0, xA1, xA2 = tmp, tmp, tmp #triplebumpA(node.current)
@@ -219,29 +243,7 @@ def send(nodes):
             bundle.append(msg)
             client.send(bundle)
 
-def bump(x, smin, Mmin, Mmax, smax):
-    if(x<smin or x>smax):
-        return 0
-    if(x<Mmin):
-        return (x-smin)/(Mmin-smin)
-    if(x>Mmax):
-        return 1-(x-Mmax)/(smax-Mmax)
-    return 1
-
-
-def triplebump(x, smin, Mmin1, Mmax1, Mmin2, Mmax2, Mmin3, Mmax3, smax):
-    a0 = bump(x, smin, Mmin1, Mmax1, Mmin2)
-    a1 = bump(x, Mmax1, Mmin2, Mmax2, Mmin3)
-    a2 = bump(x, Mmax2, Mmin3, Mmax3, smax)
-    return a0, a1, a2
-
-def triplebumpA(x):
-    return triplebump(x, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8)
-
-def triplebumpB(x):
-    return triplebump(x, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4)
-
-triplebumpC = triplebumpB
+print_nodes(NODES)
 
 _iter = -1
 while True:
@@ -252,7 +254,6 @@ while True:
     wave(NODES)
     print("iter %i mean %f" % (_iter+1, mean(NODES)))
     send(NODES)
-    # print_nodes(NODES)
 
 
 
