@@ -1,3 +1,4 @@
+import random
 import socket
 import argparse
 from time import sleep
@@ -9,7 +10,7 @@ INIT = '0: 0.0,1.0; 1: 0.0,1.0; 2: 0.0,1.0; 3: 0.0,1.0; 4: 0.0,1.0; 5: 0.0,1.0; 
 
 class Node(object):
 
-    def __init__(self, ip=-1, vertex=[0, 0, 0], weight=0.0):
+    def __init__(self, ip=-1, vertex=[0, 0, 0]):
 
         self.ip = ip
         self.vertex = vertex
@@ -39,7 +40,7 @@ parser.add_argument('-ip',
 parser.add_argument('-port',
                     dest="UDP_PORT",
                     type=int,
-                    default=8266)
+                    default=6666)
 parser.add_argument('-delay',
                     dest="DELAY",
                     type=float,
@@ -67,8 +68,9 @@ for k, v in parser.parse_args().__dict__.items():
 
 # set udp server
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((UDP_IP, UDP_PORT))
 
+client = OSCClient()
+client.connect((UDP_IP, UDP_PORT))
 
 init = {int(s.split(":")[0]):
 (float(s.split(":")[1].split(",")[0]), float(s.split(":")[1].split(",")[1]))
@@ -76,39 +78,40 @@ for s in init.split(";")}
 
 # ip - vertex table
 IP_VERTEX = [
-    (10, [0, -1, 1]),
-    (11, [0, 1, 1]),
-    (12, [0, 1, -1]),
-    (13, [0, -1, -1]),
-    (14, [1, -1, 2]),
-    (15, [1, 1, 2]),
-    (16, [1, -1, 0]),
-    (17, [1, 1, 0]),
-    (18, [1,-1, -2]),
-    (19, [1, 1, -2]),
-    (20, [2, -2, 2]),
-    (21, [2, 0, 2]),
-    (22, [2, -2, 0]),
-    (23, [2, 0, 0]),
-    (24, [2, 2, 0]),
-    (25, [2, 0, -2]),
-    (26, [2, 2, -2]),
-    (27, [3, -2, 3]),
-    (28, [3, 0, 3]),
-    (29, [3, -2, 1]),
-    (30, [3, 0, 1]),
-    (31, [3, 2, 1]),
-    (32, [3, -2, -1]),
-    (33, [3, 0, -1]),
-    (34, [3, 2, -1]),
-    (35, [4, -1, 3]),
-    (36, [4, -1, 1]),
-    (37, [4, 1, 1]),
-    (38, [4, -1, -1]),
-    (39, [4, 1, -1]),
-    (40, [5, 1, 0]),
-    (41, [5, -1, 0]),
-    (42, [5, -1, 2]),
+
+    (0, [0, -1, 1]),
+    (0, [0, 1, 1]),
+    (8, [0, 1, -1]),
+    (9, [0, -1, -1]),
+    (13, [1, -1, 2]),
+    (11, [1, 1, 2]),
+    (15, [1, -1, 0]), # not yet flashed
+    (10, [1, 1, 0]),
+    (14, [1, -1, -2]),
+    (12, [1, 1, -2]),
+    (26, [2, -2, 2]),
+    (24, [2, 0, 2]),
+    (25, [2, -2, 0]),
+    (20, [2, 0, 0]),
+    (22, [2, 2, 0]),
+    (21, [2, 0, -2]),
+    (23, [2, 2, -2]),
+    (35, [3, -2, 3]),
+    (34, [3, 0, 3]),
+    (36, [3, -2, 1]),
+    (33, [3, 0, 1]),
+    (32, [3, 2, 1]),
+    (30, [3, -2, -1]),
+    (37, [3, 0, -1]),
+    (31, [3, 2, -1]),
+    (44, [4, -1, 3]),
+    (42, [4, -1, 1]),
+    (40, [4, 1, 1]),
+    (43, [4, -1, -1]),
+    (41, [4, 1, -1]),
+    (97, [5, 1, 0]),
+    (98, [5, -1, 0]),
+    (99, [5, -1, 2]),
 ]
 
 
@@ -139,12 +142,12 @@ def get_node(vertex):
 
 # set intial condition
 for n in NODES:
-    n.current = -1
-    n.previous = -1
+    n.current = random.random()
+    n.previous = random.random()
 
 # set dirac in last node
-NODES[13].current = 32
-NODES[13].previous = 32
+# NODES[0].current = 32
+# NODES[0].previous = 32
 
 # set neighbors and normalise them
 for n in NODES:
@@ -160,7 +163,6 @@ def wave(nodes):
         D2TP = 2.0 * node.current - node.previous
         D2XP_current = 0.0
         D2XP_previous = 0.0
-        inv_weight =0.0
         for neigh, weight in node.neighbors:
             # weight is unusued here
             D2XP_previous += (neigh.previous - node.previous)
@@ -179,7 +181,7 @@ def print_nodes(nodes):
         ss = "------------ %i ------------\n" % step
         for n in NODES:
             if n.vertex[0]==step:
-                ss += "%s %1.2f\n" % (n.vertex, n.current)
+                ss += "%s %s %1.2f\n" % (n.ip, n.vertex, n.current)
         print(ss)
 
 def mean(nodes):
@@ -190,29 +192,52 @@ def mean(nodes):
 
 def send(nodes):
     for node in nodes:
-        client = OSCClient()
-        client.connect(("192.168.0.%i" % node.ip, UDP_PORT))
-        msg = OSCMessage("/callback")
-        msg.append(0) #node.current)
-        msg.append(100)
-        msg.append(0)
-        msg.append(0)
-        msg.append(0)
-        msg.append(0)
+        msg = OSCMessage("/%i" % node.ip)
+        xA0, xA1, xA2 = triplebumpA(node.current)
+        xB0, xB1, xB2 = triplebumpA(node.current)
+        print("%i %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2))
+        msg.append(xA0)
+        msg.append(xA1)
+        msg.append(xA2)
+        msg.append(xB0)
+        msg.append(xB1)
+        msg.append(xB2)
         bundle = OSCBundle()
         bundle.append(msg)
         client.send(bundle)
 
+def bump(x, smin, Mmin, Mmax, smax):
+    if(x<smin or x>smax):
+        return 0
+    if(x<Mmin):
+        return (x-smin)/(Mmin-smin)
+    if(x>Mmax):
+        return 1-(x-Mmax)/(smax-Mmax)
+    return 1
+
+
+def triplebump(x, smin, Mmin1, Mmax1, Mmin2, Mmax2, Mmin3, Mmax3, smax):
+    a0 = bump(x, smin, Mmin1, Mmax1, Mmin2)
+    a1 = bump(x, Mmax1, Mmin2, Mmax2, Mmin3)
+    a2 = bump(x, Mmax2, Mmin3, Mmax3, smax)
+    return a0, a1, a2
+
+def triplebumpA(x):
+    return triplebump(x, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8)
+
+def triplebumpB(x):
+    return triplebump(x, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4)
+
 # iterations
 print(0)
+print("iter 0 mean %f" % mean(NODES))
 print_nodes(NODES)
 send(NODES)
-exit()
 
 for _ in range(steps):
     sleep(DELAY)
     wave(NODES)
-    print("iter %i mean %f" % (_, mean(NODES)))
+    print("iter %i mean %f" % (_+1, mean(NODES)))
     send(NODES)
     print_nodes(NODES)
 
