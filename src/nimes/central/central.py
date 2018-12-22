@@ -3,6 +3,7 @@ import socket
 import argparse
 from time import sleep
 from copy import deepcopy
+from osc import decodeOSC
 from OSC import OSCClient, OSCMessage, OSCBundle
 
 NB_NODES = 33
@@ -41,10 +42,10 @@ parser.add_argument('-port',
                     dest="UDP_PORT",
                     type=int,
                     default=6666)
-parser.add_argument('-delay',
-                    dest="DELAY",
+parser.add_argument('-rate',
+                    dest="RATE",
                     type=float,
-                    default=0.1)
+                    default=32)
 parser.add_argument('-C',
                     dest="C",
                     type=float,
@@ -60,7 +61,11 @@ parser.add_argument('-steps',
 parser.add_argument('-init',
                     dest="init",
                     type=str,
-                    default=INIT)
+                    default="")
+parser.add_argument('-delta',
+                    dest="delta",
+                    type=int,
+                    default=20)
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -72,20 +77,19 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client = OSCClient()
 client.connect((UDP_IP, UDP_PORT))
 
-init = {int(s.split(":")[0]):
-(float(s.split(":")[1].split(",")[0]), float(s.split(":")[1].split(",")[1]))
-for s in init.split(";")}
+# init = {int(s.split(":")[0]):
+# (float(s.split(":")[1].split(",")[0]), float(s.split(":")[1].split(",")[1]))
+# for s in init.split(";")}
 
 # ip - vertex table
 IP_VERTEX = [
-
-    (0, [0, -1, 1]),
-    (0, [0, 1, 1]),
+    (6, [0, -1, 1]),
+    (7, [0, 1, 1]),
     (8, [0, 1, -1]),
     (9, [0, -1, -1]),
     (13, [1, -1, 2]),
     (11, [1, 1, 2]),
-    (15, [1, -1, 0]), # not yet flashed
+    (15, [1, -1, 0]),
     (10, [1, 1, 0]),
     (14, [1, -1, -2]),
     (12, [1, 1, -2]),
@@ -140,14 +144,15 @@ def get_node(vertex):
         if node.ip == _ip:
             return node
 
-# set intial condition
+# set initial condition (dirac in one node)
 for n in NODES:
-    n.current = random.random()
-    n.previous = random.random()
+    if n.ip == delta:
+        n.current = 1.0
+        n.previous = 1.0
+    else:
+        n.current = -1.0/32
+        n.previous = -1.0/32
 
-# set dirac in last node
-# NODES[0].current = 32
-# NODES[0].previous = 32
 
 # set neighbors and normalise them
 for n in NODES:
@@ -190,21 +195,29 @@ def mean(nodes):
         mean += n.current
     return mean
 
+
 def send(nodes):
     for node in nodes:
-        msg = OSCMessage("/%i" % node.ip)
-        xA0, xA1, xA2 = triplebumpA(node.current)
-        xB0, xB1, xB2 = triplebumpA(node.current)
-        print("%i %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2))
-        msg.append(xA0)
-        msg.append(xA1)
-        msg.append(xA2)
-        msg.append(xB0)
-        msg.append(xB1)
-        msg.append(xB2)
-        bundle = OSCBundle()
-        bundle.append(msg)
-        client.send(bundle)
+        if node.ip == 43:
+            msg = OSCMessage("/%i" % node.ip)
+            tmp = node.current
+            xA0, xA1, xA2 = tmp, tmp, tmp #triplebumpA(node.current)
+            xB0, xB1, xB2 = tmp, tmp, tmp #triplebumpB(node.current)
+            xC0, xC1, xC2 = tmp, tmp, tmp #triplebumpC(node.current)
+            print("%i %f" % (node.ip, xA0))
+            # print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
+            msg.append(xA0)
+            msg.append(xA1)
+            msg.append(xA2)
+            msg.append(xB0)
+            msg.append(xB1)
+            msg.append(xB2)
+            msg.append(xC0)
+            msg.append(xC1)
+            msg.append(xC2)
+            bundle = OSCBundle()
+            bundle.append(msg)
+            client.send(bundle)
 
 def bump(x, smin, Mmin, Mmax, smax):
     if(x<smin or x>smax):
@@ -228,18 +241,20 @@ def triplebumpA(x):
 def triplebumpB(x):
     return triplebump(x, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4)
 
-# iterations
-print(0)
-print("iter 0 mean %f" % mean(NODES))
-print_nodes(NODES)
-send(NODES)
+triplebumpC = triplebumpB
 
-for _ in range(steps):
-    sleep(DELAY)
+_iter = -1
+while True:
+    _iter += 1
+    if steps > 0 and _iter > steps:
+        break
+    sleep(1./RATE)
     wave(NODES)
-    print("iter %i mean %f" % (_+1, mean(NODES)))
+    print("iter %i mean %f" % (_iter+1, mean(NODES)))
     send(NODES)
-    print_nodes(NODES)
+    # print_nodes(NODES)
+
+
 
 
 
