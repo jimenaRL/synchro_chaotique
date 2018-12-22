@@ -8,7 +8,6 @@ from osc import decodeOSC
 from OSC import OSCClient, OSCMessage, OSCBundle
 
 NB_NODES = 33
-INIT = '0: 0.0,1.0; 1: 0.0,1.0; 2: 0.0,1.0; 3: 0.0,1.0; 4: 0.0,1.0; 5: 0.0,1.0; 6: 0.0,1.0; 7: 0.0,1.0; 8: 0.0,1.0; 9: 0.0,1.0; 10: 0.0,1.0; 11: 0.0,1.0; 12: 0.0,1.0; 13: 0.0,1.0; 14:0.0,1.0; 15: 0.0,1.0; 16: 0.0,1.0; 17: 0.0,1.0; 18: 0.0,1.0; 19: 0.0,1.0; 20: 0.0,1.0; 21: 0.0,1.0; 22: 0.0,1.0; 23: 0.0,1.0; 24: 0.0,1.0; 25: 0.0,1.0; 26: 0.0,1.0; 27: 0.0,1.0;28: 0.0,1.0; 29: 0.0,1.0; 30: 0.0,1.0; 31: 0.0,1.0; 32: 0.0,1.0'
 
 class Node(object):
 
@@ -67,6 +66,10 @@ parser.add_argument('-deltas',
                     dest="deltas",
                     type=str,
                     default="")
+parser.add_argument('-jeu',
+                    dest="JEU",
+                    type=str,
+                    default="2osc")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -175,7 +178,7 @@ def get_node(vertex):
 # set initial condition (dirac in one node)
 deltas = map(int, deltas.split(" ")) if deltas else [random.choice(IPS)]
 nb_deltas = len(deltas)
-print("INIT deltas %s" % deltas)
+print("Initial deltas %s" % deltas)
 for n in NODES: 
     if n.ip in deltas:
         n.current = 1.0/nb_deltas
@@ -236,16 +239,22 @@ def gate(x, vmax=1.0, vmin=-1.0):
     return max(min(x, vmax), vmin)
 
 def send(nodes):
-    mean0 = 0.0
-    mean1 = 0.0
+    mean_p = 0.0
+    mean_dp = 0.0
     for node in nodes:
         msg = OSCMessage("/%i" % node.ip)
-        tmp0 = gate(5*(node.current - node.previous))
-        tmp1 = gate(1.5*node.current)
-        xA0, xA1, xA2 = tmp0, tmp1, 0#tmp0+tmp1
-        xB0, xB1, xB2 = 0, 0, 0 # tmp0, tmp1, tmp0+tmp1
-        xC0, xC1, xC2 = 0, 0, 0 # tmp0, tmp1, tmp0+tmp1
-        #print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
+        # presure and presure derivative (constants setted to assumre equal mean)
+        p = gate(1.5*node.current)
+        dp = gate(5*(node.current - node.previous))
+        if JEU=="2osc":
+            xA0, xA1, xA2 = dp, p, 0
+            xB0, xB1, xB2 = 0, 0, 0
+            xC0, xC1, xC2 = 0, 0, 0
+        elif JEU=="3chords":
+            xA0, xA1, xA2 = dp, p, dp+p
+            xB0, xB1, xB2 = dp, p, dp+p
+            xC0, xC1, xC2 = dp, p, dp+p
+        # print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
         msg.append(xA0)
         msg.append(xA1)
         msg.append(xA2)
@@ -258,9 +267,9 @@ def send(nodes):
         bundle = OSCBundle()
         bundle.append(msg)
         client.send(bundle)
-        mean0 += abs(5*tmp0)
-        mean1 += abs(tmp1)
-    #print("mean0 %f mean1 %f mean0/mean1 %f" % (mean0, mean1, mean0/mean1))
+        # mean_p += p
+        # mean_dp += dp
+    # print("mean_p %f mean_dp %f" % (mean_p, mean_dp))
 
 #print_nodes(NODES)
 
@@ -272,7 +281,7 @@ while True:
     sleep(1./RATE)
     wave(NODES)
     #set_value(_ip=20, alpha=0.0075, beta=1./float(3*RATE), step=step)
-    #print("iter %i mean %f" % (_iter, mean(NODES)))
+    #print("iter %i mean %1.64f" % (step, mean(NODES)))
     send(NODES)
 
 
