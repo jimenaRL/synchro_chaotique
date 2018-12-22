@@ -1,6 +1,7 @@
 import random
 import socket
 import argparse
+import numpy as np
 from time import sleep
 from copy import deepcopy
 from osc import decodeOSC
@@ -46,26 +47,26 @@ parser.add_argument('-rate',
                     dest="RATE",
                     type=float,
                     default=32)
-parser.add_argument('-C',
+parser.add_argument('-c',
                     dest="C",
                     type=float,
                     default=0.051)
-parser.add_argument('-MU',
+parser.add_argument('-mu',
                     dest="MU",
                     type=float,
                     default=0.001)
-parser.add_argument('-steps',
-                    dest="steps",
+parser.add_argument('-nb_steps',
+                    dest="nb_steps",
                     type=int,
                     default=0)
 parser.add_argument('-init',
                     dest="init",
                     type=str,
                     default="")
-parser.add_argument('-delta',
-                    dest="delta",
-                    type=int,
-                    default=20)
+parser.add_argument('-deltas',
+                    dest="deltas",
+                    type=str,
+                    default="")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -118,6 +119,9 @@ IP_VERTEX = [
     (99, [5, -1, 2]),
 ]
 
+IPS = [ip_v[0] for ip_v in IP_VERTEX]
+VERTICES = [ip_v[1] for ip_v in IP_VERTEX]
+
 def bump(x, smin, Mmin, Mmax, smax):
     if(x<smin or x>smax):
         return 0
@@ -169,22 +173,31 @@ def get_node(vertex):
             return node
 
 # set initial condition (dirac in one node)
-for n in NODES:
-    if n.ip == delta:
-        n.current = 1.0
-        n.previous = 1.0
+deltas = map(int, deltas.split(" ")) if deltas else [random.choice(IPS)]
+nb_deltas = len(deltas)
+print("INIT deltas %s" % deltas)
+for n in NODES: 
+    if n.ip in deltas:
+        n.current = 1.0/nb_deltas
+        n.previous = 1.0/nb_deltas
     else:
-        n.current = -1.0/32
-        n.previous = -1.0/32
+        n.current = -1.0/(NB_NODES-nb_deltas)
+        n.previous = -1.0/(NB_NODES-nb_deltas)
 
+def set_value(_ip, alpha, beta, step):
+    "Force oscillation on one node."
+    for n in NODES:
+        if n.ip == delta:
+            n.current += alpha * np.cos(beta*2*np.pi*step)
+            n.previous += alpha * np.cos(beta*2*np.pi*step)
 
 # set neighbors and normalise them
 for n in NODES:
     neighs = [get_node(v) for v in voisin(n.vertex, VERTEX_LIST)]
     n.neighbors = [(node, 1.0/len(neighs)) for node in neighs]
 
-for n in NODES:
-    print(n)
+# for n in NODES:
+#     print(n)
 
 def wave(nodes):
     # compute
@@ -219,40 +232,47 @@ def mean(nodes):
         mean += n.current
     return mean
 
+def gate(x, vmax=1.0, vmin=-1.0):
+    return max(min(x, vmax), vmin)
 
 def send(nodes):
+    mean0 = 0.0
+    mean1 = 0.0
     for node in nodes:
-        if node.ip > 0:
-            msg = OSCMessage("/%i" % node.ip)
-            tmp = node.current
-            xA0, xA1, xA2 = tmp, tmp, tmp #triplebumpA(node.current)
-            xB0, xB1, xB2 = tmp, tmp, tmp #triplebumpB(node.current)
-            xC0, xC1, xC2 = tmp, tmp, tmp #triplebumpC(node.current)
-            print("%i %f" % (node.ip, xA0))
-            # print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
-            msg.append(xA0)
-            msg.append(xA1)
-            msg.append(xA2)
-            msg.append(xB0)
-            msg.append(xB1)
-            msg.append(xB2)
-            msg.append(xC0)
-            msg.append(xC1)
-            msg.append(xC2)
-            bundle = OSCBundle()
-            bundle.append(msg)
-            client.send(bundle)
+        msg = OSCMessage("/%i" % node.ip)
+        tmp0 = gate(5*(node.current - node.previous))
+        tmp1 = gate(1.5*node.current)
+        xA0, xA1, xA2 = tmp0, tmp1, 0#tmp0+tmp1
+        xB0, xB1, xB2 = 0, 0, 0 # tmp0, tmp1, tmp0+tmp1
+        xC0, xC1, xC2 = 0, 0, 0 # tmp0, tmp1, tmp0+tmp1
+        #print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
+        msg.append(xA0)
+        msg.append(xA1)
+        msg.append(xA2)
+        msg.append(xB0)
+        msg.append(xB1)
+        msg.append(xB2)
+        msg.append(xC0)
+        msg.append(xC1)
+        msg.append(xC2)
+        bundle = OSCBundle()
+        bundle.append(msg)
+        client.send(bundle)
+        mean0 += abs(5*tmp0)
+        mean1 += abs(tmp1)
+    #print("mean0 %f mean1 %f mean0/mean1 %f" % (mean0, mean1, mean0/mean1))
 
-print_nodes(NODES)
+#print_nodes(NODES)
 
-_iter = -1
+step = 0
 while True:
-    _iter += 1
-    if steps > 0 and _iter > steps:
+    step += 1
+    if nb_steps >= 0 and step > nb_steps:
         break
     sleep(1./RATE)
     wave(NODES)
-    print("iter %i mean %f" % (_iter+1, mean(NODES)))
+    #set_value(_ip=20, alpha=0.0075, beta=1./float(3*RATE), step=step)
+    #print("iter %i mean %f" % (_iter, mean(NODES)))
     send(NODES)
 
 
