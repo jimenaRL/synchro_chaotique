@@ -8,7 +8,7 @@ from itertools import cycle
 from OSC import OSCClient, OSCMessage, OSCBundle
 
 NB_NODES = 33
-JEUX_PERIOD = 180  # in seconds
+JEUX_PERIOD = 180 # in seconds
 JEUX = cycle(["3chords", "2osc"])
 
 class Node(object):
@@ -50,15 +50,15 @@ parser.add_argument('-debug',
 parser.add_argument('-rate',
                     dest="RATE",
                     type=float,
-                    default=32)
+                    default=16)
 parser.add_argument('-c',
                     dest="C",
                     type=float,
-                    default=0.051)
+                    default=0.002)
 parser.add_argument('-mu',
                     dest="MU",
                     type=float,
-                    default=0.001)
+                    default=0.0)
 parser.add_argument('-init_deltas',
                     dest="INIT_DELTAS",
                     type=str,
@@ -115,7 +115,7 @@ IPS = [ip_v[0] for ip_v in IP_VERTEX]
 VERTICES = [ip_v[1] for ip_v in IP_VERTEX]
 
 def new_deltas():
-    return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES))]
+    return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES-1))]
 
 INIT_DELTAS = map(int, INIT_DELTAS.split(" ")) if INIT_DELTAS else new_deltas()
 
@@ -233,37 +233,43 @@ def send(nodes, jeu):
     mean_p = 0.0
     mean_dp = 0.0
     for node in nodes:
-        msg = OSCMessage("/%i" % node.ip)
-        # presure and presure derivative (constants setted to assure equal mean)
-        p = gate(1.5*node.current)
-        dp = gate(5*(node.current - node.previous))
-        if jeu=="2osc":
-            xA0, xA1, xA2 = dp, p, 0
-            xB0, xB1, xB2 = 0, 0, 0
-            xC0, xC1, xC2 = 0, 0, 0
-        elif jeu=="3chords":
-            p /= 3.
-            dp /= 3.
-            xA0, xA1, xA2 = dp, p, dp+p
-            xB0, xB1, xB2 = dp, p, dp+p
-            xC0, xC1, xC2 = dp, p, dp+p
-        # print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
-        msg.append(xA0)
-        msg.append(xA1)
-        msg.append(xA2)
-        msg.append(xB0)
-        msg.append(xB1)
-        msg.append(xB2)
-        msg.append(xC0)
-        msg.append(xC1)
-        msg.append(xC2)
-        bundle = OSCBundle()
-        bundle.append(msg)
-        client.send(bundle)
-        # mean_p += p
-        # mean_dp += dp
-    # print("mean_p %f mean_dp %f" % (mean_p, mean_dp))
-
+        try:
+            msg = OSCMessage("/%i" % node.ip)
+            # presure and presure derivative (constants setted to assure equal mean)
+            p = gate(1.5*node.current)
+            dp = gate(5*(node.current - node.previous))
+            if jeu=="2osc":
+                xA0, xA1, xA2 = dp, p, 0
+                xB0, xB1, xB2 = 0, 0, 0
+                xC0, xC1, xC2 = 0, 0, 0
+            elif jeu=="3chords":
+                p /= 3.
+                dp /= 3.
+                xA0, xA1, xA2 = dp, p, dp+p
+                xB0, xB1, xB2 = dp, p, dp+p
+                xC0, xC1, xC2 = dp, p, dp+p
+            if DEBUG:
+                print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
+            msg.append(xA0)
+            msg.append(xA1)
+            msg.append(xA2)
+            msg.append(xB0)
+            msg.append(xB1)
+            msg.append(xB2)
+            msg.append(xC0)
+            msg.append(xC1)
+            msg.append(xC2)
+            bundle = OSCBundle()
+            bundle.append(msg)
+            client.send(bundle)
+        except Exception as e:
+            print(node)
+            print(e)
+        if DEBUG:
+            mean_p += p
+            mean_dp += dp
+    if DEBUG:
+        print("mean_p %f mean_dp %f" % (mean_p, mean_dp))
 
 if DEBUG:
     step = -1
@@ -277,11 +283,13 @@ while True:
     time.sleep(1./RATE)
     wave(NODES)
     send(NODES, jeu)
-    if(int(time.time())-seconds > JEUX_PERIOD):
+    now_ = int(time.time())-seconds
+    if(now_ > JEUX_PERIOD):
         jeu = next(JEUX)
         seconds = int(time.time())
         set_initial(new_deltas())
-        print("Changing to jeu %s, running after %i seconds." % (jeu, int(time.time())-init_seconds))
+        elapsed = int(time.time())-init_seconds
+        print("Changing to jeu %s, running after %i hours, %i minutes, %i seconds." % (jeu, elapsed/3600, elapsed/60, elapsed))
     if DEBUG:
         step += 1
         print("iter %i mean %1.64f jeu %s" % (step, mean(NODES), jeu))
