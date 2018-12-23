@@ -1,13 +1,15 @@
+import time
 import random
 import socket
 import argparse
 import numpy as np
-from time import sleep
 from copy import deepcopy
-from osc import decodeOSC
+from itertools import cycle
 from OSC import OSCClient, OSCMessage, OSCBundle
 
 NB_NODES = 33
+JEUX_PERIOD = 180  # in seconds
+JEUX = cycle(["3chords", "2osc"])
 
 class Node(object):
 
@@ -42,6 +44,9 @@ parser.add_argument('-port',
                     dest="UDP_PORT",
                     type=int,
                     default=6666)
+parser.add_argument('-debug',
+                    dest="DEBUG",
+                    action="store_true")
 parser.add_argument('-rate',
                     dest="RATE",
                     type=float,
@@ -54,22 +59,10 @@ parser.add_argument('-mu',
                     dest="MU",
                     type=float,
                     default=0.001)
-parser.add_argument('-nb_steps',
-                    dest="nb_steps",
-                    type=int,
-                    default=0)
-parser.add_argument('-init',
-                    dest="init",
+parser.add_argument('-init_deltas',
+                    dest="INIT_DELTAS",
                     type=str,
                     default="")
-parser.add_argument('-deltas',
-                    dest="deltas",
-                    type=str,
-                    default="")
-parser.add_argument('-jeu',
-                    dest="JEU",
-                    type=str,
-                    default="2osc")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -80,10 +73,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 client = OSCClient()
 client.connect((UDP_IP, UDP_PORT))
-
-# init = {int(s.split(":")[0]):
-# (float(s.split(":")[1].split(",")[0]), float(s.split(":")[1].split(",")[1]))
-# for s in init.split(";")}
 
 # ip - vertex table
 IP_VERTEX = [
@@ -125,6 +114,11 @@ IP_VERTEX = [
 IPS = [ip_v[0] for ip_v in IP_VERTEX]
 VERTICES = [ip_v[1] for ip_v in IP_VERTEX]
 
+def new_deltas():
+    return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES))]
+
+INIT_DELTAS = map(int, INIT_DELTAS.split(" ")) if INIT_DELTAS else new_deltas()
+
 def bump(x, smin, Mmin, Mmax, smax):
     if(x<smin or x>smax):
         return 0
@@ -165,7 +159,6 @@ def voisin(vertex, vertexliste):
             vertexvoisin.append(V)
     return vertexvoisin
 
-
 # create nodes
 NODES = [Node(ip, v) for ip, v in IP_VERTEX]
 
@@ -175,17 +168,17 @@ def get_node(vertex):
         if node.ip == _ip:
             return node
 
-# set initial condition (dirac in one node)
-deltas = map(int, deltas.split(" ")) if deltas else [random.choice(IPS)]
-nb_deltas = len(deltas)
-print("Initial deltas %s" % deltas)
-for n in NODES: 
-    if n.ip in deltas:
-        n.current = 1.0/nb_deltas
-        n.previous = 1.0/nb_deltas
-    else:
-        n.current = -1.0/(NB_NODES-nb_deltas)
-        n.previous = -1.0/(NB_NODES-nb_deltas)
+def set_initial(deltas):
+    """ set initial condition"""
+    print("New initial conditions in %s" % deltas)
+    nb_deltas = len(deltas)
+    for n in NODES: 
+        if n.ip in deltas:
+            n.current = 1.0/nb_deltas
+            n.previous = 1.0/nb_deltas
+        else:
+            n.current = -1.0/(NB_NODES-nb_deltas)
+            n.previous = -1.0/(NB_NODES-nb_deltas)
 
 def set_value(_ip, alpha, beta, step):
     "Force oscillation on one node."
@@ -199,8 +192,6 @@ for n in NODES:
     neighs = [get_node(v) for v in voisin(n.vertex, VERTEX_LIST)]
     n.neighbors = [(node, 1.0/len(neighs)) for node in neighs]
 
-# for n in NODES:
-#     print(n)
 
 def wave(nodes):
     # compute
@@ -235,22 +226,24 @@ def mean(nodes):
         mean += n.current
     return mean
 
-def gate(x, vmax=1.0, vmin=-1.0):
+def gate(x, vmax=0.8, vmin=-0.8):
     return max(min(x, vmax), vmin)
 
-def send(nodes):
+def send(nodes, jeu):
     mean_p = 0.0
     mean_dp = 0.0
     for node in nodes:
         msg = OSCMessage("/%i" % node.ip)
-        # presure and presure derivative (constants setted to assumre equal mean)
+        # presure and presure derivative (constants setted to assure equal mean)
         p = gate(1.5*node.current)
         dp = gate(5*(node.current - node.previous))
-        if JEU=="2osc":
+        if jeu=="2osc":
             xA0, xA1, xA2 = dp, p, 0
             xB0, xB1, xB2 = 0, 0, 0
             xC0, xC1, xC2 = 0, 0, 0
-        elif JEU=="3chords":
+        elif jeu=="3chords":
+            p /= 3.
+            dp /= 3.
             xA0, xA1, xA2 = dp, p, dp+p
             xB0, xB1, xB2 = dp, p, dp+p
             xC0, xC1, xC2 = dp, p, dp+p
@@ -271,20 +264,26 @@ def send(nodes):
         # mean_dp += dp
     # print("mean_p %f mean_dp %f" % (mean_p, mean_dp))
 
-#print_nodes(NODES)
 
-step = 0
+if DEBUG:
+    step = -1
+    print_nodes(NODES)
+
+set_initial(INIT_DELTAS)
+init_seconds = int(time.time())
+seconds = int(time.time())
+jeu = next(JEUX)
 while True:
-    step += 1
-    if nb_steps >= 0 and step > nb_steps:
-        break
-    sleep(1./RATE)
+    time.sleep(1./RATE)
     wave(NODES)
-    #set_value(_ip=20, alpha=0.0075, beta=1./float(3*RATE), step=step)
-    #print("iter %i mean %1.64f" % (step, mean(NODES)))
-    send(NODES)
-
-
-
+    send(NODES, jeu)
+    if(int(time.time())-seconds > JEUX_PERIOD):
+        jeu = next(JEUX)
+        seconds = int(time.time())
+        set_initial(new_deltas())
+        print("Changing to jeu %s, running after %i seconds." % (jeu, int(time.time())-init_seconds))
+    if DEBUG:
+        step += 1
+        print("iter %i mean %1.64f jeu %s" % (step, mean(NODES), jeu))
 
 
