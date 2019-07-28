@@ -8,12 +8,30 @@ OscP5 oscP5;
 /* a NetAddress contains the ip address and port number of a remote location in the network. */
 NetAddress myBroadcastLocation; 
 
-int edge = 80;
 ArrayList<IpVertex> vertices;
 IntDict ipNum;
 
+int STROKE = 0; // 255;
+color BACKGROUND = #ffffff; // #000000;
+color C0 = #48917B; // RGB(72, 145, 123)  // vert
+int  A0 = 64;
+color C1 = #FFC8C8; // RGB(71, 96, 143)   // blue
+int  A1 = 64;
+color C2 = #47608F; // RGB(255, 200, 200) // rouge
+int  A2 = 128; 
+int EDGE = 80;
+
+int RADIUS = 250;
+float DELTA = 0.08;
+   
+boolean ROTATE = false;
+float SPEED = 0.005; // PI/4096.0;
+float SPEEDX = SPEED/4;
+float SPEEDY = SPEED/2;
+float SPEEDZ = SPEED;
+
 void setup() {
-  size(1000, 700, P3D);
+  size(1280, 800, P3D);
   cam = new PeasyCam(this, 1000000);
 
   noStroke();
@@ -242,17 +260,23 @@ vertices.add(new IpVertex(535, 5, 5, 5));
   myBroadcastLocation = new NetAddress("127.0.0.1", 32000);
 }
 
-void draw() {
-  background(#ffffff);
+void draw() {  
+  if(ROTATE){
+    cam.rotateX(SPEEDX);
+    cam.rotateY(SPEEDY);
+    cam.rotateZ(SPEEDZ);
+  }
 
-  // draw edges 
-  stroke(0);
+  background(BACKGROUND);
+
+  // draw EDGEs 
+  stroke(STROKE);
   strokeWeight(1); 
   for (IpVertex vA : vertices) {
     for (IpVertex vB : vertices) {
       if (abs(vA.xpos-vB.xpos)+abs(vA.ypos-vB.ypos)+abs(vA.zpos-vB.zpos)<=2) {
         if (vA.xpos != vB.xpos) {
-          line(edge*vA.xpos, edge*vA.ypos, edge*vA.zpos, edge*vB.xpos, edge*vB.ypos, edge*vB.zpos);
+          line(EDGE*vA.xpos, EDGE*vA.ypos, EDGE*vA.zpos, EDGE*vB.xpos, EDGE*vB.ypos, EDGE*vB.zpos);
         }
       }
     }
@@ -276,9 +300,9 @@ class IpVertex {
     amp0 = 0.; 
     amp1 = 0.; 
     amp2 = 0.;
-    alpha = 64;  // 25% opacity.
-    r = 200;
-    delta = 0.08;
+    alpha = ALPHA;
+    r = RADIUS;
+    delta = DELTA;
   } 
 
   void updateValues(float v0, float v1, float v2) { 
@@ -298,28 +322,33 @@ class IpVertex {
   void display() { 
     pushMatrix();
 
-    translate(xpos*edge, ypos*edge, zpos*edge);
+    translate(xpos*EDGE, ypos*EDGE, zpos*EDGE);
 
-    translate(delta*edge, 0, 0);
+    translate(delta*EDGE, 0, 0);
 
-    //fill(72, 145, 123, alpha);
-    fill(255, 0, 0, alpha);
+    //fill(noise(amp0) * 255, noise(amp0) * 255, noise(amp0) * 255, alpha);
+    fill(C0, A0);
     sphere(r*amp0);
 
-    translate(0, delta*edge, 0);
-//    fill(71, 96, 143, alpha);
-    fill(0, 255, 0, alpha);
+    translate(0, delta*EDGE, 0);
+    //fill(noise(amp1) * 255, noise(amp1) * 255, noise(amp1) * 255, alpha);
+    fill(C1, A1);
     sphere(r*amp1);
 
-    translate(0, 0, delta*edge);
-//    fill(255, 200, 200, alpha);
-    fill(5, 0, 0, alpha);
+    translate(0, 0, delta*EDGE);
+    //fill(noise(amp2) * 255, noise(amp2) * 255, noise(amp2) * 255, alpha);
+    fill(C2, A2);
     sphere(r*amp2);
-
+        
     popMatrix();
   }
 };
 
+void keyPressed() {
+  if (key == ' '){
+    ROTATE = !ROTATE;
+  }
+}
 
 
 // incoming osc message are forwarded to the oscEvent method. 

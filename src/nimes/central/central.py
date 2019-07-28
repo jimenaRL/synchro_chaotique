@@ -16,7 +16,7 @@ JEUX = cycle(["3chords"])
 
 class Node(object):
 
-    def __init__(self, ip=-1, vertex=[0, 0, 0]):
+    def __init__(self, ip=-1, vertex=[0, 0, 0], nb_ave=60):
 
         self.ip = ip
         self.vertex = vertex
@@ -24,6 +24,7 @@ class Node(object):
         self.previous = 0.0
         self.tmp = None
         self.neighbors = None
+        self.average = np.zeros([3, nb_ave])
 
     def __str__(self):
         _str =  "[Node]\n\tip: {} \n\tvertex: {} \n\tprevious {}  \n\tcurrent {} \n\ttmp {} \n\tneighbors"
@@ -67,10 +68,6 @@ parser.add_argument('-init_deltas',
                     dest="INIT_DELTAS",
                     type=str,
                     default="")
-parser.add_argument('-init',
-                    dest="INIT",
-                    type=str,
-                    default="100")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -127,13 +124,14 @@ for etage, lnodes in ETAGES.items():
 IPS = [ip_v[0] for ip_v in IP_VERTEX]
 VERTICES = [ip_v[1] for ip_v in IP_VERTEX]
 
-def new_deltas():
+def new_deltas(init):
     # return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES-1))]
     # HOT FIX : test init with only one node
+    if init:
+        return ["324"]
     return [random.choice(IPS)]
-    # return [INIT]
 
-INIT_DELTAS = map(int, INIT_DELTAS.split(" ")) if INIT_DELTAS else new_deltas()
+INIT_DELTAS = map(int, INIT_DELTAS.split(" ")) if INIT_DELTAS else new_deltas(True)
 
 def bump(x, smin, Mmin, Mmax, smax):
     if(x<smin or x>smax):
@@ -266,9 +264,21 @@ def send(nodes, jeu):
                 xA0, xA1, xA2 = dp, p, dp+p
                 xB0, xB1, xB2 = dp, p, dp+p
                 xC0, xC1, xC2 = dp, p, dp+p
-            msg.append(xA0)
-            msg.append(xA1)
-            msg.append(xA2)
+
+
+            node.average[0, 0] = p
+            node.average[0, 1:] = node.average[0, :-1]
+
+            node.average[1, 0] = dp
+            node.average[1, 1:] = node.average[0, :-1]
+
+            msg.append(node.average[0, :].mean())
+            msg.append(node.average[1, :].mean())
+            msg.append(node.average[2, :].mean())
+
+            # msg.append(xA0)
+            # msg.append(xA1)
+            # msg.append(xA2)
             msg.append(xB0)
             msg.append(xB1)
             msg.append(xB2)
@@ -300,6 +310,7 @@ set_initial(INIT_DELTAS)
 init_seconds = int(time.time())
 seconds = int(time.time())
 jeu = next(JEUX)
+INIT = True
 while True:
     time.sleep(1./RATE)
     wave(NODES)
@@ -308,11 +319,11 @@ while True:
     if(now_ > JEUX_PERIOD):
         jeu = next(JEUX)
         seconds = int(time.time())
-        set_initial(new_deltas())
+        set_initial(new_deltas(init=INIT))
         elapsed = int(time.time())-init_seconds
         print("Changing to jeu %s, running after %i hours, %i minutes, %i seconds." % (jeu, elapsed/3600, elapsed/60, elapsed))
     if DEBUG:
         step += 1
         print("iter %i mean %1.64f jeu %s" % (step, mean(NODES), jeu))
-
+    INIT = False
 
