@@ -1,4 +1,5 @@
 import time
+import logging
 import random
 import socket
 import argparse
@@ -8,8 +9,10 @@ from itertools import cycle
 from OSC import OSCClient, OSCMessage, OSCBundle
 
 NB_NODES = 33
-JEUX_PERIOD = 180 # in seconds
-JEUX = cycle(["3chords", "2osc"])
+JEUX_PERIOD = 10 # 180 # in seconds
+#JEUX = cycle(["3chords", "2osc"])
+JEUX = cycle(["3chords"])
+
 
 class Node(object):
 
@@ -23,7 +26,8 @@ class Node(object):
         self.neighbors = None
 
     def __str__(self):
-        _str =  "[Node]\n\tip: %i \n\tvertex: %s \n\tprevious %f  \n\tcurrent %f \n\ttmp %s \n\tneighbors" % (
+        _str =  "[Node]\n\tip: {} \n\tvertex: {} \n\tprevious {}  \n\tcurrent {} \n\ttmp {} \n\tneighbors"
+        _str = _str.format(
             self.ip,
             str(self.vertex),
             self.current,
@@ -58,11 +62,15 @@ parser.add_argument('-c',
 parser.add_argument('-mu',
                     dest="MU",
                     type=float,
-                    default=0.0)
+                    default=0)
 parser.add_argument('-init_deltas',
                     dest="INIT_DELTAS",
                     type=str,
                     default="")
+parser.add_argument('-init',
+                    dest="INIT",
+                    type=str,
+                    default="100")
 
 for k, v in parser.parse_args().__dict__.items():
     locals()[k] = v
@@ -74,48 +82,56 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client = OSCClient()
 client.connect((UDP_IP, UDP_PORT))
 
-# ip - vertex table
-IP_VERTEX = [
-    (6, [0, -1, 1]),
-    (7, [0, 1, 1]),
-    (8, [0, 1, -1]),
-    (9, [0, -1, -1]),
-    (13, [1, -1, 2]),
-    (11, [1, 1, 2]),
-    (15, [1, -1, 0]),
-    (10, [1, 1, 0]),
-    (14, [1, -1, -2]),
-    (12, [1, 1, -2]),
-    (26, [2, -2, 2]),
-    (24, [2, 0, 2]),
-    (25, [2, -2, 0]),
-    (20, [2, 0, 0]),
-    (22, [2, 2, 0]),
-    (21, [2, 0, -2]),
-    (23, [2, 2, -2]),
-    (35, [3, -2, 3]),
-    (34, [3, 0, 3]),
-    (36, [3, -2, 1]),
-    (33, [3, 0, 1]),
-    (32, [3, 2, 1]),
-    (30, [3, -2, -1]),
-    (37, [3, 0, -1]),
-    (31, [3, 2, -1]),
-    (44, [4, -1, 3]),
-    (42, [4, -1, 1]),
-    (40, [4, 1, 1]),
-    (43, [4, -1, -1]),
-    (41, [4, 1, -1]),
-    (97, [5, 1, 0]),
-    (98, [5, -1, 0]),
-    (99, [5, -1, 2]),
+
+# etages
+from itertools import product
+R = 6
+Z = range(-R, R+1, 1)  # [-R, ... 0, ..., R]
+Z2 = [r for r in Z if r%2==0]
+Z2p1 = [r for r in Z if r%2==1]
+
+ETAGESmod4 = [
+    list(product(Z2p1, Z2p1)),
+    list(product(Z2p1, Z2)),
+    list(product(Z2, Z2)),
+    list(product(Z2, Z2p1)),
 ]
+
+NB_ETAGES = 5
+ETAGES = {
+    e: [(e, p[0], p[1])
+        for p in ETAGESmod4[(e-1) % 4]]
+            for e in range(1, NB_ETAGES+1)
+}
+
+# ip - vertex table
+IP_VERTEX = []
+for etage, lnodes in ETAGES.items():
+    ip = 100*etage
+    for lnode in lnodes:
+        IP_VERTEX.append(("{}".format(ip), lnode))
+        # generate code for Procesing client
+        print("vertices.add(new IpVertex({}, {}, {}, {}));".format(ip, *lnode))
+        ip += 1
+
+
+
+# IP_VERTEX = [
+#     ("6", [0, -1, 1]),
+#     ("7", [0, 1, 1]),
+#     ("8", [0, 1, -1]),
+#     ("9", [0, -1, -1])
+#     ...
+# ]
 
 IPS = [ip_v[0] for ip_v in IP_VERTEX]
 VERTICES = [ip_v[1] for ip_v in IP_VERTEX]
 
 def new_deltas():
-    return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES-1))]
+    # return [random.choice(IPS) for _ in range(random.randint(1, NB_NODES-1))]
+    # HOT FIX : test init with only one node
+    return [random.choice(IPS)]
+    # return [INIT]
 
 INIT_DELTAS = map(int, INIT_DELTAS.split(" ")) if INIT_DELTAS else new_deltas()
 
@@ -213,7 +229,7 @@ def wave(nodes):
         node.tmp = None
 
 def print_nodes(nodes):
-    for step in range(6):
+    for step in range(NB_ETAGES):
         ss = "------------ %i ------------\n" % step
         for n in NODES:
             if n.vertex[0]==step:
@@ -234,22 +250,22 @@ def send(nodes, jeu):
     mean_dp = 0.0
     for node in nodes:
         try:
-            msg = OSCMessage("/%i" % node.ip)
+            msg = OSCMessage("/{}".format(node.ip))
+            msg = OSCMessage("/node")
+            msg.append(node.ip)
             # presure and presure derivative (constants setted to assure equal mean)
             p = gate(1.5*node.current)
             dp = gate(5*(node.current - node.previous))
             if jeu=="2osc":
-                xA0, xA1, xA2 = dp, p, 0
-                xB0, xB1, xB2 = 0, 0, 0
-                xC0, xC1, xC2 = 0, 0, 0
+                xA0, xA1, xA2 = dp, p, 0.
+                xB0, xB1, xB2 = 0., 0., 0.
+                xC0, xC1, xC2 = 0., 0., 0.
             elif jeu=="3chords":
                 p /= 3.
                 dp /= 3.
                 xA0, xA1, xA2 = dp, p, dp+p
                 xB0, xB1, xB2 = dp, p, dp+p
                 xC0, xC1, xC2 = dp, p, dp+p
-            if DEBUG:
-                print("%i %f %f %f %f %f %f %f %f %f" % (node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
             msg.append(xA0)
             msg.append(xA1)
             msg.append(xA2)
@@ -262,6 +278,9 @@ def send(nodes, jeu):
             bundle = OSCBundle()
             bundle.append(msg)
             client.send(bundle)
+            if DEBUG:
+                print("{} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f} {:.4f}".format(
+                    node.ip, xA0, xA1, xA2, xB0, xB1, xB2, xC0, xC1, xC2))
         except Exception as e:
             print(node)
             print(e)
@@ -269,11 +288,13 @@ def send(nodes, jeu):
             mean_p += p
             mean_dp += dp
     if DEBUG:
-        print("mean_p %f mean_dp %f" % (mean_p, mean_dp))
+        print("mean_p {:.4f} mean_dp {:.4f}".format(mean_p, mean_dp))
+
 
 if DEBUG:
-    step = -1
     print_nodes(NODES)
+    step = -1
+
 
 set_initial(INIT_DELTAS)
 init_seconds = int(time.time())
